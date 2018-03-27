@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">World Tour</string>
+
+    <!--Developer Details-->
+    <string name="userName">Rachit Goyal</string>
+    <string name="userEmail">rachit@osahub.com</string>
+    <string name="company_name">Osahub Technologies</string>
+    <string name="about_developer">Ray, the eloquent engineer, is a Chief Executive Officer at OSAHUB Technologies. He is an excellent orator, and will always have a witty response to any situation. Besides being great with words, he has a keen interest in all aspects of technology. Having worked on a plethora of languages and technologies, he is a jack of all trades. He has developed products ranging from web portals and large scale backend processes to android apps and games for some of the finest MNC\'s around the world. \n\nAs a hobby, he practices \'Ethical\' Hacking (although we seriously doubt anything he does is ethical at all). He loves to read and explore new arenas within the technology world, and is always cognizant of all that\'s new and in.</string>
+    <!--Developer Details-->
+
+    <!--Activities-->
+    <string name="title_activity_detail">Details</string>
+    <string name="title_activity_gallery">Gallery</string>
+    <string name="title_activity_category">Categories</string>
+    <string name="title_activity_developer_profile">Rachit Goyal</string>
+    <!--Activities-->
+
+    <!--Navigation Drawer Options-->
+    <string name="about_the">About the</string>
+    <string name="developer">Developer</string>
+    <string name="developer_profile">Developer Profile</string>
+    <string name="other_applications">Other Applications</string>
+    <string name="communicate">Communicate</string>
+    <string name="share_application">Share Application</string>
+    <string name="rate_application">Rate Application</string>
+    <string name="email_author">Email Author</string>
+    <!--Navigation Drawer Options-->
+
+    <!--Misc-->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_Info">Info</string>
+    <string name="category">Category</string>
+    <string name="count">Count</string>
+    <string name="visit_website_button">Visit Website</string>
+    <string name="progress_animation">Progress Animation</string>
+    <string name="goto_gallery">Goto Gallery</string>
+    <string name="content_authority">com.osahub.rachit.worldtour</string>
+    <!--Misc-->
+
+</resources>
