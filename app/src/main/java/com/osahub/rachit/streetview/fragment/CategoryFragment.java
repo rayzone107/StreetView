@@ -24,6 +24,8 @@ import com.osahub.rachit.streetview.database.DataParser;
 import com.osahub.rachit.streetview.misc.Helper;
 import com.osahub.rachit.streetview.model.Category;
 import com.osahub.rachit.streetview.model.Location;
+import com.ramotion.cardslider.CardSliderLayoutManager;
+import com.ramotion.cardslider.CardSnapHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +40,7 @@ public class CategoryFragment extends Fragment {
     LinearLayout mCategoryHeader, mFragmentHolder;
     int mWidth, mHeight;
 
+    CardSliderLayoutManager mLayoutManger;
     List<Location> mLocationsArray = new ArrayList<>();
 
     public CategoryFragment() {
@@ -55,11 +58,11 @@ public class CategoryFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater
                 .inflate(R.layout.fragment_category, container, false);
 
-        mFragmentHolder = (LinearLayout) rootView.findViewById(R.id.fragment_holder);
-        mCategoryName = (TextView) rootView.findViewById(R.id.category_name);
-        mCount = (TextView) rootView.findViewById(R.id.count);
-        mLocations = (RecyclerView) rootView.findViewById(R.id.locations);
-        mCategoryHeader = (LinearLayout) rootView.findViewById(R.id.category_header);
+        mFragmentHolder = rootView.findViewById(R.id.fragment_holder);
+        mCategoryName = rootView.findViewById(R.id.category_name);
+        mCount = rootView.findViewById(R.id.count);
+        mLocations = rootView.findViewById(R.id.locations);
+        mCategoryHeader = rootView.findViewById(R.id.category_header);
 
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -109,13 +112,21 @@ public class CategoryFragment extends Fragment {
                         startActivity(intent);
                     }
                 });
+
+        mLocations.setAdapter(mAdapter);
+        mLocations.setHasFixedSize(true);
+
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(
                 getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
-        mLocations.setLayoutManager(mLayoutManager);
-        mLocations.setItemAnimator(new DefaultItemAnimator());
-        mLocations.setAdapter(mAdapter);
 
-        if (mWidth < 320 && mHeight < 480) {
+        mLayoutManger = (CardSliderLayoutManager) mLocations.getLayoutManager();;
+        new CardSnapHelper().attachToRecyclerView(mLocations);
+
+//        mLocations.setLayoutManager(mLayoutManager);
+//        mLocations.setItemAnimator(new DefaultItemAnimator());
+
+
+        /*if (mWidth < 320 && mHeight < 480) {
             mLocations.addItemDecoration(new Helper.HorizontalSpaceItemDecoration(10));
         } else if (mWidth < 480 && mHeight < 800) {
             mLocations.addItemDecoration(new Helper.HorizontalSpaceItemDecoration(15));
@@ -127,7 +138,7 @@ public class CategoryFragment extends Fragment {
             mLocations.addItemDecoration(new Helper.HorizontalSpaceItemDecoration(40));
         } else {
             mLocations.addItemDecoration(new Helper.HorizontalSpaceItemDecoration(50));
-        }
+        }*/
         mCount.setText(String.valueOf(DataParser.getLocationsCountByCategoryId(getActivity(), mCategory.getId())));
     }
 }

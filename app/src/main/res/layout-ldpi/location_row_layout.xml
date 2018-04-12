@@ -16,25 +16,20 @@
             android:layout_height="120dp"
             android:layout_marginBottom="10dp">
 
-            <FrameLayout
+            <ImageView
+                android:id="@+id/progress_bar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/progress_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:src="@drawable/progress_animation"
-                    android:visibility="gone"/>
-            </FrameLayout>
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:src="@drawable/progress_animation"
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/location_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
-                android:layout_margin="5dp"/>
+                android:layout_margin="5dp" />
         </RelativeLayout>
 
         <LinearLayout
@@ -53,12 +48,11 @@
                 android:layout_marginBottom="5dp"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
-                android:maxLines="1"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:text="Name"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/location_description"
@@ -66,12 +60,11 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
-                android:maxLines="1"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:text="Description"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
         </LinearLayout>
 
     </LinearLayout>

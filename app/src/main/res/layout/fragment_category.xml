@@ -2,6 +2,7 @@
 <LinearLayout
     android:id="@+id/fragment_holder"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="20dp"
@@ -13,7 +14,7 @@
         android:layout_height="match_parent"
         android:layout_marginBottom="6dp"
         android:layout_marginTop="6dp"
-        android:background="@drawable/card_view_background"
+        android:background="?attr/selectableItemBackground"
         android:clickable="true"
         android:orientation="horizontal"
         android:paddingBottom="10dp"
@@ -33,7 +34,7 @@
             android:paddingBottom="3dp"
             android:text="@string/category"
             android:textColor="#000"
-            android:textSize="22sp"/>
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/count"
@@ -47,7 +48,7 @@
             android:fontFamily="sans-serif-condensed"
             android:text="@string/count"
             android:textColor="#37000000"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/more"
@@ -61,12 +62,14 @@
             android:text="MORE"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="14sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/locations"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scrollbars="none"/>
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:scrollbars="none"
+        app:layoutManager="com.ramotion.cardslider.CardSliderLayoutManager"
+        app:viewUpdater="com.ramotion.cardslider.DefaultViewUpdater" />
 </LinearLayout>

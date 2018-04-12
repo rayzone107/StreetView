@@ -1,6 +1,7 @@
 package com.osahub.rachit.streetview.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +23,6 @@ import java.util.List;
  */
 public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapter.ViewHolder> {
 
-    private static final String LOG_TAG = "World Tour 3D: " + LocationListAdapter.class.getSimpleName();
-
     public interface OnItemClickListener {
         void onItemClick(Location location);
     }
@@ -40,19 +39,19 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView name;
-        public TextView desc;
+        TextView desc;
         public ImageView image;
-        public ImageView progressBar;
+        ImageView progressBar;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
-            name = (TextView) view.findViewById(R.id.location_name);
-            desc = (TextView) view.findViewById(R.id.location_description);
-            image = (ImageView) view.findViewById(R.id.location_image);
-            progressBar = (ImageView) view.findViewById(R.id.progress_bar);
+            name = view.findViewById(R.id.location_name);
+            desc = view.findViewById(R.id.location_description);
+            image = view.findViewById(R.id.location_image);
+            progressBar = view.findViewById(R.id.progress_bar);
         }
 
-        public void bind(final Location location, final OnItemClickListener onItemClickListener) {
+        void bind(final Location location, final OnItemClickListener onItemClickListener) {
             if (!location.getLocationName().equals(Helper.LOCATION_FRAGMENT_BLANK_TAG)) {
                 name.setText(location.getLocationName());
                 name.setSelected(true);
@@ -84,8 +83,9 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
         }
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == 1) {
             View itemView = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.location_row_layout, parent, false);
@@ -98,7 +98,7 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(mLocations.get(position), onItemClickListener);
     }
 

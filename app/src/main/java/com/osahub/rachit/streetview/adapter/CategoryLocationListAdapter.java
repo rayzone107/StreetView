@@ -45,10 +45,10 @@ public class CategoryLocationListAdapter extends RecyclerView.Adapter<CategoryLo
 
         public ViewHolder(View view) {
             super(view);
-            name = (TextView) view.findViewById(R.id.location_name);
-            desc = (TextView) view.findViewById(R.id.location_description);
-            image = (ImageView) view.findViewById(R.id.location_image);
-            progressBar = (ImageView) view.findViewById(R.id.progress_bar);
+            name = view.findViewById(R.id.location_name);
+            desc = view.findViewById(R.id.location_description);
+            image = view.findViewById(R.id.location_image);
+            progressBar = view.findViewById(R.id.progress_bar);
         }
 
         public void bind(final Location location, final OnItemClickListener onItemClickListener) {

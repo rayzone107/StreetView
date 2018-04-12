@@ -16,10 +16,6 @@
             android:layout_height="140dp"
             android:layout_marginBottom="10dp">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
                 <ImageView
                     android:id="@+id/progress_bar"
                     android:layout_width="match_parent"
@@ -27,7 +23,6 @@
                     android:layout_gravity="center"
                     android:src="@drawable/progress_animation"
                     android:visibility="gone"/>
-            </FrameLayout>
 
             <ImageView
                 android:id="@+id/location_image"
@@ -53,7 +48,6 @@
                 android:layout_marginBottom="5dp"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
-                android:maxLines="1"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:text="Name"
@@ -66,7 +60,6 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
-                android:maxLines="1"
                 android:scrollHorizontally="true"
                 android:singleLine="true"
                 android:text="Description"
