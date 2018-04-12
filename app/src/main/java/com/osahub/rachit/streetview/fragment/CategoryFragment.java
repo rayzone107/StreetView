@@ -119,14 +119,14 @@ public class CategoryFragment extends Fragment {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(
                 getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
 
-        mLayoutManger = (CardSliderLayoutManager) mLocations.getLayoutManager();;
-        new CardSnapHelper().attachToRecyclerView(mLocations);
+//        mLayoutManger = (CardSliderLayoutManager) mLocations.getLayoutManager();;
+//        new CardSnapHelper().attachToRecyclerView(mLocations);
 
-//        mLocations.setLayoutManager(mLayoutManager);
-//        mLocations.setItemAnimator(new DefaultItemAnimator());
+        mLocations.setLayoutManager(mLayoutManager);
+        mLocations.setItemAnimator(new DefaultItemAnimator());
 
 
-        /*if (mWidth < 320 && mHeight < 480) {
+        if (mWidth < 320 && mHeight < 480) {
             mLocations.addItemDecoration(new Helper.HorizontalSpaceItemDecoration(10));
         } else if (mWidth < 480 && mHeight < 800) {
             mLocations.addItemDecoration(new Helper.HorizontalSpaceItemDecoration(15));
@@ -138,7 +138,7 @@ public class CategoryFragment extends Fragment {
             mLocations.addItemDecoration(new Helper.HorizontalSpaceItemDecoration(40));
         } else {
             mLocations.addItemDecoration(new Helper.HorizontalSpaceItemDecoration(50));
-        }*/
+        }
         mCount.setText(String.valueOf(DataParser.getLocationsCountByCategoryId(getActivity(), mCategory.getId())));
     }
 }

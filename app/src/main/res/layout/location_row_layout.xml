@@ -1,69 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView
+    android:id="@+id/card_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="140dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="5dp">
 
-    <RelativeLayout
-        android:id="@+id/parent_rl"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground">
+        android:background="@drawable/card_view_background"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/progress_bar"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:layout_gravity="center"
-            android:scaleType="centerCrop"
-            android:src="@drawable/progress_animation"
-            android:visibility="visible" />
+        <RelativeLayout
+            android:layout_width="@dimen/image_height_width"
+            android:layout_height="@dimen/image_height_width"
+            android:layout_marginBottom="10dp">
 
-        <ImageView
-            android:id="@+id/location_image"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            tools:src="@drawable/splash" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/location_name"
-            android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/progress_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:src="@drawable/progress_animation"
+                    android:visibility="gone"/>
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/location_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_margin="5dp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/location_image"
-            android:layout_marginBottom="5dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:scrollHorizontally="true"
-            android:singleLine="true"
-            android:text="Name"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="18sp" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/location_description"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/location_name"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:ellipsize="marquee"
-            android:marqueeRepeatLimit="marquee_forever"
-            android:scrollHorizontally="true"
-            android:singleLine="true"
-            android:text="Description"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="12sp" />
+            <TextView
+                android:id="@+id/location_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="Name"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="18sp" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/location_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="Description"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="12sp" />
+        </LinearLayout>
 
-    <View
-        android:layout_width="140dp"
-        android:layout_height="match_parent"
-        android:alpha="0"
-        android:background="@android:color/white" />
-
+    </LinearLayout>
 </android.support.v7.widget.CardView>

@@ -1,0 +1,26 @@
+{
+    "logs": [
+        {
+            "outputFile": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-xxxhdpi-v4/values-xxxhdpi-v4.xml",
+            "map": [
+                {
+                    "source": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/res/values-xxxhdpi/dimens.xml",
+                    "from": {
+                        "startLines": "3,2",
+                        "startColumns": "4,4",
+                        "startOffsets": "106,55",
+                        "endColumns": "68,50",
+                        "endOffsets": "170,101"
+                    },
+                    "to": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,124",
+                        "endColumns": "68,50",
+                        "endOffsets": "119,170"
+                    }
+                }
+            ]
+        }
+    ]
+}

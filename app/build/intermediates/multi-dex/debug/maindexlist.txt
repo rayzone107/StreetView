@@ -89,6 +89,7 @@ com/google/firebase/dynamiclinks/ShortDynamicLink$Suffix.class
 android/support/annotation/RequiresPermission$Read.class
 android/support/transition/Slide$4.class
 android/support/v4/app/NotificationCompat$NotificationVisibility.class
+android/arch/persistence/room/Insert.class
 android/support/v7/app/AppCompatCallback.class
 android/support/v7/widget/RecyclerView$Recycler.class
 android/support/v4/provider/FontsContractCompat$FontRequestCallback$FontRequestFailReason.class
@@ -125,14 +126,17 @@ android/support/v7/view/menu/ShowableListMenu.class
 com/google/android/gms/internal/zzbei.class
 android/support/v4/app/ServiceCompat$StopForegroundFlags.class
 com/google/android/gms/wearable/ChannelClient.class
+android/arch/persistence/room/Delete.class
 android/support/design/widget/BaseTransientBottomBar$Duration.class
 android/support/v4/provider/SelfDestructiveThread$2.class
 android/support/v4/view/AccessibilityDelegateCompat.class
+android/arch/persistence/room/Embedded.class
 android/support/annotation/StringRes.class
 com/google/android/gms/wearable/CapabilityClient$OnCapabilityChangedListener.class
 android/support/v4/app/FrameMetricsAggregator$1.class
 com/google/android/gms/common/api/Api$ApiOptions$HasOptions.class
 android/support/annotation/AnyRes.class
+com/google/gson/annotations/JsonAdapter.class
 android/support/v4/media/session/MediaSessionCompat$MediaSessionImplBase.class
 android/support/v4/provider/FontsContractCompat$5.class
 android/support/v4/app/NotificationCompat$DecoratedCustomViewStyle.class
@@ -231,8 +235,10 @@ android/support/v7/appcompat/R$layout.class
 android/support/v4/media/MediaBrowserCompat$MediaItem$1.class
 android/support/design/widget/ViewOffsetBehavior.class
 com/google/android/gms/common/internal/zzaf.class
+android/arch/persistence/room/Index.class
 com/google/android/gms/appinvite/AppInviteInvitation$IntentBuilder.class
 android/support/v7/widget/RecyclerView$RecyclerListener.class
+android/arch/persistence/room/TypeConverters.class
 android/support/v7/widget/RecyclerView$Orientation.class
 com/google/android/gms/internal/zzber.class
 android/support/design/widget/BaseTransientBottomBar$8.class
@@ -248,6 +254,7 @@ android/support/v7/widget/RecyclerView$SmoothScroller.class
 android/support/annotation/NavigationRes.class
 com/google/android/gms/wearable/CapabilityClient$CapabilityFilterType.class
 android/support/v4/view/PagerAdapter.class
+android/arch/persistence/room/Ignore.class
 android/support/transition/Visibility$VisibilityInfo.class
 android/support/annotation/GuardedBy.class
 android/support/v4/view/ViewPager$3.class
@@ -271,10 +278,12 @@ android/support/v4/view/NestedScrollingChild2.class
 com/google/android/gms/games/Game.class
 android/support/v4/media/RatingCompat$1.class
 android/support/v7/view/menu/MenuAdapter.class
+com/google/gson/annotations/SerializedName.class
 com/google/android/gms/games/multiplayer/turnbased/TurnBasedMatch$MatchTurnStatus.class
 android/support/v4/media/MediaMetadataCompatApi21.class
 android/support/design/widget/BaseTransientBottomBar$11.class
 android/support/v7/widget/RecyclerView$EdgeEffectFactory.class
+android/arch/persistence/room/TypeConverter.class
 com/google/android/gms/games/multiplayer/Participant.class
 android/support/annotation/IntegerRes.class
 android/support/design/widget/TabLayout$Tab.class
@@ -302,6 +311,7 @@ com/google/android/gms/common/api/GoogleApiClient$ConnectionCallbacks.class
 android/support/v4/app/NotificationCompatJellybean.class
 android/support/v7/widget/RecyclerView$ViewCacheExtension.class
 com/google/android/gms/common/internal/Hide.class
+android/arch/persistence/room/ColumnInfo.class
 android/support/design/widget/ThemeUtils.class
 android/support/v7/appcompat/R$attr.class
 android/support/v4/view/accessibility/AccessibilityEventCompat.class
@@ -317,6 +327,7 @@ android/support/v4/net/ConnectivityManagerCompat.class
 android/support/v4/widget/TextViewCompat$TextViewCompatApi27Impl.class
 android/support/annotation/RequiresPermission.class
 android/support/v4/provider/FontsContractCompat.class
+android/arch/persistence/room/ColumnInfo$SQLiteTypeAffinity.class
 android/support/transition/Visibility$Mode.class
 com/google/android/gms/wallet/fragment/WalletFragmentStyle.class
 com/google/android/gms/common/api/Api$ApiOptions$Optional.class
@@ -379,12 +390,14 @@ com/google/android/gms/ads/formats/NativeAdOptions.class
 com/google/android/gms/games/achievement/Achievement$AchievementState.class
 android/support/design/widget/ViewUtils.class
 android/support/v4/view/ViewPager$2.class
+com/google/gson/annotations/Since.class
 com/google/android/gms/games/GamesCallbackStatusCodes$OnRoomConnectedStatusCodes.class
 android/support/v4/media/session/MediaSessionCompat$SessionFlags.class
 android/support/v4/view/ViewCompat$ViewCompatBaseImpl.class
 android/support/v4/app/NotificationCompat$Builder.class
 android/support/v4/net/ConnectivityManagerCompat$RestrictBackgroundStatus.class
 android/support/v4/content/PermissionChecker.class
+android/arch/persistence/room/SkipQueryVerification.class
 com/google/android/gms/nearby/connection/Payload$Type.class
 android/support/v4/widget/TextViewCompat$TextViewCompatApi26Impl$1.class
 android/support/v4/media/MediaBrowserCompat.class
@@ -412,6 +425,7 @@ com/google/android/gms/wearable/CapabilityApi$GetAllCapabilitiesResult.class
 com/google/android/gms/common/internal/zzby.class
 android/support/v7/widget/ViewInfoStore$ProcessCallback.class
 com/google/android/gms/nearby/messages/internal/zzf.class
+android/arch/persistence/room/Update.class
 android/arch/lifecycle/OnLifecycleEvent.class
 android/support/v4/content/res/TypedArrayUtils.class
 android/support/annotation/RestrictTo$Scope.class
@@ -423,6 +437,7 @@ android/support/v4/media/VolumeProviderCompat$1.class
 com/google/android/gms/nearby/messages/NearbyPermissions.class
 android/support/transition/Transition$1.class
 com/google/android/gms/fitness/data/Goal$Recurrence.class
+com/google/gson/annotations/Expose.class
 com/google/android/gms/ads/VideoOptions.class
 android/support/design/widget/SnackbarManager$Callback.class
 android/support/v4/media/MediaBrowserCompat$MediaBrowserImplApi23.class
@@ -505,6 +520,7 @@ android/support/v4/media/MediaDescriptionCompat$Builder.class
 android/support/v4/media/MediaMetadataCompat$Builder.class
 android/support/v7/app/ActionBarDrawerToggle$Delegate.class
 android/support/v7/widget/LinearLayoutCompat$OrientationMode.class
+android/arch/persistence/room/ForeignKey.class
 android/support/v7/widget/RecyclerView$LayoutParams.class
 com/google/firebase/database/Exclude.class
 com/google/android/gms/common/api/PendingResult.class
@@ -527,6 +543,7 @@ android/support/design/widget/AppBarLayout$Behavior$1.class
 android/support/v4/content/res/FontResourcesParserCompat.class
 android/support/v7/widget/AppCompatImageHelper.class
 android/support/v4/view/AbsSavedState.class
+android/arch/persistence/room/Transaction.class
 android/support/v4/util/LruCache.class
 com/google/android/gms/wallet/LoyaltyWalletObject.class
 com/google/android/gms/internal/zzbev.class
@@ -561,6 +578,7 @@ android/support/transition/Styleable$Transition.class
 android/support/design/widget/BottomSheetBehavior.class
 com/google/android/gms/games/GamesCallbackStatusCodes$OnLeftRoomStatusCodes.class
 com/google/android/gms/common/SignInButton.class
+android/arch/persistence/room/Relation.class
 com/google/android/gms/games/video/zzb.class
 android/support/v4/text/util/LinkifyCompat$1.class
 android/support/v4/media/session/PlaybackStateCompat$State.class
@@ -594,6 +612,7 @@ android/support/v4/app/NotificationCompat$StreamType.class
 android/support/v4/media/VolumeProviderCompat$ControlType.class
 com/google/android/gms/common/api/GoogleApiClient$OnConnectionFailedListener.class
 com/google/android/gms/wallet/InstrumentInfo$CardClass.class
+android/arch/persistence/room/ForeignKey$Action.class
 com/google/android/gms/internal/zzbdw.class
 android/support/design/R$styleable.class
 android/support/design/widget/SwipeDismissBehavior$OnDismissListener.class
@@ -680,6 +699,7 @@ android/support/v7/view/menu/MenuView.class
 android/support/v7/view/menu/SubMenuBuilder.class
 android/support/v4/view/ViewCompat$ScrollIndicators.class
 android/support/v4/media/session/PlaybackStateCompat$1.class
+android/arch/persistence/room/Entity.class
 android/support/design/widget/FloatingActionButton$OnVisibilityChangedListener.class
 android/support/v7/widget/RecyclerView$ItemAnimator$ItemAnimatorListener.class
 com/google/android/gms/wearable/DataApi$DeleteDataItemsResult.class
@@ -688,6 +708,8 @@ android/support/v7/app/AppCompatDelegateImplBase.class
 android/support/v7/view/menu/CascadingMenuPopup.class
 android/support/v7/view/menu/MenuBuilder.class
 android/support/v4/view/ViewCompat$ViewCompatApi18Impl.class
+android/arch/persistence/room/Dao.class
+android/arch/persistence/room/OnConflictStrategy.class
 android/support/design/widget/CoordinatorLayout$DefaultBehavior.class
 android/support/v7/widget/GapWorker$LayoutPrefetchRegistryImpl.class
 android/support/v4/text/util/LinkifyCompat$LinkSpec.class
@@ -744,6 +766,7 @@ android/support/v4/view/ViewPager$SimpleOnPageChangeListener.class
 android/support/v4/view/NestedScrollingChildHelper.class
 android/support/v4/view/OnApplyWindowInsetsListener.class
 android/support/v4/view/NestedScrollingParentHelper.class
+android/arch/persistence/room/Database.class
 android/support/design/R$style.class
 com/google/android/gms/internal/zzbeh.class
 android/support/v7/widget/RecyclerView$ItemAnimatorRestoreListener.class
@@ -759,6 +782,7 @@ android/support/v7/app/AppCompatDelegateImplV23.class
 com/google/android/gms/common/api/Releasable.class
 com/google/android/gms/R$style.class
 com/google/android/gms/wallet/fragment/WalletFragmentStyle$LogoImageType.class
+com/google/gson/annotations/Until.class
 com/google/android/gms/location/places/PlacePhotoMetadata.class
 com/google/android/gms/auth/api/signin/GoogleSignInAccount.class
 com/google/android/gms/common/api/internal/zzcv.class
@@ -776,6 +800,7 @@ android/support/v4/media/session/PlaybackStateCompat.class
 android/support/v4/provider/FontsContractCompat$3.class
 android/support/media/ExifInterface$Rational.class
 android/support/v4/view/ViewCompat$FocusRelativeDirection.class
+android/arch/persistence/room/PrimaryKey.class
 android/support/design/widget/TabLayout$TabView.class
 android/support/v4/internal/view/SupportMenuItem.class
 android/support/v4/os/BuildCompat.class
@@ -870,6 +895,7 @@ android/support/v4/view/GravityCompat.class
 android/support/v7/widget/RecyclerView$ItemAnimator$ItemAnimatorFinishedListener.class
 android/support/v4/media/session/MediaSessionCompat$OnActiveChangeListener.class
 com/google/android/gms/common/api/Api$zza.class
+android/arch/persistence/room/Query.class
 com/google/android/gms/location/places/AutocompleteFilter.class
 com/google/android/gms/common/api/Api$zzb.class
 android/support/v7/view/menu/MenuPopup.class
@@ -881,6 +907,7 @@ android/support/v4/view/MotionEventCompat.class
 android/support/v4/provider/FontsContractCompat$TypefaceResult.class
 android/support/v4/util/PatternsCompat.class
 com/google/android/gms/common/api/internal/zzo.class
+android/arch/persistence/room/ColumnInfo$Collate.class
 android/support/v4/util/LongSparseArray.class
 android/support/v4/media/VolumeProviderCompat$Callback.class
 android/support/v4/media/MediaBrowserCompat$SubscriptionCallback.class
@@ -899,6 +926,7 @@ android/support/v7/widget/FastScroller$DragState.class
 com/google/android/gms/internal/zzanf.class
 com/google/android/gms/internal/zzapq.class
 android/support/v4/view/MenuCompat.class
+com/google/gson/JsonNull.class
 android/support/v4/view/ViewGroupCompat.class
 com/google/android/gms/internal/zzauz$zza.class
 com/google/android/gms/internal/zzagn.class
@@ -1160,6 +1188,7 @@ com/google/android/gms/internal/zzuq.class
 com/google/android/gms/internal/zzfhg.class
 okio/Buffer.class
 de/hdodenhof/circleimageview/CircleImageView.class
+com/google/gson/reflect/TypeToken.class
 com/google/android/gms/internal/zzapp.class
 com/google/android/gms/internal/zzahp.class
 com/google/ads/mediation/MediationInterstitialAdapter.class
@@ -1458,6 +1487,7 @@ com/google/android/gms/games/request/GameRequestEntity.class
 com/google/android/gms/internal/zzalc.class
 com/google/android/gms/plus/model/people/Person$ObjectType.class
 com/google/android/gms/wallet/MaskedWalletRequest$Builder.class
+net/sqlcipher/database/SQLiteDebug$PagerStats.class
 com/google/android/gms/internal/zzzr.class
 com/google/android/gms/internal/zzaof.class
 com/google/android/gms/internal/zziz.class
@@ -1601,6 +1631,7 @@ com/google/android/gms/cast/RemoteMediaPlayer$OnStatusUpdatedListener.class
 android/support/v4/view/LayoutInflaterCompat.class
 com/google/android/gms/internal/zzajl.class
 com/google/android/gms/internal/zzof.class
+net/sqlcipher/database/SQLiteDatabase.class
 com/google/android/gms/appindexing/Thing.class
 com/google/android/gms/games/leaderboard/Leaderboards$LeaderboardMetadataResult.class
 com/google/android/gms/internal/zzanl.class
@@ -1635,6 +1666,7 @@ com/google/android/gms/common/api/internal/zzdf.class
 com/google/android/gms/ads/internal/js/zzn.class
 com/google/android/gms/ads/internal/gmsg/zzd.class
 com/google/android/gms/internal/zzalu.class
+net/sqlcipher/database/SQLiteProgram.class
 com/google/android/gms/internal/zzop.class
 com/google/android/gms/internal/zzaep.class
 okio/SegmentPool.class

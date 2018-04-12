@@ -6,12 +6,34 @@
                 {
                     "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/e49b5d528766cf9b9a93613f8295f515/res/values-hdpi-v4/values-hdpi-v4.xml",
                     "from": {
-                        "startLines": "2",
+                        "startLines": "-1",
+                        "startColumns": "-1",
+                        "startOffsets": "-1"
+                    },
+                    "to": {
+                        "startLines": "4",
                         "startColumns": "4",
-                        "startOffsets": "55",
-                        "endLines": "6",
+                        "startOffsets": "175",
+                        "endLines": "8",
                         "endColumns": "13",
-                        "endOffsets": "327"
+                        "endOffsets": "447"
+                    }
+                },
+                {
+                    "source": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/res/values-hdpi/dimens.xml",
+                    "from": {
+                        "startLines": "3,2",
+                        "startColumns": "4,4",
+                        "startOffsets": "106,55",
+                        "endColumns": "68,50",
+                        "endOffsets": "170,101"
+                    },
+                    "to": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,124",
+                        "endColumns": "68,50",
+                        "endOffsets": "119,170"
                     }
                 }
             ]

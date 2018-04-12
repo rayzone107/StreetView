@@ -11,8 +11,8 @@
         android:orientation="vertical">
 
         <RelativeLayout
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/category_location_image_height_width"
+            android:layout_height="@dimen/category_location_image_height_width"
             android:layout_marginBottom="10dp">
 
             <FrameLayout
