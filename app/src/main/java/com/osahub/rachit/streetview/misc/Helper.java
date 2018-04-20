@@ -10,9 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
 
-import com.osahub.rachit.streetview.database.DataContract.CategoriesEntry;
-import com.osahub.rachit.streetview.database.DataContract.CategoryLocationsEntry;
-import com.osahub.rachit.streetview.database.DataContract.LocationsEntry;
+import com.osahub.rachit.streetview.database.old.DataContract.CategoriesEntry;
+import com.osahub.rachit.streetview.database.old.DataContract.CategoryLocationsEntry;
+import com.osahub.rachit.streetview.database.old.DataContract.LocationsEntry;
 import com.osahub.rachit.streetview.model.Category;
 import com.osahub.rachit.streetview.model.CategoryLocations;
 import com.osahub.rachit.streetview.model.Location;
@@ -131,7 +131,7 @@ public class Helper {
 
     public static ContentValues generateContentValuesFromCategoryObject(Category category) {
         ContentValues categoryValues = new ContentValues();
-        categoryValues.put(CategoriesEntry.COLUMN_ID, category.getId());
+        categoryValues.put(CategoriesEntry.COLUMN_ID, category.getCategoryId());
         categoryValues.put(CategoriesEntry.COLUMN_NAME, category.getName());
         categoryValues.put(CategoriesEntry.COLUMN_TYPE, category.getType());
         categoryValues.put(CategoriesEntry.COLUMN_ORDER, category.getOrder());
@@ -142,7 +142,7 @@ public class Helper {
 
     public static ContentValues generateContentValuesFromLocationObject(Location location) {
         ContentValues locationValues = new ContentValues();
-        locationValues.put(LocationsEntry.COLUMN_ID, location.getId());
+        locationValues.put(LocationsEntry.COLUMN_ID, location.getLocationId());
         locationValues.put(LocationsEntry.COLUMN_LOCATION_NAME, location.getLocationName());
         locationValues.put(LocationsEntry.COLUMN_DESCRIPTION, location.getDescription());
         locationValues.put(LocationsEntry.COLUMN_DESCRIPTION_SMALL, location.getDescriptionSmall());
@@ -160,7 +160,7 @@ public class Helper {
 
     public static ContentValues generateContentValuesFromCategoryLocationsObject(CategoryLocations categoryLocations) {
         ContentValues categoryValues = new ContentValues();
-        categoryValues.put(CategoryLocationsEntry.COLUMN_ID, categoryLocations.getId());
+        categoryValues.put(CategoryLocationsEntry.COLUMN_ID, categoryLocations.getCategoryLocationId());
         categoryValues.put(CategoryLocationsEntry.COLUMN_CATEGORY_ID, categoryLocations.getCategoryId());
         categoryValues.put(CategoryLocationsEntry.COLUMN_LOCATION_ID, categoryLocations.getLocationId());
         categoryValues.put(CategoryLocationsEntry.COLUMN_ORDER, categoryLocations.getOrder());

@@ -108,7 +108,7 @@
         </activity>
 
         <provider
-            android:name=".database.DataProvider"
+            android:name=".database.old.DataProvider"
             android:authorities="@string/content_authority" />
 
         <service

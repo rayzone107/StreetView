@@ -1,4 +1,4 @@
-package com.osahub.rachit.streetview.database;
+package com.osahub.rachit.streetview.database.old;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
@@ -8,10 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.annotation.NonNull;
-
-import com.osahub.rachit.streetview.database.DataContract.CategoriesEntry;
-import com.osahub.rachit.streetview.database.DataContract.CategoryLocationsEntry;
-import com.osahub.rachit.streetview.database.DataContract.LocationsEntry;
 
 /**
  * Content Provider Class
@@ -33,18 +29,18 @@ public class DataProvider extends ContentProvider {
 
     public static final String QUERY_PARAMETER_LIMIT = "limit";
 
-    private static final String sCategoriesIdSelection = CategoriesEntry.TABLE_NAME + "." + CategoriesEntry._ID + " = ? ";
-    private static final String sLocationsIdSelection = LocationsEntry.TABLE_NAME + "." + LocationsEntry._ID + " = ? ";
-    private static final String sCategoryLocationsIdSelection = CategoryLocationsEntry.TABLE_NAME + "." + CategoryLocationsEntry._ID + " = ? ";
+    private static final String sCategoriesIdSelection = DataContract.CategoriesEntry.TABLE_NAME + "." + DataContract.CategoriesEntry._ID + " = ? ";
+    private static final String sLocationsIdSelection = DataContract.LocationsEntry.TABLE_NAME + "." + DataContract.LocationsEntry._ID + " = ? ";
+    private static final String sCategoryLocationsIdSelection = DataContract.CategoryLocationsEntry.TABLE_NAME + "." + DataContract.CategoryLocationsEntry._ID + " = ? ";
     private static final SQLiteQueryBuilder sCategoriesQueryBuilder, sLocationsQueryBuilder, sCategoryLocationsQueryBuilder;
 
     static {
         sCategoriesQueryBuilder = new SQLiteQueryBuilder();
-        sCategoriesQueryBuilder.setTables(CategoriesEntry.TABLE_NAME);
+        sCategoriesQueryBuilder.setTables(DataContract.CategoriesEntry.TABLE_NAME);
         sLocationsQueryBuilder = new SQLiteQueryBuilder();
-        sLocationsQueryBuilder.setTables(LocationsEntry.TABLE_NAME);
+        sLocationsQueryBuilder.setTables(DataContract.LocationsEntry.TABLE_NAME);
         sCategoryLocationsQueryBuilder = new SQLiteQueryBuilder();
-        sCategoryLocationsQueryBuilder.setTables(CategoryLocationsEntry.TABLE_NAME);
+        sCategoryLocationsQueryBuilder.setTables(DataContract.CategoryLocationsEntry.TABLE_NAME);
     }
 
     static UriMatcher buildUriMatcher() {
@@ -65,7 +61,7 @@ public class DataProvider extends ContentProvider {
     }
 
     private Cursor getCategoriesById(Uri uri, String[] projection, String sortOrder) {
-        String categorySetting = CategoriesEntry.getIdFromUri(uri);
+        String categorySetting = DataContract.CategoriesEntry.getIdFromUri(uri);
 
         return sCategoriesQueryBuilder.query(mOpenHelper.getReadableDatabase(),
                 projection,
@@ -78,7 +74,7 @@ public class DataProvider extends ContentProvider {
     }
 
     private Cursor getLocationsById(Uri uri, String[] projection, String sortOrder) {
-        String locationSetting = LocationsEntry.getIdFromUri(uri);
+        String locationSetting = DataContract.LocationsEntry.getIdFromUri(uri);
 
         return sLocationsQueryBuilder.query(mOpenHelper.getReadableDatabase(),
                 projection,
@@ -91,7 +87,7 @@ public class DataProvider extends ContentProvider {
     }
 
     private Cursor getCategoryLocationsById(Uri uri, String[] projection, String sortOrder) {
-        String categoryLocationsSetting = CategoryLocationsEntry.getIdFromUri(uri);
+        String categoryLocationsSetting = DataContract.CategoryLocationsEntry.getIdFromUri(uri);
 
         return sCategoryLocationsQueryBuilder.query(mOpenHelper.getReadableDatabase(),
                 projection,
@@ -116,17 +112,17 @@ public class DataProvider extends ContentProvider {
 
         switch (match) {
             case CATEGORIES:
-                return CategoriesEntry.CONTENT_TYPE;
+                return DataContract.CategoriesEntry.CONTENT_TYPE;
             case CATEGORIES_WITH_ID:
-                return CategoriesEntry.CONTENT_ITEM_TYPE;
+                return DataContract.CategoriesEntry.CONTENT_ITEM_TYPE;
             case LOCATIONS:
-                return LocationsEntry.CONTENT_TYPE;
+                return DataContract.LocationsEntry.CONTENT_TYPE;
             case LOCATIONS_WITH_ID:
-                return LocationsEntry.CONTENT_ITEM_TYPE;
+                return DataContract.LocationsEntry.CONTENT_ITEM_TYPE;
             case CATEGORY_LOCATIONS:
-                return CategoryLocationsEntry.CONTENT_TYPE;
+                return DataContract.CategoryLocationsEntry.CONTENT_TYPE;
             case CATEGORY_LOCATIONS_WITH_ID:
-                return CategoryLocationsEntry.CONTENT_ITEM_TYPE;
+                return DataContract.CategoryLocationsEntry.CONTENT_ITEM_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -147,7 +143,7 @@ public class DataProvider extends ContentProvider {
             case CATEGORIES: {
                 if (limit == null) {
                     retCursor = mOpenHelper.getReadableDatabase().query(
-                            CategoriesEntry.TABLE_NAME,
+                            DataContract.CategoriesEntry.TABLE_NAME,
                             projection,
                             selection,
                             selectionArgs,
@@ -157,7 +153,7 @@ public class DataProvider extends ContentProvider {
                     );
                 } else {
                     retCursor = mOpenHelper.getReadableDatabase().query(
-                            CategoriesEntry.TABLE_NAME,
+                            DataContract.CategoriesEntry.TABLE_NAME,
                             projection,
                             selection,
                             selectionArgs,
@@ -179,7 +175,7 @@ public class DataProvider extends ContentProvider {
             case LOCATIONS: {
                 if (limit == null) {
                     retCursor = mOpenHelper.getReadableDatabase().query(
-                            LocationsEntry.TABLE_NAME,
+                            DataContract.LocationsEntry.TABLE_NAME,
                             projection,
                             selection,
                             selectionArgs,
@@ -189,7 +185,7 @@ public class DataProvider extends ContentProvider {
                     );
                 } else {
                     retCursor = mOpenHelper.getReadableDatabase().query(
-                            LocationsEntry.TABLE_NAME,
+                            DataContract.LocationsEntry.TABLE_NAME,
                             projection,
                             selection,
                             selectionArgs,
@@ -210,7 +206,7 @@ public class DataProvider extends ContentProvider {
             case CATEGORY_LOCATIONS: {
                 if (limit == null) {
                     retCursor = mOpenHelper.getReadableDatabase().query(
-                            CategoryLocationsEntry.TABLE_NAME,
+                            DataContract.CategoryLocationsEntry.TABLE_NAME,
                             projection,
                             selection,
                             selectionArgs,
@@ -220,7 +216,7 @@ public class DataProvider extends ContentProvider {
                     );
                 } else {
                     retCursor = mOpenHelper.getReadableDatabase().query(
-                            CategoryLocationsEntry.TABLE_NAME,
+                            DataContract.CategoryLocationsEntry.TABLE_NAME,
                             projection,
                             selection,
                             selectionArgs,
@@ -247,25 +243,25 @@ public class DataProvider extends ContentProvider {
 
         switch (match) {
             case CATEGORIES: {
-                long _id = db.insert(CategoriesEntry.TABLE_NAME, null, values);
+                long _id = db.insert(DataContract.CategoriesEntry.TABLE_NAME, null, values);
                 if (_id > 0)
-                    returnUri = CategoriesEntry.buildCategoriesUri(_id);
+                    returnUri = DataContract.CategoriesEntry.buildCategoriesUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
             }
             case LOCATIONS: {
-                long _id = db.insert(LocationsEntry.TABLE_NAME, null, values);
+                long _id = db.insert(DataContract.LocationsEntry.TABLE_NAME, null, values);
                 if (_id > 0)
-                    returnUri = LocationsEntry.buildLocationsUri(_id);
+                    returnUri = DataContract.LocationsEntry.buildLocationsUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
             }
             case CATEGORY_LOCATIONS: {
-                long _id = db.insert(CategoryLocationsEntry.TABLE_NAME, null, values);
+                long _id = db.insert(DataContract.CategoryLocationsEntry.TABLE_NAME, null, values);
                 if (_id > 0)
-                    returnUri = CategoryLocationsEntry.buildCategoryLocationsUri(_id);
+                    returnUri = DataContract.CategoryLocationsEntry.buildCategoryLocationsUri(_id);
                 else
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
@@ -287,15 +283,15 @@ public class DataProvider extends ContentProvider {
         switch (match) {
             case CATEGORIES:
                 rowsDeleted = db.delete(
-                        CategoriesEntry.TABLE_NAME, selection, selectionArgs);
+                        DataContract.CategoriesEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             case LOCATIONS:
                 rowsDeleted = db.delete(
-                        LocationsEntry.TABLE_NAME, selection, selectionArgs);
+                        DataContract.LocationsEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             case CATEGORY_LOCATIONS:
                 rowsDeleted = db.delete(
-                        CategoryLocationsEntry.TABLE_NAME, selection, selectionArgs);
+                        DataContract.CategoryLocationsEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -314,22 +310,22 @@ public class DataProvider extends ContentProvider {
 
         switch (match) {
             case CATEGORIES:
-                rowsUpdated = db.update(CategoriesEntry.TABLE_NAME, values, selection, selectionArgs);
+                rowsUpdated = db.update(DataContract.CategoriesEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             case CATEGORIES_WITH_ID:
-                rowsUpdated = db.update(CategoriesEntry.TABLE_NAME, values, selection, selectionArgs);
+                rowsUpdated = db.update(DataContract.CategoriesEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             case LOCATIONS:
-                rowsUpdated = db.update(LocationsEntry.TABLE_NAME, values, selection, selectionArgs);
+                rowsUpdated = db.update(DataContract.LocationsEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             case LOCATIONS_WITH_ID:
-                rowsUpdated = db.update(LocationsEntry.TABLE_NAME, values, selection, selectionArgs);
+                rowsUpdated = db.update(DataContract.LocationsEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             case CATEGORY_LOCATIONS:
-                rowsUpdated = db.update(CategoryLocationsEntry.TABLE_NAME, values, selection, selectionArgs);
+                rowsUpdated = db.update(DataContract.CategoryLocationsEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             case CATEGORY_LOCATIONS_WITH_ID:
-                rowsUpdated = db.update(CategoryLocationsEntry.TABLE_NAME, values, selection, selectionArgs);
+                rowsUpdated = db.update(DataContract.CategoryLocationsEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -350,7 +346,7 @@ public class DataProvider extends ContentProvider {
                 db.beginTransaction();
                 try {
                     for (ContentValues value : values) {
-                        long _id = db.insert(CategoriesEntry.TABLE_NAME, null, value);
+                        long _id = db.insert(DataContract.CategoriesEntry.TABLE_NAME, null, value);
                         if (_id != -1) {
                             returnCount++;
                         }
@@ -365,7 +361,7 @@ public class DataProvider extends ContentProvider {
                 db.beginTransaction();
                 try {
                     for (ContentValues value : values) {
-                        long _id = db.insert(LocationsEntry.TABLE_NAME, null, value);
+                        long _id = db.insert(DataContract.LocationsEntry.TABLE_NAME, null, value);
                         if (_id != -1) {
                             returnCount++;
                         }
@@ -380,7 +376,7 @@ public class DataProvider extends ContentProvider {
                 db.beginTransaction();
                 try {
                     for (ContentValues value : values) {
-                        long _id = db.insert(CategoryLocationsEntry.TABLE_NAME, null, value);
+                        long _id = db.insert(DataContract.CategoryLocationsEntry.TABLE_NAME, null, value);
                         if (_id != -1) {
                             returnCount++;
                         }

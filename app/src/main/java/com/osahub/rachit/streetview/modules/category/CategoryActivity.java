@@ -10,17 +10,19 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.osahub.rachit.streetview.R;
-import com.osahub.rachit.streetview.modules.category.adapter.CategoryLocationListAdapter;
-import com.osahub.rachit.streetview.database.DataParser;
+import com.osahub.rachit.streetview.database.DatabaseContract;
+import com.osahub.rachit.streetview.database.LocationDatabaseHelper;
 import com.osahub.rachit.streetview.misc.Helper;
 import com.osahub.rachit.streetview.model.Category;
 import com.osahub.rachit.streetview.model.Location;
+import com.osahub.rachit.streetview.modules.base.BaseActivity;
+import com.osahub.rachit.streetview.modules.category.adapter.CategoryLocationListAdapter;
 import com.osahub.rachit.streetview.modules.streetview.StreetViewActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryActivity extends AppCompatActivity {
+public class CategoryActivity extends BaseActivity {
 
     Category mCategory;
     RecyclerView mLocations;
@@ -46,7 +48,7 @@ public class CategoryActivity extends AppCompatActivity {
             mGridLayoutManager = new GridLayoutManager(CategoryActivity.this, 5);
         }
 
-        mLocationsArray = DataParser.getLocationsByCategoryId(this, mCategory.getId());
+        mLocationsArray = mLocationDatabaseHelper.getLocationsByCategoryId(mCategory.getCategoryId());
 
         setLocationsList();
     }
@@ -57,7 +59,7 @@ public class CategoryActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(Location location) {
                         Intent intent = new Intent(CategoryActivity.this, StreetViewActivity.class);
-                        intent.putExtra("location", location);
+                        intent.putExtra("location", location.getId());
                         startActivity(intent);
                     }
                 });

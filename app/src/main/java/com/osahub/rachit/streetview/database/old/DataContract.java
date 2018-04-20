@@ -1,4 +1,4 @@
-package com.osahub.rachit.streetview.database;
+package com.osahub.rachit.streetview.database.old;
 
 import android.content.ContentResolver;
 import android.content.ContentUris;

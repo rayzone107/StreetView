@@ -1,16 +1,10 @@
 package com.osahub.rachit.streetview.modules.splash;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.osahub.rachit.streetview.R;
-import com.osahub.rachit.streetview.database.DataParser;
-import com.osahub.rachit.streetview.model.CategoryLocations;
-import com.osahub.rachit.streetview.modules.home.LocationsActivity;
 import com.osahub.rachit.streetview.service.FetchDataIntentService;
-
-import java.util.List;
 
 public class SplashActivity extends AppCompatActivity {
 

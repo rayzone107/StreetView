@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,18 +16,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.osahub.rachit.streetview.R;
-import com.osahub.rachit.streetview.database.DataParser;
 import com.osahub.rachit.streetview.misc.Helper;
 import com.osahub.rachit.streetview.model.Category;
 import com.osahub.rachit.streetview.model.Location;
+import com.osahub.rachit.streetview.modules.base.BaseFragment;
 import com.osahub.rachit.streetview.modules.home.adapter.LocationListAdapter;
 import com.osahub.rachit.streetview.modules.streetview.StreetViewActivity;
-import com.ramotion.cardslider.CardSliderLayoutManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoryFragment extends Fragment {
+public class CategoryFragment extends BaseFragment {
 
     private static final String LOG_TAG = "World Tour 3D: " + CategoryFragment.class.getSimpleName();
 
@@ -38,7 +36,6 @@ public class CategoryFragment extends Fragment {
     LinearLayout mCategoryHeader, mFragmentHolder;
     int mWidth, mHeight;
 
-    CardSliderLayoutManager mLayoutManger;
     List<Location> mLocationsArray = new ArrayList<>();
 
     public CategoryFragment() {
@@ -75,9 +72,9 @@ public class CategoryFragment extends Fragment {
                 mCategoryName.setTextAppearance(R.style.boldText);
             }
 
-            if (mCategory.getId() == 1) {
+            if (mCategory.getCategoryId() == 1) {
                 mLocations.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.background_fragment_most_popular));
-            } else if (mCategory.getId() == 2) {
+            } else if (mCategory.getCategoryId() == 2) {
                 mLocations.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.background_fragment_most_visited));
             }
 
@@ -90,12 +87,13 @@ public class CategoryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CategoryActivity.class);
-                intent.putExtra(Helper.CATEGORY_EXTRA, mCategory);
+                intent.putExtra(Helper.CATEGORY_EXTRA, mCategory.getCategoryId());
                 startActivity(intent);
             }
         });
 
-        mLocationsArray.addAll(DataParser.getLimitedLocationsByCategoryId(getActivity(), mCategory.getId()));
+        mLocationsArray.addAll(mLocationDatabaseHelper.getLimitedLocationsByCategoryId(mCategory.getCategoryId()));
+
         setLocationsList();
         return rootView;
     }
@@ -106,7 +104,7 @@ public class CategoryFragment extends Fragment {
                     @Override
                     public void onItemClick(Location location) {
                         Intent intent = new Intent(getActivity(), StreetViewActivity.class);
-                        intent.putExtra("location", location);
+                        intent.putExtra("location", location.getLocationId());
                         startActivity(intent);
                     }
                 });
@@ -115,7 +113,7 @@ public class CategoryFragment extends Fragment {
         mLocations.setHasFixedSize(true);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(
-                getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+                mContext, LinearLayoutManager.HORIZONTAL, false);
 
         mLocations.setLayoutManager(mLayoutManager);
         mLocations.setItemAnimator(new DefaultItemAnimator());
@@ -134,6 +132,6 @@ public class CategoryFragment extends Fragment {
         } else {
             mLocations.addItemDecoration(new Helper.HorizontalSpaceItemDecoration(50));
         }
-        mCount.setText(String.valueOf(DataParser.getLocationsCountByCategoryId(getActivity(), mCategory.getId())));
+        mCount.setText(String.valueOf(mLocationDatabaseHelper.getLocationCountByCategoryId(mCategory.getCategoryId())));
     }
 }

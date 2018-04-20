@@ -1,13 +1,11 @@
 package com.osahub.rachit.streetview.model;
 
-import android.database.Cursor;
-
+import com.orm.SugarRecord;
 import com.osahub.rachit.streetview.misc.Helper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -15,16 +13,12 @@ import java.util.Date;
  * Category Bean Class
  * Created by Rachit on 23-Apr-16.
  */
-public class Category implements Serializable {
+public class Category extends SugarRecord<Category> {
 
-    public static final int COLUMN_ID = 1;
-    public static final int COLUMN_NAME = 2;
-    public static final int COLUMN_TYPE = 3;
-    public static final int COLUMN_ORDER = 4;
-    public static final int COLUMN_CREATED_ON = 5;
-    public static final int COLUMN_UPDATED_ON = 6;
+    public static final String COLUMN_CATEGORY_ID = "CATEGORYID";
+    public static final String COLUMN_CATEGORY_NAME = "NAME";
 
-    private int id;
+    private int categoryId;
     private String name;
     private String type;
     private int order;
@@ -35,7 +29,7 @@ public class Category implements Serializable {
     }
 
     public Category(int id, String name, String type, int order, Date createdOn, Date updatedOn) {
-        this.id = id;
+        this.categoryId = id;
         this.name = name;
         this.type = type;
         this.order = order;
@@ -44,7 +38,7 @@ public class Category implements Serializable {
 
     }
 
-    public static Category fromCursor(Cursor cursor) throws ParseException {
+    /*public static Category fromCursor(Cursor cursor) throws ParseException {
         return new Category(
                 cursor.getInt(COLUMN_ID),
                 cursor.getString(COLUMN_NAME),
@@ -52,11 +46,11 @@ public class Category implements Serializable {
                 cursor.getInt(COLUMN_ORDER),
                 Helper.convertStringToDate(cursor.getString(COLUMN_CREATED_ON)),
                 Helper.convertStringToDate(cursor.getString(COLUMN_UPDATED_ON)));
-    }
+    }*/
 
     public static Category fromJson(JSONObject jsonObject) throws JSONException, ParseException {
         return new Category(
-                jsonObject.getInt("id"),
+                jsonObject.getInt("categoryLocationId"),
                 jsonObject.getString("name"),
                 jsonObject.getString("type"),
                 jsonObject.getInt("order"),
@@ -64,12 +58,12 @@ public class Category implements Serializable {
                 Helper.convertStringToDate(jsonObject.getString("updated")));
     }
 
-    public int getId() {
-        return id;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getName() {

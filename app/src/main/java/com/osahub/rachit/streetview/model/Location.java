@@ -2,12 +2,12 @@ package com.osahub.rachit.streetview.model;
 
 import android.database.Cursor;
 
+import com.orm.SugarRecord;
 import com.osahub.rachit.streetview.misc.Helper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -15,23 +15,12 @@ import java.util.Date;
  * Location Bean Class
  * Created by Rachit on 22-Apr-16.
  */
-public class Location implements Serializable {
+public class Location extends SugarRecord<Location> {
 
-    public static final int COLUMN_ID = 1;
-    public static final int COLUMN_LOCATION_NAME = 2;
-    public static final int COLUMN_DESCRIPTION = 3;
-    public static final int COLUMN_DESCRIPTION_SMALL = 4;
-    public static final int COLUMN_CITY = 5;
-    public static final int COLUMN_STATE = 6;
-    public static final int COLUMN_COUNTRY = 7;
-    public static final int COLUMN_LATITUDE = 8;
-    public static final int COLUMN_LONGITUDE = 9;
-    public static final int COLUMN_IMAGE_LINKS = 10;
-    public static final int COLUMN_THUMBNAIL_PATH = 11;
-    public static final int COLUMN_CREATED_ON = 12;
-    public static final int COLUMN_UPDATED_ON = 13;
+    public static final String COLUMN_LOCATION_ID = "LOCATIONID";
+    public static final String COLUMN_LOCATION_NAME = "LOCATIONNAME";
 
-    private int id;
+    private int locationId;
     private String locationName;
     private String description;
     private String descriptionSmall;
@@ -53,7 +42,7 @@ public class Location implements Serializable {
     }
 
     public Location(int id, String locationName, String description, String descriptionSmall, String city, String state, String country, double latitude, double longitude, String imageLinks, String thumbnailPath, Date createdOn, Date updatedOn) {
-        this.id = id;
+        this.locationId = id;
         this.locationName = locationName;
         this.description = description;
         this.descriptionSmall = descriptionSmall;
@@ -68,7 +57,7 @@ public class Location implements Serializable {
         this.updatedOn = updatedOn;
     }
 
-    public static Location fromCursor(Cursor cursor) throws ParseException {
+    /*public static Location fromCursor(Cursor cursor) throws ParseException {
         return new Location(
                 cursor.getInt(COLUMN_ID),
                 cursor.getString(COLUMN_LOCATION_NAME),
@@ -83,11 +72,11 @@ public class Location implements Serializable {
                 cursor.getString(COLUMN_THUMBNAIL_PATH),
                 Helper.convertStringToDate(cursor.getString(COLUMN_CREATED_ON)),
                 Helper.convertStringToDate(cursor.getString(COLUMN_UPDATED_ON)));
-    }
+    }*/
 
     public static Location fromJson(JSONObject jsonObject) throws JSONException, ParseException {
         return new Location(
-                jsonObject.getInt("id"),
+                jsonObject.getInt("categoryLocationId"),
                 jsonObject.getString("locname"),
                 jsonObject.getString("desc"),
                 jsonObject.getString("descsmall"),
@@ -102,12 +91,12 @@ public class Location implements Serializable {
                 Helper.convertStringToDate(jsonObject.getString("updated")));
     }
 
-    public int getId() {
-        return id;
+    public int getLocationId() {
+        return locationId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
     }
 
     public String getLocationName() {

@@ -9,7 +9,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +21,7 @@ import com.osahub.rachit.streetview.R;
 import com.osahub.rachit.streetview.misc.HackyViewPager;
 import com.osahub.rachit.streetview.misc.Helper;
 import com.osahub.rachit.streetview.model.Location;
+import com.osahub.rachit.streetview.modules.base.BaseActivity;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -29,7 +29,7 @@ import com.squareup.picasso.Target;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GalleryActivity extends AppCompatActivity {
+public class GalleryActivity extends BaseActivity {
 
     private ViewPager mViewPager;
     private List<ImageView> mDots;
@@ -82,7 +82,7 @@ public class GalleryActivity extends AppCompatActivity {
             final PhotoViewAttacher attacher = new PhotoViewAttacher(photoView);
             Picasso.get()
                     .load(mImageLinks.get(position))
-                    .placeholder(ContextCompat.getDrawable(getApplicationContext(), R.drawable.progress_animation_white))
+                    .placeholder(ContextCompat.getDrawable(mContext, R.drawable.progress_animation_white))
                     .into(photoView, new Callback() {
                         @Override
                         public void onSuccess() {
@@ -121,7 +121,7 @@ public class GalleryActivity extends AppCompatActivity {
 
         for (int i = 0; i < mImageLinks.size(); i++) {
             final ImageView dot = new ImageView(this);
-            dot.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.dot_dark));
+            dot.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.dot_dark));
             dot.setContentDescription(String.valueOf(i));
             if (i == 0) {
                 dot.setPadding(15, 15, 7, 15);
@@ -175,7 +175,7 @@ public class GalleryActivity extends AppCompatActivity {
     public void selectDot(int idx) {
         for (int i = 0; i < mImageLinks.size(); i++) {
             int drawableId = (i == idx) ? (R.drawable.dot_white) : (R.drawable.dot_dark);
-            Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), drawableId);
+            Drawable drawable = ContextCompat.getDrawable(mContext, drawableId);
             mDots.get(i).setImageDrawable(drawable);
         }
     }

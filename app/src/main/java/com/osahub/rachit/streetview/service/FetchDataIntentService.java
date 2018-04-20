@@ -1,16 +1,15 @@
 package com.osahub.rachit.streetview.service;
 
-import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 
 import com.osahub.rachit.streetview.AppController;
-import com.osahub.rachit.streetview.modules.home.LocationsActivity;
-import com.osahub.rachit.streetview.modules.splash.SplashActivity;
-import com.osahub.rachit.streetview.database.DataParser;
 import com.osahub.rachit.streetview.model.Category;
 import com.osahub.rachit.streetview.model.CategoryLocations;
 import com.osahub.rachit.streetview.model.Location;
+import com.osahub.rachit.streetview.modules.base.BaseIntentService;
+import com.osahub.rachit.streetview.modules.home.LocationsActivity;
+import com.osahub.rachit.streetview.modules.splash.SplashActivity;
 import com.osahub.rachit.streetview.server.VolleyRequests;
 
 import org.json.JSONArray;
@@ -21,7 +20,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FetchDataIntentService extends IntentService {
+public class FetchDataIntentService extends BaseIntentService {
     private static final String ACTION_FETCH_DATA = "ACTION_FETCH_DATA";
 
     private List<Category> categoryList = new ArrayList<>();
@@ -83,17 +82,17 @@ public class FetchDataIntentService extends IntentService {
     private void saveToDatabase(String type) {
         switch (type) {
             case "Categories":
-                DataParser.addMultipleCategories(this, categoryList);
+                mCategoryDatabaseHelper.addMultipleCategories(categoryList);
                 isCategoriesSaved = true;
                 actionIfAllSaved();
                 break;
             case "Locations":
-                DataParser.addMultipleLocations(this, locationList);
+                mLocationDatabaseHelper.addMultipleLocations(locationList);
                 isLocationsSaved = true;
                 actionIfAllSaved();
                 break;
             case "CategoryLocations":
-                DataParser.addMultipleCategoryLocations(this, categoryLocationsList);
+                mCategoryLocationDatabaseHelper.addMultipleCategoryLocations(categoryLocationsList);
                 isCategoryLocationsSaved = true;
                 actionIfAllSaved();
                 break;

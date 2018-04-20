@@ -10,7 +10,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -19,15 +18,15 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.osahub.rachit.streetview.R;
-import com.osahub.rachit.streetview.database.DataParser;
-import com.osahub.rachit.streetview.modules.category.CategoryFragment;
 import com.osahub.rachit.streetview.model.Category;
+import com.osahub.rachit.streetview.modules.base.BaseActivity;
+import com.osahub.rachit.streetview.modules.category.CategoryFragment;
 import com.osahub.rachit.streetview.modules.developerprofile.DeveloperProfileActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocationsActivity extends AppCompatActivity
+public class LocationsActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String LOG_TAG = "World Tour 3D: " + LocationsActivity.class.getSimpleName();
@@ -57,7 +56,8 @@ public class LocationsActivity extends AppCompatActivity
 
         fragmentsProgressBar = findViewById(R.id.fragments_progress_bar);
 
-        mCategories = DataParser.getAllCategories(this);
+        mCategories = mCategoryDatabaseHelper.getAllCategories();
+
         Log.i(LOG_TAG, "Categories Fetched");
         setCategoriesList();
     }
@@ -69,7 +69,7 @@ public class LocationsActivity extends AppCompatActivity
             ft = getSupportFragmentManager().beginTransaction();
             CategoryFragment categoryFragment = new CategoryFragment();
             Bundle bundle = new Bundle();
-            bundle.putSerializable("category", category);
+            bundle.putSerializable("category", category.getCategoryId());
             categoryFragment.setArguments(bundle);
             CategoryFragment categoryFragmentOld = (CategoryFragment) getSupportFragmentManager().findFragmentByTag(category.getName());
             if (categoryFragmentOld == null) {
@@ -118,7 +118,7 @@ public class LocationsActivity extends AppCompatActivity
     }
 
     protected void rateApp() {
-        Uri uri = Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
+        Uri uri = Uri.parse("market://details?id=" + mContext.getPackageName());
         Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
         goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
                 Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET |
@@ -127,7 +127,7 @@ public class LocationsActivity extends AppCompatActivity
             startActivity(goToMarket);
         } catch (ActivityNotFoundException e) {
             startActivity(new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("http://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName())));
+                    Uri.parse("http://play.google.com/store/apps/details?id=" + mContext.getPackageName())));
         }
     }
 

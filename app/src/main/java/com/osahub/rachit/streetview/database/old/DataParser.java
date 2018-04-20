@@ -1,4 +1,4 @@
-package com.osahub.rachit.streetview.database;
+package com.osahub.rachit.streetview.database.old;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,9 +6,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.util.Log;
 
-import com.osahub.rachit.streetview.database.DataContract.CategoriesEntry;
-import com.osahub.rachit.streetview.database.DataContract.CategoryLocationsEntry;
-import com.osahub.rachit.streetview.database.DataContract.LocationsEntry;
 import com.osahub.rachit.streetview.misc.Helper;
 import com.osahub.rachit.streetview.model.Category;
 import com.osahub.rachit.streetview.model.CategoryLocations;
@@ -32,10 +29,10 @@ public class DataParser {
 
     public static boolean addCategory(Context context, Category category) {
         Cursor categoryCursor = context.getContentResolver().query(
-                CategoriesEntry.CONTENT_URI,
+                DataContract.CategoriesEntry.CONTENT_URI,
                 null,
-                CategoriesEntry.COLUMN_ID + " = ?",
-                new String[]{String.valueOf(category.getId())},
+                DataContract.CategoriesEntry.COLUMN_ID + " = ?",
+                new String[]{String.valueOf(category.getCategoryId())},
                 null);
 
         if (categoryCursor != null && categoryCursor.moveToFirst()) {
@@ -43,7 +40,7 @@ public class DataParser {
                 int dateCompare = Helper.convertStringToDate(categoryCursor.getString(Category.COLUMN_UPDATED_ON))
                         .compareTo(category.getUpdatedOn());
                 if (dateCompare < 0) {*/
-                    updateCategoryById(context, category, category.getId());
+                    updateCategoryById(context, category, category.getCategoryId());
 //                }
                 categoryCursor.close();
             /*} catch (ParseException e) {
@@ -51,7 +48,7 @@ public class DataParser {
             }*/
             return false;
         } else {
-            Uri insertedUri = context.getContentResolver().insert(CategoriesEntry.CONTENT_URI,
+            Uri insertedUri = context.getContentResolver().insert(DataContract.CategoriesEntry.CONTENT_URI,
                     Helper.generateContentValuesFromCategoryObject(category));
             Log.i(LOG_TAG, "Category inserted" + insertedUri);
             return true;
@@ -62,17 +59,17 @@ public class DataParser {
         List<ContentValues> contentValuesList = new ArrayList<>();
         for (Category category : categoryList) {
             Cursor categoryCursor = context.getContentResolver().query(
-                    CategoriesEntry.CONTENT_URI,
+                    DataContract.CategoriesEntry.CONTENT_URI,
                     null,
-                    CategoriesEntry.COLUMN_ID + " = ?",
-                    new String[]{String.valueOf(category.getId())},
+                    DataContract.CategoriesEntry.COLUMN_ID + " = ?",
+                    new String[]{String.valueOf(category.getCategoryId())},
                     null);
             if (categoryCursor != null && categoryCursor.moveToFirst()) {
                /* try {
                     int dateCompare = Helper.convertStringToDate(categoryCursor.getString(Category.COLUMN_UPDATED_ON))
                             .compareTo(category.getUpdatedOn());
                     if (dateCompare < 0) {*/
-                        updateCategoryById(context, category, category.getId());
+                        updateCategoryById(context, category, category.getCategoryId());
                     /*}*/
                     categoryCursor.close();
                 /*} catch (ParseException e) {
@@ -82,24 +79,24 @@ public class DataParser {
                 contentValuesList.add(Helper.generateContentValuesFromCategoryObject(category));
             }
         }
-        int categoriesInserted = context.getContentResolver().bulkInsert(CategoriesEntry.CONTENT_URI, contentValuesList.toArray(new ContentValues[contentValuesList.size()]));
+        int categoriesInserted = context.getContentResolver().bulkInsert(DataContract.CategoriesEntry.CONTENT_URI, contentValuesList.toArray(new ContentValues[contentValuesList.size()]));
         Log.i(LOG_TAG, "Number of Categories inserted" + categoriesInserted);
         return categoriesInserted > 0;
     }
 
     public static Category getCategoryById(Context context, int id) {
         Category category = new Category();
-        Cursor categoryCursor = context.getContentResolver().query(CategoriesEntry.CONTENT_URI, null,
-                CategoriesEntry.COLUMN_ID + " = ?", new String[]{String.valueOf(id)}, null);
+        Cursor categoryCursor = context.getContentResolver().query(DataContract.CategoriesEntry.CONTENT_URI, null,
+                DataContract.CategoriesEntry.COLUMN_ID + " = ?", new String[]{String.valueOf(id)}, null);
 
         if (categoryCursor != null) {
             if (categoryCursor.moveToFirst()) {
                 do {
-                    try {
+                    /*try {
                         category = Category.fromCursor(categoryCursor);
                     } catch (ParseException e) {
                         e.printStackTrace();
-                    }
+                    }*/
                 } while (categoryCursor.moveToNext());
             }
             categoryCursor.close();
@@ -111,17 +108,17 @@ public class DataParser {
 
     public static Category getCategoryByName(Context context, String name) {
         Category category = new Category();
-        Cursor categoryCursor = context.getContentResolver().query(CategoriesEntry.CONTENT_URI, null,
-                CategoriesEntry.COLUMN_NAME + " = ?", new String[]{name}, null);
+        Cursor categoryCursor = context.getContentResolver().query(DataContract.CategoriesEntry.CONTENT_URI, null,
+                DataContract.CategoriesEntry.COLUMN_NAME + " = ?", new String[]{name}, null);
 
         if (categoryCursor != null) {
             if (categoryCursor.moveToFirst()) {
                 do {
-                    try {
+                    /*try {
                         category = Category.fromCursor(categoryCursor);
                     } catch (ParseException e) {
                         e.printStackTrace();
-                    }
+                    }*/
                 } while (categoryCursor.moveToNext());
             }
             categoryCursor.close();
@@ -133,17 +130,17 @@ public class DataParser {
 
     public static List<Category> getAllCategories(Context context) {
         List<Category> categoryList = new ArrayList<>();
-        Cursor categoryCursor = context.getContentResolver().query(CategoriesEntry.CONTENT_URI, null,
+        Cursor categoryCursor = context.getContentResolver().query(DataContract.CategoriesEntry.CONTENT_URI, null,
                 null, null, Helper.QUERY_SORT_ORDER_ASC);
 
         if (categoryCursor != null) {
             if (categoryCursor.moveToFirst()) {
                 do {
-                    try {
+                    /*try {
                         categoryList.add(Category.fromCursor(categoryCursor));
                     } catch (ParseException e) {
                         e.printStackTrace();
-                    }
+                    }*/
                 } while (categoryCursor.moveToNext());
             }
             categoryCursor.close();
@@ -154,9 +151,9 @@ public class DataParser {
     }
 
     public static boolean updateCategoryById(Context context, Category newCategory, int categoryID) {
-        int updated = context.getContentResolver().update(CategoriesEntry.CONTENT_URI,
+        int updated = context.getContentResolver().update(DataContract.CategoriesEntry.CONTENT_URI,
                 Helper.generateContentValuesFromCategoryObject(newCategory),
-                CategoriesEntry.COLUMN_ID + " = ?", new String[]{String.valueOf(categoryID)});
+                DataContract.CategoriesEntry.COLUMN_ID + " = ?", new String[]{String.valueOf(categoryID)});
 
         Log.i(LOG_TAG, "Category Updated " + updated);
 
@@ -164,8 +161,8 @@ public class DataParser {
     }
 
     public static boolean deleteCategoryById(Context context, int categoryID) {
-        int updated = context.getContentResolver().delete(CategoriesEntry.CONTENT_URI,
-                CategoriesEntry.COLUMN_ID + " = ?", new String[]{String.valueOf(categoryID)});
+        int updated = context.getContentResolver().delete(DataContract.CategoriesEntry.CONTENT_URI,
+                DataContract.CategoriesEntry.COLUMN_ID + " = ?", new String[]{String.valueOf(categoryID)});
 
         Log.i(LOG_TAG, "Category Deleted " + updated);
 
@@ -182,17 +179,17 @@ public class DataParser {
 
     public static boolean addLocation(Context context, Location location) {
         Cursor locationCursor = context.getContentResolver().query(
-                LocationsEntry.CONTENT_URI,
+                DataContract.LocationsEntry.CONTENT_URI,
                 null,
-                LocationsEntry.COLUMN_ID + " = ?",
-                new String[]{String.valueOf(location.getId())},
+                DataContract.LocationsEntry.COLUMN_ID + " = ?",
+                new String[]{String.valueOf(location.getLocationId())},
                 null);
 
         if (locationCursor != null && locationCursor.moveToFirst()) {
             /*try {
                 int dateCompare = Helper.convertStringToDate(locationCursor.getString(Location.COLUMN_UPDATED_ON)).compareTo(location.getUpdatedOn());
                 if (dateCompare < 0) {*/
-                    updateLocationById(context, location, location.getId());
+                    updateLocationById(context, location, location.getLocationId());
                 /*}*/
                 locationCursor.close();
             /*} catch (ParseException e) {
@@ -200,7 +197,7 @@ public class DataParser {
             }*/
             return false;
         } else {
-            Uri insertedUri = context.getContentResolver().insert(LocationsEntry.CONTENT_URI,
+            Uri insertedUri = context.getContentResolver().insert(DataContract.LocationsEntry.CONTENT_URI,
                     Helper.generateContentValuesFromLocationObject(location));
             Log.i(LOG_TAG, "Location inserted" + insertedUri);
             return true;
@@ -211,16 +208,16 @@ public class DataParser {
         List<ContentValues> contentValuesList = new ArrayList<>();
         for (Location location : locationList) {
             Cursor locationCursor = context.getContentResolver().query(
-                    LocationsEntry.CONTENT_URI,
+                    DataContract.LocationsEntry.CONTENT_URI,
                     null,
-                    LocationsEntry.COLUMN_ID + " = ?",
-                    new String[]{String.valueOf(location.getId())},
+                    DataContract.LocationsEntry.COLUMN_ID + " = ?",
+                    new String[]{String.valueOf(location.getLocationId())},
                     null);
             if (locationCursor != null && locationCursor.moveToFirst()) {
                 /*try {
                     int dateCompare = Helper.convertStringToDate(locationCursor.getString(Location.COLUMN_UPDATED_ON)).compareTo(location.getUpdatedOn());
                     if (dateCompare < 0) {*/
-                        updateLocationById(context, location, location.getId());
+                        updateLocationById(context, location, location.getLocationId());
                     /*}*/
                     locationCursor.close();
                 /*} catch (ParseException e) {
@@ -230,24 +227,24 @@ public class DataParser {
                 contentValuesList.add(Helper.generateContentValuesFromLocationObject(location));
             }
         }
-        int locationsInserted = context.getContentResolver().bulkInsert(LocationsEntry.CONTENT_URI, contentValuesList.toArray(new ContentValues[contentValuesList.size()]));
+        int locationsInserted = context.getContentResolver().bulkInsert(DataContract.LocationsEntry.CONTENT_URI, contentValuesList.toArray(new ContentValues[contentValuesList.size()]));
         Log.i(LOG_TAG, "Number of Locations inserted" + locationsInserted);
         return locationsInserted > 0;
     }
 
     public static Location getLocationById(Context context, int id) {
         Location location = new Location();
-        Cursor locationCursor = context.getContentResolver().query(LocationsEntry.CONTENT_URI, null,
-                LocationsEntry.COLUMN_ID + " = ?", new String[]{String.valueOf(id)}, null);
+        Cursor locationCursor = context.getContentResolver().query(DataContract.LocationsEntry.CONTENT_URI, null,
+                DataContract.LocationsEntry.COLUMN_ID + " = ?", new String[]{String.valueOf(id)}, null);
 
         if (locationCursor != null) {
             if (locationCursor.moveToFirst()) {
                 do {
-                    try {
+                    /*try {
                         location = Location.fromCursor(locationCursor);
                     } catch (ParseException e) {
                         e.printStackTrace();
-                    }
+                    }*/
                 } while (locationCursor.moveToNext());
             }
             locationCursor.close();
@@ -259,17 +256,17 @@ public class DataParser {
 
     public static Location getLocationByName(Context context, String name) {
         Location location = new Location();
-        Cursor locationCursor = context.getContentResolver().query(LocationsEntry.CONTENT_URI, null,
-                LocationsEntry.COLUMN_LOCATION_NAME + " = ?", new String[]{name}, null);
+        Cursor locationCursor = context.getContentResolver().query(DataContract.LocationsEntry.CONTENT_URI, null,
+                DataContract.LocationsEntry.COLUMN_LOCATION_NAME + " = ?", new String[]{name}, null);
 
         if (locationCursor != null) {
             if (locationCursor.moveToFirst()) {
                 do {
-                    try {
+                    /*try {
                         location = Location.fromCursor(locationCursor);
                     } catch (ParseException e) {
                         e.printStackTrace();
-                    }
+                    }*/
                 } while (locationCursor.moveToNext());
             }
             locationCursor.close();
@@ -282,17 +279,17 @@ public class DataParser {
     public static List<Location> getMultipleLocationsByNames(Context context, List<String> locationNames) {
         List<Location> locationList = new ArrayList<>();
         for (String locationName : locationNames) {
-            Cursor locationCursor = context.getContentResolver().query(LocationsEntry.CONTENT_URI, null,
-                    LocationsEntry.COLUMN_LOCATION_NAME + " = ?", new String[]{locationName}, null);
+            Cursor locationCursor = context.getContentResolver().query(DataContract.LocationsEntry.CONTENT_URI, null,
+                    DataContract.LocationsEntry.COLUMN_LOCATION_NAME + " = ?", new String[]{locationName}, null);
 
             if (locationCursor != null) {
                 if (locationCursor.moveToFirst()) {
                     do {
-                        try {
+                        /*try {
                             locationList.add(Location.fromCursor(locationCursor));
                         } catch (ParseException e) {
                             e.printStackTrace();
-                        }
+                        }*/
                     } while (locationCursor.moveToNext());
                 }
                 locationCursor.close();
@@ -307,17 +304,17 @@ public class DataParser {
     public static List<Location> getMultipleLocationsByIds(Context context, List<Integer> locationIds) {
         List<Location> locationList = new ArrayList<>();
         for (Integer locationId : locationIds) {
-            Cursor locationCursor = context.getContentResolver().query(LocationsEntry.CONTENT_URI, null,
-                    LocationsEntry.COLUMN_ID + " = ?", new String[]{String.valueOf(locationId)}, null);
+            Cursor locationCursor = context.getContentResolver().query(DataContract.LocationsEntry.CONTENT_URI, null,
+                    DataContract.LocationsEntry.COLUMN_ID + " = ?", new String[]{String.valueOf(locationId)}, null);
 
             if (locationCursor != null) {
                 if (locationCursor.moveToFirst()) {
                     do {
-                        try {
+                        /*try {
                             locationList.add(Location.fromCursor(locationCursor));
                         } catch (ParseException e) {
                             e.printStackTrace();
-                        }
+                        }*/
                     } while (locationCursor.moveToNext());
                 }
                 locationCursor.close();
@@ -331,13 +328,13 @@ public class DataParser {
 
     public static List<Integer> getLocationIdsByCategoryId(Context context, int categoryId) {
         List<Integer> locationIds = new ArrayList<>();
-        Cursor categoryLocationsCursor = context.getContentResolver().query(CategoryLocationsEntry.CONTENT_URI, null,
-                CategoryLocationsEntry.COLUMN_CATEGORY_ID + " = ?", new String[]{String.valueOf(categoryId)}, Helper.QUERY_SORT_ORDER_ASC);
+        Cursor categoryLocationsCursor = context.getContentResolver().query(DataContract.CategoryLocationsEntry.CONTENT_URI, null,
+                DataContract.CategoryLocationsEntry.COLUMN_CATEGORY_ID + " = ?", new String[]{String.valueOf(categoryId)}, Helper.QUERY_SORT_ORDER_ASC);
 
         if (categoryLocationsCursor != null) {
             if (categoryLocationsCursor.moveToFirst()) {
                 do {
-                    locationIds.add(categoryLocationsCursor.getInt(CategoryLocations.COLUMN_LOCATION_ID));
+//                    locationIds.add(categoryLocationsCursor.getInt(CategoryLocations.COLUMN_LOCATION_ID));
                 } while (categoryLocationsCursor.moveToNext());
             }
             categoryLocationsCursor.close();
@@ -359,16 +356,16 @@ public class DataParser {
 
     public static List<Integer> getLimitedLocationIdsByCategoryId(Context context, int categoryId) {
         List<Integer> locationIds = new ArrayList<>();
-        Cursor categoryLocationsCursor = context.getContentResolver().query(CategoryLocationsEntry.CONTENT_URI.buildUpon()
+        Cursor categoryLocationsCursor = context.getContentResolver().query(DataContract.CategoryLocationsEntry.CONTENT_URI.buildUpon()
                         .appendQueryParameter(DataProvider.QUERY_PARAMETER_LIMIT,
                                 String.valueOf(Helper.MAX_PER_LIST_ON_HOME_SCREEN)).build(), null,
-                CategoryLocationsEntry.COLUMN_CATEGORY_ID + " = ?",
+                DataContract.CategoryLocationsEntry.COLUMN_CATEGORY_ID + " = ?",
                 new String[]{String.valueOf(categoryId)}, Helper.QUERY_SORT_ORDER_ASC);
 
         if (categoryLocationsCursor != null) {
             if (categoryLocationsCursor.moveToFirst()) {
                 do {
-                    locationIds.add(categoryLocationsCursor.getInt(CategoryLocations.COLUMN_LOCATION_ID));
+//                    locationIds.add(categoryLocationsCursor.getInt(CategoryLocations.COLUMN_LOCATION_ID));
                 } while (categoryLocationsCursor.moveToNext());
             }
             categoryLocationsCursor.close();
@@ -384,9 +381,9 @@ public class DataParser {
     }
 
     public static boolean updateLocationById(Context context, Location newLocation, int locationID) {
-        int updated = context.getContentResolver().update(LocationsEntry.CONTENT_URI,
+        int updated = context.getContentResolver().update(DataContract.LocationsEntry.CONTENT_URI,
                 Helper.generateContentValuesFromLocationObject(newLocation),
-                LocationsEntry.COLUMN_ID + " = ?", new String[]{String.valueOf(locationID)});
+                DataContract.LocationsEntry.COLUMN_ID + " = ?", new String[]{String.valueOf(locationID)});
 
         Log.i(LOG_TAG, "Location Updated " + updated);
 
@@ -394,8 +391,8 @@ public class DataParser {
     }
 
     public static boolean deleteLocationById(Context context, int locationID) {
-        int updated = context.getContentResolver().delete(LocationsEntry.CONTENT_URI,
-                LocationsEntry.COLUMN_ID + " = ?", new String[]{String.valueOf(locationID)});
+        int updated = context.getContentResolver().delete(DataContract.LocationsEntry.CONTENT_URI,
+                DataContract.LocationsEntry.COLUMN_ID + " = ?", new String[]{String.valueOf(locationID)});
 
         Log.i(LOG_TAG, "Category Deleted " + updated);
 
@@ -412,9 +409,9 @@ public class DataParser {
 
     public static boolean addCategoryLocations(Context context, CategoryLocations categoryLocations) {
         Cursor categoryLocationsCursor = context.getContentResolver().query(
-                CategoryLocationsEntry.CONTENT_URI,
+                DataContract.CategoryLocationsEntry.CONTENT_URI,
                 null,
-                CategoryLocationsEntry.COLUMN_ID + " = ?",
+                DataContract.CategoryLocationsEntry.COLUMN_ID + " = ?",
                 new String[]{String.valueOf(categoryLocations.getId())},
                 null);
 
@@ -423,7 +420,7 @@ public class DataParser {
                 int dateCompare = Helper.convertStringToDate(categoryLocationsCursor.getString(CategoryLocations.COLUMN_UPDATED_ON))
                         .compareTo(categoryLocations.getUpdatedOn());
                 if (dateCompare < 0) {*/
-                    updateCategoryLocationsById(context, categoryLocations, categoryLocations.getId());
+                    updateCategoryLocationsById(context, categoryLocations, categoryLocations.getCategoryLocationId());
                 /*}*/
                 categoryLocationsCursor.close();
             /*} catch (ParseException e) {
@@ -431,7 +428,7 @@ public class DataParser {
             }*/
             return false;
         } else {
-            Uri insertedUri = context.getContentResolver().insert(CategoryLocationsEntry.CONTENT_URI,
+            Uri insertedUri = context.getContentResolver().insert(DataContract.CategoryLocationsEntry.CONTENT_URI,
                     Helper.generateContentValuesFromCategoryLocationsObject(categoryLocations));
             Log.i(LOG_TAG, "Category_Location inserted" + insertedUri);
             return true;
@@ -442,9 +439,9 @@ public class DataParser {
         List<ContentValues> contentValuesList = new ArrayList<>();
         for (CategoryLocations categoryLocations : categoryLocationsList) {
             Cursor categoryLocationsCursor = context.getContentResolver().query(
-                    CategoryLocationsEntry.CONTENT_URI,
+                    DataContract.CategoryLocationsEntry.CONTENT_URI,
                     null,
-                    CategoryLocationsEntry.COLUMN_ID + " = ?",
+                    DataContract.CategoryLocationsEntry.COLUMN_ID + " = ?",
                     new String[]{String.valueOf(categoryLocations.getId())},
                     null);
             if (categoryLocationsCursor != null && categoryLocationsCursor.moveToFirst()) {
@@ -452,7 +449,7 @@ public class DataParser {
                     int dateCompare = Helper.convertStringToDate(categoryLocationsCursor.getString(CategoryLocations.COLUMN_UPDATED_ON))
                             .compareTo(categoryLocations.getUpdatedOn());
                     if (dateCompare < 0) {*/
-                        updateCategoryLocationsById(context, categoryLocations, categoryLocations.getId());
+                        updateCategoryLocationsById(context, categoryLocations, categoryLocations.getCategoryLocationId());
 //                    }
                     categoryLocationsCursor.close();
                 /*} catch (ParseException e) {
@@ -463,24 +460,24 @@ public class DataParser {
                 contentValuesList.add(Helper.generateContentValuesFromCategoryLocationsObject(categoryLocations));
             }
         }
-        int categoryLocationsInserted = context.getContentResolver().bulkInsert(CategoryLocationsEntry.CONTENT_URI, contentValuesList.toArray(new ContentValues[contentValuesList.size()]));
+        int categoryLocationsInserted = context.getContentResolver().bulkInsert(DataContract.CategoryLocationsEntry.CONTENT_URI, contentValuesList.toArray(new ContentValues[contentValuesList.size()]));
         Log.i(LOG_TAG, "Number of Category_Locations inserted" + categoryLocationsInserted);
         return categoryLocationsInserted > 0;
     }
 
     public static List<CategoryLocations> getCategoryLocationsByCategoryId(Context context, int categoryId) {
         List<CategoryLocations> categoryLocationsList = new ArrayList<>();
-        Cursor categoryLocationsCursor = context.getContentResolver().query(CategoryLocationsEntry.CONTENT_URI, null,
-                CategoryLocationsEntry.COLUMN_CATEGORY_ID + " = ?", new String[]{String.valueOf(categoryId)}, Helper.QUERY_SORT_ORDER_ASC);
+        Cursor categoryLocationsCursor = context.getContentResolver().query(DataContract.CategoryLocationsEntry.CONTENT_URI, null,
+                DataContract.CategoryLocationsEntry.COLUMN_CATEGORY_ID + " = ?", new String[]{String.valueOf(categoryId)}, Helper.QUERY_SORT_ORDER_ASC);
 
         if (categoryLocationsCursor != null) {
             if (categoryLocationsCursor.moveToFirst()) {
                 do {
-                    try {
+                    /*try {
                         categoryLocationsList.add(CategoryLocations.fromCursor(categoryLocationsCursor));
                     } catch (ParseException e) {
                         e.printStackTrace();
-                    }
+                    }*/
                 } while (categoryLocationsCursor.moveToNext());
             }
             categoryLocationsCursor.close();
@@ -492,17 +489,17 @@ public class DataParser {
 
     public static List<CategoryLocations> getAllCategoryLocations(Context context) {
         List<CategoryLocations> categoryLocationsList = new ArrayList<>();
-        Cursor categoryLocationsCursor = context.getContentResolver().query(CategoryLocationsEntry.CONTENT_URI, null,
+        Cursor categoryLocationsCursor = context.getContentResolver().query(DataContract.CategoryLocationsEntry.CONTENT_URI, null,
                 null, null, null);
 
         if (categoryLocationsCursor != null) {
             if (categoryLocationsCursor.moveToFirst()) {
                 do {
-                    try {
+                    /*try {
                         categoryLocationsList.add(CategoryLocations.fromCursor(categoryLocationsCursor));
                     } catch (ParseException e) {
                         e.printStackTrace();
-                    }
+                    }*/
                 } while (categoryLocationsCursor.moveToNext());
             }
             categoryLocationsCursor.close();
@@ -513,9 +510,9 @@ public class DataParser {
     }
 
     public static boolean updateCategoryLocationsById(Context context, CategoryLocations newCategoryLocation, int categoryLocationID) {
-        int updated = context.getContentResolver().update(CategoryLocationsEntry.CONTENT_URI,
+        int updated = context.getContentResolver().update(DataContract.CategoryLocationsEntry.CONTENT_URI,
                 Helper.generateContentValuesFromCategoryLocationsObject(newCategoryLocation),
-                CategoryLocationsEntry.COLUMN_ID + " = ?", new String[]{String.valueOf(categoryLocationID)});
+                DataContract.CategoryLocationsEntry.COLUMN_ID + " = ?", new String[]{String.valueOf(categoryLocationID)});
 
         Log.i(LOG_TAG, "Category_Location Updated with ID " + updated);
 
@@ -523,8 +520,8 @@ public class DataParser {
     }
 
     public static boolean deleteCategoryLocationsById(Context context, int categoryLocationID) {
-        int updated = context.getContentResolver().delete(CategoryLocationsEntry.CONTENT_URI,
-                CategoryLocationsEntry.COLUMN_ID + " = ?", new String[]{String.valueOf(categoryLocationID)});
+        int updated = context.getContentResolver().delete(DataContract.CategoryLocationsEntry.CONTENT_URI,
+                DataContract.CategoryLocationsEntry.COLUMN_ID + " = ?", new String[]{String.valueOf(categoryLocationID)});
 
         Log.i(LOG_TAG, "Category Deleted " + updated);
 
