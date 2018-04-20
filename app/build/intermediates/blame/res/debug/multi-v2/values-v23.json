@@ -4,18 +4,7 @@
             "outputFile": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v23/values-v23.xml",
             "map": [
                 {
-                    "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/e49b5d528766cf9b9a93613f8295f515/res/values-v23/values-v23.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,19,32,33,34,35,36",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,190,325,400,487,1277,2079,2206,2311,2426,2533",
-                        "endLines": "2,3,4,5,18,31,32,33,34,35,36",
-                        "endColumns": "134,134,74,86,12,12,126,104,114,106,112",
-                        "endOffsets": "185,320,395,482,1272,2074,2201,2306,2421,2528,2641"
-                    }
-                },
-                {
-                    "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.1.0.aar/7e1c4d4ea6ed8dcfd404ee1b070e91ee/res/values-v23/values-v23.xml",
+                    "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/cardview-v7-27.1.1.aar/740adf98a807603a2313b41ae9a32934/res/values-v23/values-v23.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -31,6 +20,17 @@
                         "endLines": "39",
                         "endColumns": "12",
                         "endOffsets": "2791"
+                    }
+                },
+                {
+                    "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/9244180e471d4ef69579b231ce279ca1/res/values-v23/values-v23.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,19,32,33,34,35,36",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,190,325,400,487,1277,2079,2206,2311,2426,2533",
+                        "endLines": "2,3,4,5,18,31,32,33,34,35,36",
+                        "endColumns": "134,134,74,86,12,12,126,104,114,106,112",
+                        "endOffsets": "185,320,395,482,1272,2074,2201,2306,2421,2528,2641"
                     }
                 }
             ]

@@ -8,7 +8,7 @@
     android:paddingLeft="6dp"
     android:paddingRight="6dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.osahub.rachit.streetview.activity.CategoryActivity"
+    tools:context="com.osahub.rachit.streetview.modules.category.CategoryActivity"
     tools:showIn="@layout/activity_category">
 
     <android.support.v7.widget.RecyclerView

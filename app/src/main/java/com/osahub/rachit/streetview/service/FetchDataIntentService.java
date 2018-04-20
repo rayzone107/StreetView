@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.osahub.rachit.streetview.AppController;
-import com.osahub.rachit.streetview.activity.LocationsActivity;
-import com.osahub.rachit.streetview.activity.SplashActivity;
+import com.osahub.rachit.streetview.modules.home.LocationsActivity;
+import com.osahub.rachit.streetview.modules.splash.SplashActivity;
 import com.osahub.rachit.streetview.database.DataParser;
 import com.osahub.rachit.streetview.model.Category;
 import com.osahub.rachit.streetview.model.CategoryLocations;

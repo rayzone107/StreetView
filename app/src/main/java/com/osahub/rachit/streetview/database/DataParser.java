@@ -39,16 +39,16 @@ public class DataParser {
                 null);
 
         if (categoryCursor != null && categoryCursor.moveToFirst()) {
-            try {
+            /*try {
                 int dateCompare = Helper.convertStringToDate(categoryCursor.getString(Category.COLUMN_UPDATED_ON))
                         .compareTo(category.getUpdatedOn());
-                if (dateCompare < 0) {
+                if (dateCompare < 0) {*/
                     updateCategoryById(context, category, category.getId());
-                }
+//                }
                 categoryCursor.close();
-            } catch (ParseException e) {
+            /*} catch (ParseException e) {
                 e.printStackTrace();
-            }
+            }*/
             return false;
         } else {
             Uri insertedUri = context.getContentResolver().insert(CategoriesEntry.CONTENT_URI,
@@ -68,16 +68,16 @@ public class DataParser {
                     new String[]{String.valueOf(category.getId())},
                     null);
             if (categoryCursor != null && categoryCursor.moveToFirst()) {
-                try {
+               /* try {
                     int dateCompare = Helper.convertStringToDate(categoryCursor.getString(Category.COLUMN_UPDATED_ON))
                             .compareTo(category.getUpdatedOn());
-                    if (dateCompare < 0) {
+                    if (dateCompare < 0) {*/
                         updateCategoryById(context, category, category.getId());
-                    }
+                    /*}*/
                     categoryCursor.close();
-                } catch (ParseException e) {
+                /*} catch (ParseException e) {
                     e.printStackTrace();
-                }
+                }*/
             } else {
                 contentValuesList.add(Helper.generateContentValuesFromCategoryObject(category));
             }
@@ -189,15 +189,15 @@ public class DataParser {
                 null);
 
         if (locationCursor != null && locationCursor.moveToFirst()) {
-            try {
+            /*try {
                 int dateCompare = Helper.convertStringToDate(locationCursor.getString(Location.COLUMN_UPDATED_ON)).compareTo(location.getUpdatedOn());
-                if (dateCompare < 0) {
+                if (dateCompare < 0) {*/
                     updateLocationById(context, location, location.getId());
-                }
+                /*}*/
                 locationCursor.close();
-            } catch (ParseException e) {
+            /*} catch (ParseException e) {
                 e.printStackTrace();
-            }
+            }*/
             return false;
         } else {
             Uri insertedUri = context.getContentResolver().insert(LocationsEntry.CONTENT_URI,
@@ -217,15 +217,15 @@ public class DataParser {
                     new String[]{String.valueOf(location.getId())},
                     null);
             if (locationCursor != null && locationCursor.moveToFirst()) {
-                try {
+                /*try {
                     int dateCompare = Helper.convertStringToDate(locationCursor.getString(Location.COLUMN_UPDATED_ON)).compareTo(location.getUpdatedOn());
-                    if (dateCompare < 0) {
+                    if (dateCompare < 0) {*/
                         updateLocationById(context, location, location.getId());
-                    }
+                    /*}*/
                     locationCursor.close();
-                } catch (ParseException e) {
+                /*} catch (ParseException e) {
                     e.printStackTrace();
-                }
+                }*/
             } else {
                 contentValuesList.add(Helper.generateContentValuesFromLocationObject(location));
             }
@@ -419,16 +419,16 @@ public class DataParser {
                 null);
 
         if (categoryLocationsCursor != null && categoryLocationsCursor.moveToFirst()) {
-            try {
+            /*try {
                 int dateCompare = Helper.convertStringToDate(categoryLocationsCursor.getString(CategoryLocations.COLUMN_UPDATED_ON))
                         .compareTo(categoryLocations.getUpdatedOn());
-                if (dateCompare < 0) {
+                if (dateCompare < 0) {*/
                     updateCategoryLocationsById(context, categoryLocations, categoryLocations.getId());
-                }
+                /*}*/
                 categoryLocationsCursor.close();
-            } catch (ParseException e) {
+            /*} catch (ParseException e) {
                 e.printStackTrace();
-            }
+            }*/
             return false;
         } else {
             Uri insertedUri = context.getContentResolver().insert(CategoryLocationsEntry.CONTENT_URI,
@@ -448,17 +448,17 @@ public class DataParser {
                     new String[]{String.valueOf(categoryLocations.getId())},
                     null);
             if (categoryLocationsCursor != null && categoryLocationsCursor.moveToFirst()) {
-                try {
+                /*try {
                     int dateCompare = Helper.convertStringToDate(categoryLocationsCursor.getString(CategoryLocations.COLUMN_UPDATED_ON))
                             .compareTo(categoryLocations.getUpdatedOn());
-                    if (dateCompare < 0) {
+                    if (dateCompare < 0) {*/
                         updateCategoryLocationsById(context, categoryLocations, categoryLocations.getId());
-                    }
+//                    }
                     categoryLocationsCursor.close();
-                } catch (ParseException e) {
+                /*} catch (ParseException e) {
                     e.printStackTrace();
                     return false;
-                }
+                }*/
             } else {
                 contentValuesList.add(Helper.generateContentValuesFromCategoryLocationsObject(categoryLocations));
             }

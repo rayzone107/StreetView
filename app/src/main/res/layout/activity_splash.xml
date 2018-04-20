@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.osahub.rachit.streetview.activity.SplashActivity">
+    tools:context="com.osahub.rachit.streetview.modules.splash.SplashActivity">
 
 </RelativeLayout>

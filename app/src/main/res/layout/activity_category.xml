@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#eeeeee"
     android:fitsSystemWindows="true"
-    tools:context="com.osahub.rachit.streetview.activity.CategoryActivity">
+    tools:context="com.osahub.rachit.streetview.modules.category.CategoryActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

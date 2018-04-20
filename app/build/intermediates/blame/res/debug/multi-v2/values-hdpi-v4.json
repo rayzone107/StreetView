@@ -4,11 +4,14 @@
             "outputFile": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-hdpi-v4/values-hdpi-v4.xml",
             "map": [
                 {
-                    "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/e49b5d528766cf9b9a93613f8295f515/res/values-hdpi-v4/values-hdpi-v4.xml",
+                    "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/9244180e471d4ef69579b231ce279ca1/res/values-hdpi-v4/values-hdpi-v4.xml",
                     "from": {
-                        "startLines": "-1",
-                        "startColumns": "-1",
-                        "startOffsets": "-1"
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "6",
+                        "endColumns": "13",
+                        "endOffsets": "327"
                     },
                     "to": {
                         "startLines": "4",

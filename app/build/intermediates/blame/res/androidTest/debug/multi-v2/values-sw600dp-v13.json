@@ -4,24 +4,7 @@
             "outputFile": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-sw600dp-v13/values-sw600dp-v13.xml",
             "map": [
                 {
-                    "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-27.1.0.aar/938fefea7b0790ebbce2b4e384f51540/res/values-sw600dp-v13/values-sw600dp-v13.xml",
-                    "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,124",
-                        "endColumns": "68,68",
-                        "endOffsets": "119,188"
-                    },
-                    "to": {
-                        "startLines": "18,19",
-                        "startColumns": "4,4",
-                        "startOffsets": "1170,1239",
-                        "endColumns": "68,68",
-                        "endOffsets": "1234,1303"
-                    }
-                },
-                {
-                    "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/design-27.1.0.aar/53748db8aa36b273499a9c451f7ba214/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/design-27.1.1.aar/6d4342274088dde93f49a7c14a1803c9/res/values-sw600dp-v13/values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
@@ -40,13 +23,30 @@
                     }
                 },
                 {
-                    "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.0.aar/e49b5d528766cf9b9a93613f8295f515/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/9244180e471d4ef69579b231ce279ca1/res/values-sw600dp-v13/values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
                         "startOffsets": "55,124,193,263,337,413,472,543",
                         "endColumns": "68,68,69,73,75,58,70,67",
                         "endOffsets": "119,188,258,332,408,467,538,606"
+                    }
+                },
+                {
+                    "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-27.1.1.aar/4c48a6876bf68a8853aa05c3cadc26ea/res/values-sw600dp-v13/values-sw600dp-v13.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,124",
+                        "endColumns": "68,68",
+                        "endOffsets": "119,188"
+                    },
+                    "to": {
+                        "startLines": "18,19",
+                        "startColumns": "4,4",
+                        "startOffsets": "1170,1239",
+                        "endColumns": "68,68",
+                        "endOffsets": "1234,1303"
                     }
                 }
             ]

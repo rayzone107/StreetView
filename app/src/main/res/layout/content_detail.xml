@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:scrollbars="none"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.osahub.rachit.streetview.activity.DetailActivity"
+    tools:context="com.osahub.rachit.streetview.modules.detail.DetailActivity"
     tools:showIn="@layout/activity_detail">
 
     <LinearLayout

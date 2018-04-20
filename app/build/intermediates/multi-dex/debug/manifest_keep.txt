@@ -1,3 +1,3 @@
-# Referenced at /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/manifests/full/debug/AndroidManifest.xml:32
+# Referenced at /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/manifests/full/debug/AndroidManifest.xml:31
 -keep class com.osahub.rachit.streetview.AppController { <init>(...); }
 
