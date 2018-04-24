@@ -50,7 +50,7 @@ public class Category extends SugarRecord<Category> {
 
     public static Category fromJson(JSONObject jsonObject) throws JSONException, ParseException {
         return new Category(
-                jsonObject.getInt("categoryLocationId"),
+                jsonObject.getInt("id"),
                 jsonObject.getString("name"),
                 jsonObject.getString("type"),
                 jsonObject.getInt("order"),

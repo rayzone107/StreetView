@@ -92,7 +92,7 @@ public class CategoryFragment extends BaseFragment {
             }
         });
 
-        mLocationsArray.addAll(mLocationDatabaseHelper.getLimitedLocationsByCategoryId(mCategory.getCategoryId()));
+        mLocationsArray.addAll(mDatabaseHelper.mLocationDbHelper.getLimitedLocationsByCategoryId(mCategory.getCategoryId()));
 
         setLocationsList();
         return rootView;
@@ -132,6 +132,6 @@ public class CategoryFragment extends BaseFragment {
         } else {
             mLocations.addItemDecoration(new Helper.HorizontalSpaceItemDecoration(50));
         }
-        mCount.setText(String.valueOf(mLocationDatabaseHelper.getLocationCountByCategoryId(mCategory.getCategoryId())));
+        mCount.setText(String.valueOf(mDatabaseHelper.mLocationDbHelper.getLocationCountByCategoryId(mCategory.getCategoryId())));
     }
 }

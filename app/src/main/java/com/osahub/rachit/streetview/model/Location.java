@@ -76,7 +76,7 @@ public class Location extends SugarRecord<Location> {
 
     public static Location fromJson(JSONObject jsonObject) throws JSONException, ParseException {
         return new Location(
-                jsonObject.getInt("categoryLocationId"),
+                jsonObject.getInt("id"),
                 jsonObject.getString("locname"),
                 jsonObject.getString("desc"),
                 jsonObject.getString("descsmall"),

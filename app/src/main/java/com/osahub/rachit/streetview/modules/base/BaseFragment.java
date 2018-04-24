@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import com.osahub.rachit.streetview.database.CategoryDatabaseHelper;
 import com.osahub.rachit.streetview.database.CategoryLocationDatabaseHelper;
 import com.osahub.rachit.streetview.database.DatabaseContract;
+import com.osahub.rachit.streetview.database.DatabaseHelper;
 import com.osahub.rachit.streetview.database.LocationDatabaseHelper;
 
 /**
@@ -17,9 +18,7 @@ import com.osahub.rachit.streetview.database.LocationDatabaseHelper;
 public abstract class BaseFragment extends Fragment {
 
     public Context mContext;
-    public DatabaseContract.CategoryContract mCategoryDatabaseHelper;
-    public DatabaseContract.LocationContract mLocationDatabaseHelper;
-    public DatabaseContract.CategoryLocationContract mCategoryLocationDatabaseHelper;
+    public DatabaseHelper mDatabaseHelper;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,9 +26,6 @@ public abstract class BaseFragment extends Fragment {
         if (getActivity() != null) {
             mContext = getActivity().getApplicationContext();
         }
-
-        mCategoryDatabaseHelper = new CategoryDatabaseHelper();
-        mLocationDatabaseHelper = new LocationDatabaseHelper();
-        mCategoryLocationDatabaseHelper = new CategoryLocationDatabaseHelper();
+        mDatabaseHelper = new DatabaseHelper();
     }
 }

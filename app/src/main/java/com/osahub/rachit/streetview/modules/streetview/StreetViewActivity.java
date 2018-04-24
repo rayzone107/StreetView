@@ -115,15 +115,11 @@ public class StreetViewActivity extends AppCompatActivity implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_info) {
             Intent intent = new Intent(StreetViewActivity.this, DetailActivity.class);
-            intent.putExtra("location", mLocation);
+            intent.putExtra("location", mLocation.getLocationId());
             startActivity(intent);
             return true;
         }

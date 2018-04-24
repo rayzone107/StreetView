@@ -12,8 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.osahub.rachit.streetview.R;
-import com.osahub.rachit.streetview.modules.gallery.GalleryActivity;
 import com.osahub.rachit.streetview.model.Location;
+import com.osahub.rachit.streetview.modules.gallery.GalleryActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.Arrays;
@@ -68,7 +68,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DetailActivity.this, GalleryActivity.class);
-                intent.putExtra("location", mLocation);
+                intent.putExtra("location", mLocation.getLocationId());
                 startActivity(intent);
             }
         });
@@ -77,7 +77,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DetailActivity.this, GalleryActivity.class);
-                intent.putExtra("location", mLocation);
+                intent.putExtra("location", mLocation.getLocationId());
                 startActivity(intent);
             }
         });

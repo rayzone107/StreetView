@@ -48,7 +48,7 @@ public class CategoryActivity extends BaseActivity {
             mGridLayoutManager = new GridLayoutManager(CategoryActivity.this, 5);
         }
 
-        mLocationsArray = mLocationDatabaseHelper.getLocationsByCategoryId(mCategory.getCategoryId());
+        mLocationsArray = mDatabaseHelper.mLocationDbHelper.getLocationsByCategoryId(mCategory.getCategoryId());
 
         setLocationsList();
     }

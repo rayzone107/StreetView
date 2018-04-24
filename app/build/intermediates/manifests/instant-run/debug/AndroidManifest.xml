@@ -27,7 +27,6 @@
         android:protectionLevel="signature" />
 
     <uses-permission android:name="com.osahub.rachit.streetview.permission.C2D_MESSAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name="com.osahub.rachit.streetview.AppController"
@@ -38,8 +37,22 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="DATABASE"
+            android:value="com.rachitgoyal.worldtour" />
+        <meta-data
+            android:name="VERSION"
+            android:value="1" />
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="true" />
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="com.osahub.rachit.streetview" />
+
         <activity
             android:name="com.osahub.rachit.streetview.modules.splash.SplashActivity"
+            android:label="@string/app_name"
             android:theme="@style/Theme.Splash" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -112,7 +125,7 @@
         </activity>
 
         <provider
-            android:name="com.osahub.rachit.streetview.database.DataProvider"
+            android:name="com.osahub.rachit.streetview.database.old.DataProvider"
             android:authorities="@string/content_authority" />
 
         <service

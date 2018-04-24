@@ -56,7 +56,7 @@ public class LocationsActivity extends BaseActivity
 
         fragmentsProgressBar = findViewById(R.id.fragments_progress_bar);
 
-        mCategories = mCategoryDatabaseHelper.getAllCategories();
+        mCategories = mDatabaseHelper.mCategoryDbHelper.getAllCategories();
 
         Log.i(LOG_TAG, "Categories Fetched");
         setCategoriesList();

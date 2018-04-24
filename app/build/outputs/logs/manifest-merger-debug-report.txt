@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:2:1-115:12
-INJECTED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:2:1-115:12
-INJECTED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:2:1-115:12
-INJECTED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:2:1-115:12
+ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:2:1-130:12
+INJECTED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:2:1-130:12
+INJECTED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:2:1-130:12
+INJECTED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:2:1-130:12
 MERGED from [com.amitshekhar.android:debug-db:1.0.3] /Users/rachit/.gradle/caches/transforms-1/files-1.1/debug-db-1.0.3.aar/e23a2fce08388a7cc0c614c928ead0f0/AndroidManifest.xml:20:1-40:12
 MERGED from [com.android.support:multidex:1.0.2] /Users/rachit/.gradle/caches/transforms-1/files-1.1/multidex-1.0.2.aar/a7327cfc4b3c889a7e3775a79c6914f5/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support.constraint:constraint-layout:1.1.0] /Users/rachit/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.0.aar/8f5aa1a87d66bf6d87ed26affca8bcbf/AndroidManifest.xml:2:1-11:12
@@ -139,20 +139,20 @@ MERGED from [com.google.android.gms:play-services-vision-common-license:12.0.1] 
 MERGED from [com.google.android.gms:play-services-vision-license:12.0.1] /Users/rachit/.gradle/caches/transforms-1/files-1.1/play-services-vision-license-12.0.1.aar/0ff677d9399eea6a8018ee91195d0915/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-wallet-license:12.0.1] /Users/rachit/.gradle/caches/transforms-1/files-1.1/play-services-wallet-license-12.0.1.aar/385180b4d4ad54def583c0030b2cf21b/AndroidManifest.xml:17:1-24:12
 MERGED from [com.google.android.gms:play-services-wearable-license:12.0.1] /Users/rachit/.gradle/caches/transforms-1/files-1.1/play-services-wearable-license-12.0.1.aar/13b40fd4a9e28063062ff924d3da6356/AndroidManifest.xml:17:1-24:12
-INJECTED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:2:1-115:12
-INJECTED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:2:1-115:12
-INJECTED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:2:1-115:12
+INJECTED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:2:1-130:12
+INJECTED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:2:1-130:12
+INJECTED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:2:1-130:12
 	package
 		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:2:11-49
 		INJECTED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:2:1-115:12
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:2:1-130:12
 		INJECTED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:2:1-115:12
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:2:1-130:12
 		INJECTED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:3:11-69
@@ -229,7 +229,7 @@ MERGED from [com.google.android.gms:play-services-maps:12.0.1] /Users/rachit/.gr
 	android:required
 		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:13:9-32
 application
-ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:15:5-113:19
+ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:15:5-128:19
 MERGED from [com.amitshekhar.android:debug-db:1.0.3] /Users/rachit/.gradle/caches/transforms-1/files-1.1/debug-db-1.0.3.aar/e23a2fce08388a7cc0c614c928ead0f0/AndroidManifest.xml:32:5-38:19
 MERGED from [com.amitshekhar.android:debug-db:1.0.3] /Users/rachit/.gradle/caches/transforms-1/files-1.1/debug-db-1.0.3.aar/e23a2fce08388a7cc0c614c928ead0f0/AndroidManifest.xml:32:5-38:19
 MERGED from [com.android.support.constraint:constraint-layout:1.1.0] /Users/rachit/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.0.aar/8f5aa1a87d66bf6d87ed26affca8bcbf/AndroidManifest.xml:9:5-20
@@ -440,130 +440,156 @@ MERGED from [com.google.android.gms:play-services-wearable-license:12.0.1] /User
 		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:21:9-40
 	android:name
 		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:16:9-38
+meta-data#DATABASE
+ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:23:9-25:57
+	android:value
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:25:13-54
+	android:name
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:24:13-36
+meta-data#VERSION
+ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:26:9-28:33
+	android:value
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:28:13-30
+	android:name
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:27:13-35
+meta-data#QUERY_LOG
+ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:29:9-31:36
+	android:value
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:31:13-33
+	android:name
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:30:13-37
+meta-data#DOMAIN_PACKAGE_NAME
+ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:32:9-34:60
+	android:value
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:34:13-57
+	android:name
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:33:13-47
 activity#com.osahub.rachit.streetview.modules.splash.SplashActivity
-ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:22:9-30:20
+ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:36:9-45:20
+	android:label
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:38:13-45
 	android:theme
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:24:13-48
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:39:13-48
 	android:name
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:23:13-58
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:37:13-58
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:25:13-29:29
+ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:40:13-44:29
 action#android.intent.action.MAIN
-ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:26:17-69
+ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:41:17-69
 	android:name
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:26:25-66
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:41:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:28:17-77
+ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:43:17-77
 	android:name
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:28:27-74
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:43:27-74
 activity#com.osahub.rachit.streetview.modules.home.LocationsActivity
-ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:31:9-36:20
+ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:46:9-51:20
 	android:label
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:33:13-45
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:48:13-45
 	android:launchMode
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:34:13-44
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:49:13-44
 	android:theme
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:35:13-73
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:50:13-73
 	android:name
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:32:13-59
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:47:13-59
 activity#com.osahub.rachit.streetview.modules.streetview.StreetViewActivity
-ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:37:9-45:20
+ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:52:9-60:20
 	android:label
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:39:13-45
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:54:13-45
 	android:launchMode
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:40:13-44
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:55:13-44
 	android:theme
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:41:13-56
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:56:13-56
 	android:name
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:38:13-66
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:53:13-66
 meta-data#android.support.PARENT_ACTIVITY
-ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:42:13-44:67
+ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:57:13-59:67
 	android:value
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:44:17-64
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:59:17-64
 	android:name
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:43:17-63
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:58:17-63
 meta-data#com.google.android.gms
-ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:47:9-49:69
+ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:62:9-64:69
 	android:value
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:49:13-66
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:64:13-66
 	android:name
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:48:13-50
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:63:13-50
 meta-data#com.google.android.geo.API_KEY
-ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:50:9-52:71
+ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:65:9-67:71
 	android:value
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:52:13-68
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:67:13-68
 	android:name
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:51:13-58
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:66:13-58
 activity#com.osahub.rachit.streetview.modules.detail.DetailActivity
-ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:54:9-63:20
+ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:69:9-78:20
 	android:parentActivityName
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:58:13-80
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:73:13-80
 	android:label
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:56:13-58
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:71:13-58
 	android:launchMode
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:57:13-44
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:72:13-44
 	android:theme
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:59:13-56
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:74:13-56
 	android:name
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:55:13-58
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:70:13-58
 activity#com.osahub.rachit.streetview.modules.gallery.GalleryActivity
-ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:64:9-73:20
+ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:79:9-88:20
 	android:parentActivityName
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:68:13-72
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:83:13-72
 	android:label
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:66:13-59
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:81:13-59
 	android:launchMode
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:67:13-44
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:82:13-44
 	android:theme
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:69:13-56
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:84:13-56
 	android:name
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:65:13-60
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:80:13-60
 activity#com.osahub.rachit.streetview.modules.category.CategoryActivity
-ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:74:9-83:20
+ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:89:9-98:20
 	android:parentActivityName
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:78:13-73
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:93:13-73
 	android:label
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:76:13-60
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:91:13-60
 	android:launchMode
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:77:13-44
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:92:13-44
 	android:theme
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:79:13-56
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:94:13-56
 	android:name
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:75:13-62
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:90:13-62
 activity#com.osahub.rachit.streetview.modules.developerprofile.DeveloperProfileActivity
-ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:84:9-93:20
+ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:99:9-108:20
 	android:parentActivityName
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:88:13-73
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:103:13-73
 	android:label
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:86:13-69
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:101:13-69
 	android:launchMode
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:87:13-44
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:102:13-44
 	android:theme
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:89:13-56
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:104:13-56
 	android:name
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:85:13-78
-provider#com.osahub.rachit.streetview.database.DataProvider
-ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:95:9-97:63
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:100:13-78
+provider#com.osahub.rachit.streetview.database.old.DataProvider
+ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:110:9-112:63
 	android:authorities
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:97:13-60
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:112:13-60
 	android:name
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:96:13-50
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:111:13-54
 service#com.osahub.rachit.streetview.service.FetchDataIntentService
-ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:99:9-102:19
+ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:114:9-117:19
 	android:exported
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:101:13-37
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:116:13-37
 	android:name
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:100:13-59
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:115:13-59
 activity#com.osahub.rachit.streetview.modules.category.SingleCategoryActivity
-ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:104:9-112:20
+ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:119:9-127:20
 	android:parentActivityName
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:107:13-73
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:122:13-73
 	android:label
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:106:13-67
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:121:13-67
 	android:theme
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:108:13-56
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:123:13-56
 	android:name
-		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:105:13-68
+		ADDED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml:120:13-68
 uses-sdk
 INJECTED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/AndroidManifest.xml
