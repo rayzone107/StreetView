@@ -1,7 +1,7 @@
 package com.osahub.rachit.streetview.database;
 
-import com.orm.query.Condition;
-import com.orm.query.Select;
+import com.activeandroid.query.Select;
+import com.osahub.rachit.streetview.misc.Helper;
 import com.osahub.rachit.streetview.model.Category;
 
 import java.util.List;
@@ -26,64 +26,68 @@ public class CategoryDatabaseHelper implements DatabaseContract.CategoryContract
 
     @Override
     public Category getCategoryById(int categoryId) {
-        return Select.from(Category.class).where(Condition.prop(Category.COLUMN_CATEGORY_ID).eq(categoryId)).list().get(0);
+        return new Select().from(Category.class).where(Category.COLUMN_CATEGORY_ID + " = ? ", categoryId).executeSingle();
     }
 
     @Override
     public Category getCategoryByName(String name) {
-        return Select.from(Category.class).where(Condition.prop(Category.COLUMN_CATEGORY_NAME).eq(name)).list().get(0);
+        return new Select().from(Category.class).where(Category.COLUMN_NAME + " = ? ", name).executeSingle();
     }
 
     @Override
     public List<Category> getCategoriesByIdsList(List<Integer> categoryIds) {
-        String whereClause = " " + Category.COLUMN_CATEGORY_ID + " IN (";
-        String whereArgs = "";
-        for (Integer id : categoryIds) {
-            whereClause = whereClause.concat("?,");
-            whereArgs = whereArgs.concat(id + ",");
+        if (categoryIds.isEmpty()) {
+            return null;
+        } else {
+            String whereClause = " " + Category.COLUMN_CATEGORY_ID + " IN (";
+            Integer[] whereArgs = new Integer[categoryIds.size()];
+            for (int i = 0; i < categoryIds.size(); i++) {
+                Integer id = categoryIds.get(i);
+                whereClause = whereClause.concat("?,");
+                whereArgs[i] = id;
+            }
+            whereClause = whereClause.substring(0, whereClause.length() - 1).concat(") ");
+            return new Select().from(Category.class).where(whereClause, whereArgs).execute();
         }
-        whereClause = whereClause.substring(0, whereClause.length() - 1).concat(") ");
-        whereArgs = whereArgs.substring(0, whereArgs.length() - 1);
-
-        return Category.find(Category.class, whereClause, whereArgs);
     }
 
     @Override
     public List<Category> getCategoriesByNamesList(List<String> names) {
-        String whereClause = " " + Category.COLUMN_CATEGORY_NAME + " IN (";
-        String whereArgs = "";
-        for (String name : names) {
-            whereClause = whereClause.concat("?,");
-            whereArgs = whereArgs.concat(name + ",");
+        if (names.isEmpty()) {
+            return null;
+        } else {
+            String whereClause = " " + Category.COLUMN_NAME + " IN (";
+            String[] whereArgs = new String[names.size()];
+            for (int i = 0; i < names.size(); i++) {
+                String name = names.get(i);
+                whereClause = whereClause.concat("?,");
+                whereArgs[i] = name;
+            }
+            whereClause = whereClause.substring(0, whereClause.length() - 1).concat(") ");
+            return new Select().from(Category.class).where(whereClause, whereArgs).execute();
         }
-        whereClause = whereClause.substring(0, whereClause.length() - 1).concat(") ");
-        whereArgs = whereArgs.substring(0, whereArgs.length() - 1);
-
-        return Category.find(Category.class, whereClause, whereArgs);
     }
 
     @Override
     public List<Category> getAllCategories() {
-        return Select.from(Category.class).list();
+        return new Select().from(Category.class).execute();
     }
 
     @Override
     public void updateCategoryById(int categoryId, Category category) {
-        Category originalCategory = Select.from(Category.class).where(Condition.prop(Category.COLUMN_CATEGORY_ID).eq(categoryId)).list().get(0);
-        long id = originalCategory.getId();
-        originalCategory = category;
-        originalCategory.setId(id);
+        Category originalCategory = new Select().from(Category.class).where(Category.COLUMN_CATEGORY_ID + " = ? ", categoryId).executeSingle();
+        originalCategory.updateObject(category);
         originalCategory.save();
     }
 
     @Override
     public void deleteCategoryById(int categoryId) {
-        Category category = Select.from(Category.class).where(Condition.prop(Category.COLUMN_CATEGORY_ID).eq(categoryId)).list().get(0);
+        Category category = new Select().from(Category.class).where(Category.COLUMN_CATEGORY_ID + " = ? ", categoryId).executeSingle();
         category.delete();
     }
 
     @Override
     public void deleteAllCategories() {
-        Category.deleteAll(Category.class);
+        Helper.clearTable(Category.class);
     }
 }

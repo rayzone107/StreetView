@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -44,11 +45,16 @@ public class CategoryFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mCategory = (Category) getArguments().getSerializable("category");
+        if (getArguments() != null) {
+            int categoryId = getArguments().getInt("category");
+            mCategory = mDatabaseHelper.mCategoryDbHelper.getCategoryById(categoryId);
+        } else {
+            getActivity().onBackPressed();
+        }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater
                 .inflate(R.layout.fragment_category, container, false);
@@ -92,9 +98,12 @@ public class CategoryFragment extends BaseFragment {
             }
         });
 
-        mLocationsArray.addAll(mDatabaseHelper.mLocationDbHelper.getLimitedLocationsByCategoryId(mCategory.getCategoryId()));
+        List<Location> locations = mDatabaseHelper.mLocationDbHelper.getLimitedLocationsByCategoryId(mCategory.getCategoryId());
 
-        setLocationsList();
+        if (locations != null && !locations.isEmpty()) {
+            mLocationsArray.addAll(locations);
+            setLocationsList();
+        }
         return rootView;
     }
 

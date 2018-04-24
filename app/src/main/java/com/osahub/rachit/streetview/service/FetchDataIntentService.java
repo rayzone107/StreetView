@@ -82,16 +82,19 @@ public class FetchDataIntentService extends BaseIntentService {
     private void saveToDatabase(String type) {
         switch (type) {
             case "Categories":
+                mDatabaseHelper.mCategoryDbHelper.deleteAllCategories();
                 mDatabaseHelper.mCategoryDbHelper.addMultipleCategories(categoryList);
                 isCategoriesSaved = true;
                 actionIfAllSaved();
                 break;
             case "Locations":
+                mDatabaseHelper.mLocationDbHelper.deleteAllLocations();
                 mDatabaseHelper.mLocationDbHelper.addMultipleLocations(locationList);
                 isLocationsSaved = true;
                 actionIfAllSaved();
                 break;
             case "CategoryLocations":
+                mDatabaseHelper.mCategoryLocationDatabaseHelper.deleteAllCategoryLocations();
                 mDatabaseHelper.mCategoryLocationDatabaseHelper.addMultipleCategoryLocations(categoryLocationsList);
                 isCategoryLocationsSaved = true;
                 actionIfAllSaved();

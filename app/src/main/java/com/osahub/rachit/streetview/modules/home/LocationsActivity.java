@@ -66,16 +66,18 @@ public class LocationsActivity extends BaseActivity
         fragmentsProgressBar.setVisibility(View.GONE);
 
         for (Category category : mCategories) {
-            ft = getSupportFragmentManager().beginTransaction();
-            CategoryFragment categoryFragment = new CategoryFragment();
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("category", category.getCategoryId());
-            categoryFragment.setArguments(bundle);
-            CategoryFragment categoryFragmentOld = (CategoryFragment) getSupportFragmentManager().findFragmentByTag(category.getName());
-            if (categoryFragmentOld == null) {
-                ft.add(R.id.fragment_holder, categoryFragment, category.getName());
+            if (mDatabaseHelper.mLocationDbHelper.getLocationCountByCategoryId(category.getCategoryId()) != 0) {
+                ft = getSupportFragmentManager().beginTransaction();
+                CategoryFragment categoryFragment = new CategoryFragment();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("category", category.getCategoryId());
+                categoryFragment.setArguments(bundle);
+                CategoryFragment categoryFragmentOld = (CategoryFragment) getSupportFragmentManager().findFragmentByTag(category.getName());
+                if (categoryFragmentOld == null) {
+                    ft.add(R.id.fragment_holder, categoryFragment, category.getName());
+                }
+                ft.commit();
             }
-            ft.commit();
         }
     }
 

@@ -1,6 +1,8 @@
 package com.osahub.rachit.streetview.model;
 
-import com.orm.SugarRecord;
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 import com.osahub.rachit.streetview.misc.Helper;
 
 import org.json.JSONException;
@@ -13,40 +15,41 @@ import java.util.Date;
  * Category Bean Class
  * Created by Rachit on 23-Apr-16.
  */
-public class Category extends SugarRecord<Category> {
+@Table(name = "Categories")
+public class Category extends Model {
 
-    public static final String COLUMN_CATEGORY_ID = "CATEGORYID";
-    public static final String COLUMN_CATEGORY_NAME = "NAME";
+    public static final String COLUMN_CATEGORY_ID = "categoryId";
+    public static final String COLUMN_NAME = "name";
+    public static final String COLUMN_TYPE = "type";
+    public static final String COLUMN_POSITION = "position";
+    public static final String COLUMN_CREATED_ON = "createdOn";
+    public static final String COLUMN_UPDATED_ON = "updatedOn";
 
+    @Column(name = COLUMN_CATEGORY_ID)
     private int categoryId;
+    @Column(name = COLUMN_NAME)
     private String name;
+    @Column(name = COLUMN_TYPE)
     private String type;
-    private int order;
+    @Column(name = COLUMN_POSITION)
+    private int position;
+    @Column(name = COLUMN_CREATED_ON)
     private Date createdOn;
+    @Column(name = COLUMN_UPDATED_ON)
     private Date updatedOn;
 
     public Category() {
     }
 
-    public Category(int id, String name, String type, int order, Date createdOn, Date updatedOn) {
+    public Category(int id, String name, String type, int position, Date createdOn, Date updatedOn) {
         this.categoryId = id;
         this.name = name;
         this.type = type;
-        this.order = order;
+        this.position = position;
         this.createdOn = createdOn;
         this.updatedOn = updatedOn;
 
     }
-
-    /*public static Category fromCursor(Cursor cursor) throws ParseException {
-        return new Category(
-                cursor.getInt(COLUMN_ID),
-                cursor.getString(COLUMN_NAME),
-                cursor.getString(COLUMN_TYPE),
-                cursor.getInt(COLUMN_ORDER),
-                Helper.convertStringToDate(cursor.getString(COLUMN_CREATED_ON)),
-                Helper.convertStringToDate(cursor.getString(COLUMN_UPDATED_ON)));
-    }*/
 
     public static Category fromJson(JSONObject jsonObject) throws JSONException, ParseException {
         return new Category(
@@ -56,6 +59,15 @@ public class Category extends SugarRecord<Category> {
                 jsonObject.getInt("order"),
                 Helper.convertStringToDate(jsonObject.getString("created")),
                 Helper.convertStringToDate(jsonObject.getString("updated")));
+    }
+
+    public void updateObject(Category category) {
+        this.categoryId = category.getCategoryId();
+        this.name = category.getName();
+        this.type = category.getType();
+        this.position = category.getPosition();
+        this.createdOn = category.getCreatedOn();
+        this.updatedOn = category.getUpdatedOn();
     }
 
     public int getCategoryId() {
@@ -82,12 +94,12 @@ public class Category extends SugarRecord<Category> {
         this.type = type;
     }
 
-    public int getOrder() {
-        return order;
+    public int getPosition() {
+        return position;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     public Date getCreatedOn() {

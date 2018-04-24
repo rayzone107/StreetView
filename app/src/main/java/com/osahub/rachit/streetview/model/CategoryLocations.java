@@ -1,6 +1,8 @@
 package com.osahub.rachit.streetview.model;
 
-import com.orm.SugarRecord;
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 import com.osahub.rachit.streetview.misc.Helper;
 
 import org.json.JSONException;
@@ -13,27 +15,37 @@ import java.util.Date;
  * CategoryLocation join bean class.
  * Created by Rachit on 30-May-16.
  */
-public class CategoryLocations extends SugarRecord<CategoryLocations> {
+@Table(name = "CategoryLocations")
+public class CategoryLocations extends Model {
 
-    public static final String COLUMN_CATEGORY_LOCATION_ID = "CATEGORYLOCATIONID";
-    public static final String COLUMN_CATEGORY_ID = "CATEGORYID";
-    public static final String COLUMN_LOCATION_ID = "LOCATIONID";
+    public static final String COLUMN_CATEGORY_LOCATION_ID = "categoryLocationId";
+    public static final String COLUMN_CATEGORY_ID = "categoryId";
+    public static final String COLUMN_LOCATION_ID = "locationId";
+    public static final String COLUMN_POSITION = "position";
+    public static final String COLUMN_CREATED_ON = "createdOn";
+    public static final String COLUMN_UPDATED_ON = "updatedOn";
 
+    @Column(name = COLUMN_CATEGORY_LOCATION_ID)
     private int categoryLocationId;
+    @Column(name = COLUMN_CATEGORY_ID)
     private int categoryId;
+    @Column(name = COLUMN_LOCATION_ID)
     private int locationId;
-    private int order;
+    @Column(name = COLUMN_POSITION)
+    private int position;
+    @Column(name = COLUMN_CREATED_ON)
     private Date createdOn;
+    @Column(name = COLUMN_UPDATED_ON)
     private Date updatedOn;
 
     public CategoryLocations() {
     }
 
-    public CategoryLocations(int id, int categoryId, int locationId, int order, Date createdOn, Date updatedOn) {
+    public CategoryLocations(int id, int categoryId, int locationId, int position, Date createdOn, Date updatedOn) {
         this.categoryLocationId = id;
         this.categoryId = categoryId;
         this.locationId = locationId;
-        this.order = order;
+        this.position = position;
         this.createdOn = createdOn;
         this.updatedOn = updatedOn;
     }
@@ -46,6 +58,15 @@ public class CategoryLocations extends SugarRecord<CategoryLocations> {
                 jsonObject.getInt("order"),
                 Helper.convertStringToDate(jsonObject.getString("created_on")),
                 Helper.convertStringToDate(jsonObject.getString("updated_on")));
+    }
+
+    public void updateObject(CategoryLocations categoryLocations) {
+        this.categoryLocationId = categoryLocations.getCategoryLocationId();
+        this.categoryId = categoryLocations.getCategoryId();
+        this.locationId = categoryLocations.getLocationId();
+        this.position = categoryLocations.getPosition();
+        this.createdOn = categoryLocations.getCreatedOn();
+        this.updatedOn = categoryLocations.getUpdatedOn();
     }
 
     public int getCategoryLocationId() {
@@ -72,12 +93,12 @@ public class CategoryLocations extends SugarRecord<CategoryLocations> {
         this.locationId = locationId;
     }
 
-    public int getOrder() {
-        return order;
+    public int getPosition() {
+        return position;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     public Date getCreatedOn() {

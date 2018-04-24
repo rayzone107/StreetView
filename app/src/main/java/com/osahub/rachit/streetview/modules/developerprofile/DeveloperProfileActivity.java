@@ -8,8 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.osahub.rachit.streetview.R;
+import com.osahub.rachit.streetview.modules.base.BaseActivity;
 
-public class DeveloperProfileActivity extends AppCompatActivity {
+public class DeveloperProfileActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

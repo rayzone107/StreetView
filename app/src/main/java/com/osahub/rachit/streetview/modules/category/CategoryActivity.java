@@ -3,15 +3,12 @@ package com.osahub.rachit.streetview.modules.category;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.osahub.rachit.streetview.R;
-import com.osahub.rachit.streetview.database.DatabaseContract;
-import com.osahub.rachit.streetview.database.LocationDatabaseHelper;
 import com.osahub.rachit.streetview.misc.Helper;
 import com.osahub.rachit.streetview.model.Category;
 import com.osahub.rachit.streetview.model.Location;
@@ -50,7 +47,9 @@ public class CategoryActivity extends BaseActivity {
 
         mLocationsArray = mDatabaseHelper.mLocationDbHelper.getLocationsByCategoryId(mCategory.getCategoryId());
 
-        setLocationsList();
+        if (mLocationsArray != null && !mLocationsArray.isEmpty()) {
+            setLocationsList();
+        }
     }
 
     public void setLocationsList() {

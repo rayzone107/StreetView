@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.osahub.rachit.streetview.R;
 import com.osahub.rachit.streetview.model.Location;
+import com.osahub.rachit.streetview.modules.base.BaseActivity;
 import com.osahub.rachit.streetview.modules.gallery.GalleryActivity;
 import com.squareup.picasso.Picasso;
 
@@ -20,7 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends BaseActivity {
 
     public static final String BUNDLE_IMAGE_ID = "BUNDLE_IMAGE_ID";
     Location mLocation;

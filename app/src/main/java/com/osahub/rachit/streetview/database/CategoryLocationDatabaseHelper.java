@@ -1,8 +1,7 @@
 package com.osahub.rachit.streetview.database;
 
-import com.orm.query.Condition;
-import com.orm.query.Select;
-import com.osahub.rachit.streetview.model.Category;
+import com.activeandroid.query.Select;
+import com.osahub.rachit.streetview.misc.Helper;
 import com.osahub.rachit.streetview.model.CategoryLocations;
 
 import java.util.List;
@@ -26,33 +25,31 @@ public class CategoryLocationDatabaseHelper implements DatabaseContract.Category
 
     @Override
     public List<CategoryLocations> getCategoryLocationByCategoryId(int categoryId) {
-        return Select.from(CategoryLocations.class).where(Condition.prop(CategoryLocations.COLUMN_CATEGORY_ID).eq(categoryId)).list();
+        return new Select().from(CategoryLocations.class).where(CategoryLocations.COLUMN_CATEGORY_ID + " = ? ", categoryId).execute();
     }
 
     @Override
     public List<CategoryLocations> getAllCategoryLocations() {
-        return Select.from(CategoryLocations.class).list();
+        return new Select().from(CategoryLocations.class).execute();
     }
 
     @Override
     public void updateCategoryLocationById(int categoryLocationId, CategoryLocations categoryLocations) {
-        CategoryLocations originalCategoryLocations = Select.from(CategoryLocations.class).
-                where(Condition.prop(CategoryLocations.COLUMN_CATEGORY_LOCATION_ID).eq(categoryLocationId)).list().get(0);
-        long id = originalCategoryLocations.getId();
-        originalCategoryLocations = categoryLocations;
-        originalCategoryLocations.setId(id);
+        CategoryLocations originalCategoryLocations = new Select().from(CategoryLocations.class).
+                where(CategoryLocations.COLUMN_CATEGORY_LOCATION_ID + " = ? ", categoryLocationId).executeSingle();
+        originalCategoryLocations.updateObject(categoryLocations);
         originalCategoryLocations.save();
     }
 
     @Override
     public void deleteCategoryLocationById(int categoryLocationId) {
-        CategoryLocations categoryLocations = Select.from(CategoryLocations.class).
-                where(Condition.prop(CategoryLocations.COLUMN_CATEGORY_LOCATION_ID).eq(categoryLocationId)).list().get(0);
+        CategoryLocations categoryLocations = new Select().from(CategoryLocations.class).
+                where(CategoryLocations.COLUMN_CATEGORY_LOCATION_ID + " = ? ", categoryLocationId).executeSingle();
         categoryLocations.delete();
     }
 
     @Override
     public void deleteAllCategoryLocations() {
-        CategoryLocations.deleteAll(CategoryLocations.class);
+        Helper.clearTable(CategoryLocations.class);
     }
 }

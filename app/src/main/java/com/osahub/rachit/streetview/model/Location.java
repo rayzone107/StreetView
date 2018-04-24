@@ -1,8 +1,8 @@
 package com.osahub.rachit.streetview.model;
 
-import android.database.Cursor;
-
-import com.orm.SugarRecord;
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 import com.osahub.rachit.streetview.misc.Helper;
 
 import org.json.JSONException;
@@ -15,23 +15,49 @@ import java.util.Date;
  * Location Bean Class
  * Created by Rachit on 22-Apr-16.
  */
-public class Location extends SugarRecord<Location> {
+@Table(name = "Locations")
+public class Location extends Model {
 
-    public static final String COLUMN_LOCATION_ID = "LOCATIONID";
-    public static final String COLUMN_LOCATION_NAME = "LOCATIONNAME";
+    public static final String COLUMN_LOCATION_ID = "locationId";
+    public static final String COLUMN_LOCATION_NAME = "locationName";
+    public static final String COLUMN_DESCRIPTION = "description";
+    public static final String COLUMN_DESCRIPTION_SMALL = "descriptionSmall";
+    public static final String COLUMN_CITY = "city";
+    public static final String COLUMN_STATE = "state";
+    public static final String COLUMN_COUNTRY = "country";
+    public static final String COLUMN_LATITUDE = "latitude";
+    public static final String COLUMN_LONGITUDE = "longitude";
+    public static final String COLUMN_IMAGE_LINKS = "imageLinks";
+    public static final String COLUMN_THUMBNAIL_PATH = "thumbnailPath";
+    public static final String COLUMN_CREATED_ON = "createdOn";
+    public static final String COLUMN_UPDATED_ON = "updatedOn";
 
+
+    @Column(name = COLUMN_LOCATION_ID, unique = true)
     private int locationId;
+    @Column(name = COLUMN_LOCATION_NAME)
     private String locationName;
+    @Column(name = COLUMN_DESCRIPTION)
     private String description;
+    @Column(name = COLUMN_DESCRIPTION_SMALL)
     private String descriptionSmall;
+    @Column(name = COLUMN_CITY)
     private String city;
+    @Column(name = COLUMN_STATE)
     private String state;
+    @Column(name = COLUMN_COUNTRY)
     private String country;
+    @Column(name = COLUMN_LATITUDE)
     private double latitude;
+    @Column(name = COLUMN_LONGITUDE)
     private double longitude;
+    @Column(name = COLUMN_IMAGE_LINKS)
     private String imageLinks;
+    @Column(name = COLUMN_THUMBNAIL_PATH)
     private String thumbnailPath;
+    @Column(name = COLUMN_CREATED_ON)
     private Date createdOn;
+    @Column(name = COLUMN_UPDATED_ON)
     private Date updatedOn;
 
     public Location() {
@@ -41,7 +67,8 @@ public class Location extends SugarRecord<Location> {
         this.locationName = name;
     }
 
-    public Location(int id, String locationName, String description, String descriptionSmall, String city, String state, String country, double latitude, double longitude, String imageLinks, String thumbnailPath, Date createdOn, Date updatedOn) {
+    public Location(int id, String locationName, String description, String descriptionSmall, String city, String state, String country, double latitude,
+                    double longitude, String imageLinks, String thumbnailPath, Date createdOn, Date updatedOn) {
         this.locationId = id;
         this.locationName = locationName;
         this.description = description;
@@ -56,23 +83,6 @@ public class Location extends SugarRecord<Location> {
         this.createdOn = createdOn;
         this.updatedOn = updatedOn;
     }
-
-    /*public static Location fromCursor(Cursor cursor) throws ParseException {
-        return new Location(
-                cursor.getInt(COLUMN_ID),
-                cursor.getString(COLUMN_LOCATION_NAME),
-                cursor.getString(COLUMN_DESCRIPTION),
-                cursor.getString(COLUMN_DESCRIPTION_SMALL),
-                cursor.getString(COLUMN_CITY),
-                cursor.getString(COLUMN_STATE),
-                cursor.getString(COLUMN_COUNTRY),
-                cursor.getDouble(COLUMN_LATITUDE),
-                cursor.getDouble(COLUMN_LONGITUDE),
-                cursor.getString(COLUMN_IMAGE_LINKS),
-                cursor.getString(COLUMN_THUMBNAIL_PATH),
-                Helper.convertStringToDate(cursor.getString(COLUMN_CREATED_ON)),
-                Helper.convertStringToDate(cursor.getString(COLUMN_UPDATED_ON)));
-    }*/
 
     public static Location fromJson(JSONObject jsonObject) throws JSONException, ParseException {
         return new Location(
@@ -89,6 +99,22 @@ public class Location extends SugarRecord<Location> {
                 jsonObject.getString("thumb"),
                 Helper.convertStringToDate(jsonObject.getString("created")),
                 Helper.convertStringToDate(jsonObject.getString("updated")));
+    }
+
+    public void updateObject(Location location) {
+        this.locationId = location.getLocationId();
+        this.locationName = location.getLocationName();
+        this.description = location.getDescription();
+        this.descriptionSmall = location.getDescriptionSmall();
+        this.city = location.getCity();
+        this.state = location.getState();
+        this.country = location.getCountry();
+        this.latitude = location.getLatitude();
+        this.longitude = location.getLongitude();
+        this.imageLinks = location.getImageLinks();
+        this.thumbnailPath = location.getThumbnailPath();
+        this.createdOn = location.getCreatedOn();
+        this.updatedOn = location.getUpdatedOn();
     }
 
     public int getLocationId() {

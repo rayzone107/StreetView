@@ -428,12 +428,12 @@
         "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/9244180e471d4ef69579b231ce279ca1/res/drawable-xxhdpi-v4/abc_list_longpressed_holo.9.png"
     },
     {
-        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_list_pressed_holo_light.9.png.flat",
-        "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/9244180e471d4ef69579b231ce279ca1/res/drawable-xhdpi-v4/abc_list_pressed_holo_light.9.png"
-    },
-    {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-ldrtl-xhdpi-v17_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
         "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/9244180e471d4ef69579b231ce279ca1/res/drawable-ldrtl-xhdpi-v17/abc_ic_menu_copy_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_list_pressed_holo_light.9.png.flat",
+        "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/9244180e471d4ef69579b231ce279ca1/res/drawable-xhdpi-v4/abc_list_pressed_holo_light.9.png"
     },
     {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable_navigation_empty_icon.xml.flat",
@@ -708,10 +708,6 @@
         "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-27.1.1.aar/4c48a6876bf68a8853aa05c3cadc26ea/res/drawable-xhdpi-v4/ic_mr_button_connecting_20_light.png"
     },
     {
-        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_ic_launcher.png.flat",
-        "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/sugar-1.3.aar/a902094342a693bda8197b188c4926e0/res/drawable-mdpi-v4/ic_launcher.png"
-    },
-    {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-ldrtl-xhdpi-v17_abc_ic_menu_cut_mtrl_alpha.png.flat",
         "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/9244180e471d4ef69579b231ce279ca1/res/drawable-ldrtl-xhdpi-v17/abc_ic_menu_cut_mtrl_alpha.png"
     },
@@ -798,10 +794,6 @@
     {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_common_google_signin_btn_icon_light_normal_background.9.png.flat",
         "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/8f4282d57b84a51cd197a606efe97438/res/drawable-xxhdpi-v4/common_google_signin_btn_icon_light_normal_background.9.png"
-    },
-    {
-        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_ic_launcher.png.flat",
-        "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/sugar-1.3.aar/a902094342a693bda8197b188c4926e0/res/drawable-hdpi-v4/ic_launcher.png"
     },
     {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_textfield_search_default_mtrl_alpha.9.png.flat",
@@ -1852,12 +1844,12 @@
         "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-27.1.1.aar/4c48a6876bf68a8853aa05c3cadc26ea/res/drawable-xxhdpi-v4/ic_mr_button_disabled_light.png"
     },
     {
-        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_list_pressed_holo_dark.9.png.flat",
-        "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/9244180e471d4ef69579b231ce279ca1/res/drawable-mdpi-v4/abc_list_pressed_holo_dark.9.png"
-    },
-    {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable_p2_big.webp.flat",
         "source": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/res/drawable/p2_big.webp"
+    },
+    {
+        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_list_pressed_holo_dark.9.png.flat",
+        "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/9244180e471d4ef69579b231ce279ca1/res/drawable-mdpi-v4/abc_list_pressed_holo_dark.9.png"
     },
     {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ic_mr_button_connecting_28_light.png.flat",
@@ -2444,12 +2436,12 @@
         "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-27.1.1.aar/4c48a6876bf68a8853aa05c3cadc26ea/res/drawable-xhdpi-v4/ic_mr_button_connecting_02_dark.png"
     },
     {
-        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connected_20_dark.png.flat",
-        "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-27.1.1.aar/4c48a6876bf68a8853aa05c3cadc26ea/res/drawable-xxhdpi-v4/ic_mr_button_connected_20_dark.png"
-    },
-    {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable_p4_big.webp.flat",
         "source": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/res/drawable/p4_big.webp"
+    },
+    {
+        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connected_20_dark.png.flat",
+        "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-27.1.1.aar/4c48a6876bf68a8853aa05c3cadc26ea/res/drawable-xxhdpi-v4/ic_mr_button_connected_20_dark.png"
     },
     {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_googleg_disabled_color_18.png.flat",
@@ -2578,10 +2570,6 @@
     {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/interpolator_mr_fast_out_slow_in.xml.flat",
         "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-27.1.1.aar/4c48a6876bf68a8853aa05c3cadc26ea/res/interpolator/mr_fast_out_slow_in.xml"
-    },
-    {
-        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_ic_launcher.png.flat",
-        "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/sugar-1.3.aar/a902094342a693bda8197b188c4926e0/res/drawable-xhdpi-v4/ic_launcher.png"
     },
     {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_ic_group_expand_07.png.flat",
@@ -3116,12 +3104,12 @@
         "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-27.1.1.aar/4c48a6876bf68a8853aa05c3cadc26ea/res/drawable-xxhdpi-v4/ic_mr_button_connected_04_light.png"
     },
     {
-        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_quantum_ic_play_arrow_white_24.png.flat",
-        "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/3eb37b06cfda85ec927f529a4837fca9/res/drawable-xxhdpi-v4/quantum_ic_play_arrow_white_24.png"
-    },
-    {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/anim_slide_in_right.xml.flat",
         "source": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/res/anim/slide_in_right.xml"
+    },
+    {
+        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_quantum_ic_play_arrow_white_24.png.flat",
+        "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/3eb37b06cfda85ec927f529a4837fca9/res/drawable-xxhdpi-v4/quantum_ic_play_arrow_white_24.png"
     },
     {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connected_07_light.png.flat",
@@ -3424,16 +3412,16 @@
         "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/3eb37b06cfda85ec927f529a4837fca9/res/drawable-hdpi-v4/quantum_ic_forward_10_white_24.png"
     },
     {
+        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/anim_slide_in_bottom.xml.flat",
+        "source": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/res/anim/slide_in_bottom.xml"
+    },
+    {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_quantum_ic_replay_white_24.png.flat",
         "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/3eb37b06cfda85ec927f529a4837fca9/res/drawable-xxxhdpi-v4/quantum_ic_replay_white_24.png"
     },
     {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable_common_google_signin_btn_icon_light.xml.flat",
         "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/play-services-base-12.0.1.aar/8f4282d57b84a51cd197a606efe97438/res/drawable/common_google_signin_btn_icon_light.xml"
-    },
-    {
-        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/anim_slide_in_bottom.xml.flat",
-        "source": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/res/anim/slide_in_bottom.xml"
     },
     {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/layout_design_bottom_navigation_item.xml.flat",
@@ -3600,12 +3588,12 @@
         "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-27.1.1.aar/4c48a6876bf68a8853aa05c3cadc26ea/res/drawable-xxhdpi-v4/ic_mr_button_connecting_22_light.png"
     },
     {
-        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connecting_25_light.png.flat",
-        "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-27.1.1.aar/4c48a6876bf68a8853aa05c3cadc26ea/res/drawable-xxhdpi-v4/ic_mr_button_connecting_25_light.png"
-    },
-    {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable_temperature_background.xml.flat",
         "source": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/res/drawable/temperature_background.xml"
+    },
+    {
+        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connecting_25_light.png.flat",
+        "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-27.1.1.aar/4c48a6876bf68a8853aa05c3cadc26ea/res/drawable-xxhdpi-v4/ic_mr_button_connecting_25_light.png"
     },
     {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-ldrtl-xxxhdpi-v17_abc_ic_menu_cut_mtrl_alpha.png.flat",
@@ -3796,16 +3784,12 @@
         "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/9244180e471d4ef69579b231ce279ca1/res/drawable-mdpi-v4/abc_btn_radio_to_on_mtrl_015.png"
     },
     {
-        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_launcher.png.flat",
-        "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/sugar-1.3.aar/a902094342a693bda8197b188c4926e0/res/drawable-xxhdpi-v4/ic_launcher.png"
+        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/anim_fade_in.xml.flat",
+        "source": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/res/anim/fade_in.xml"
     },
     {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_switch_track_mtrl_alpha.9.png.flat",
         "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/9244180e471d4ef69579b231ce279ca1/res/drawable-hdpi-v4/abc_switch_track_mtrl_alpha.9.png"
-    },
-    {
-        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/anim_fade_in.xml.flat",
-        "source": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/res/anim/fade_in.xml"
     },
     {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_quantum_ic_refresh_white_24.png.flat",
@@ -4296,12 +4280,12 @@
         "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/3eb37b06cfda85ec927f529a4837fca9/res/drawable-xxhdpi-v4/cast_ic_stop_circle_filled_grey600.png"
     },
     {
-        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_list_selector_disabled_holo_dark.9.png.flat",
-        "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/9244180e471d4ef69579b231ce279ca1/res/drawable-xhdpi-v4/abc_list_selector_disabled_holo_dark.9.png"
-    },
-    {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ic_star_half_black_16dp.png.flat",
         "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/9244180e471d4ef69579b231ce279ca1/res/drawable-xxhdpi-v4/abc_ic_star_half_black_16dp.png"
+    },
+    {
+        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_list_selector_disabled_holo_dark.9.png.flat",
+        "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/9244180e471d4ef69579b231ce279ca1/res/drawable-xhdpi-v4/abc_list_selector_disabled_holo_dark.9.png"
     },
     {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/anim_slide_out_bottom.xml.flat",
@@ -4544,16 +4528,16 @@
         "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/9244180e471d4ef69579b231ce279ca1/res/drawable-xhdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png"
     },
     {
+        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/anim_slide_out_top.xml.flat",
+        "source": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/res/anim/slide_out_top.xml"
+    },
+    {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_gallery_unclicked.9.png.flat",
         "source": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/res/drawable-xxxhdpi/gallery_unclicked.9.png"
     },
     {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_quantum_ic_stop_white_24.png.flat",
         "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/3eb37b06cfda85ec927f529a4837fca9/res/drawable-xxxhdpi-v4/quantum_ic_stop_white_24.png"
-    },
-    {
-        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/anim_slide_out_top.xml.flat",
-        "source": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/res/anim/slide_out_top.xml"
     },
     {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable_mr_media_pause_dark.xml.flat",
@@ -5000,12 +4984,12 @@
         "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-27.1.1.aar/4c48a6876bf68a8853aa05c3cadc26ea/res/drawable-xxxhdpi-v4/ic_group_collapse_05.png"
     },
     {
-        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable_mr_dialog_material_background_light.xml.flat",
-        "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-27.1.1.aar/4c48a6876bf68a8853aa05c3cadc26ea/res/drawable/mr_dialog_material_background_light.xml"
-    },
-    {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-mdpi_dot_dark.png.flat",
         "source": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/res/drawable-mdpi/dot_dark.png"
+    },
+    {
+        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable_mr_dialog_material_background_light.xml.flat",
+        "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-27.1.1.aar/4c48a6876bf68a8853aa05c3cadc26ea/res/drawable/mr_dialog_material_background_light.xml"
     },
     {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/layout_design_navigation_item_separator.xml.flat",
@@ -5032,12 +5016,12 @@
         "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/3eb37b06cfda85ec927f529a4837fca9/res/drawable-xhdpi-v4/quantum_ic_play_arrow_white_24.png"
     },
     {
-        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_quantum_ic_forward_30_white_36.png.flat",
-        "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/3eb37b06cfda85ec927f529a4837fca9/res/drawable-xhdpi-v4/quantum_ic_forward_30_white_36.png"
-    },
-    {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/anim_slide_in_left.xml.flat",
         "source": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/res/anim/slide_in_left.xml"
+    },
+    {
+        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_quantum_ic_forward_30_white_36.png.flat",
+        "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/play-services-cast-framework-12.0.1.aar/3eb37b06cfda85ec927f529a4837fca9/res/drawable-xhdpi-v4/quantum_ic_forward_30_white_36.png"
     },
     {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_scrubber_control_to_pressed_mtrl_000.png.flat",
@@ -5328,12 +5312,12 @@
         "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-27.1.1.aar/4c48a6876bf68a8853aa05c3cadc26ea/res/drawable-xxhdpi-v4/ic_mr_button_connected_03_light.png"
     },
     {
-        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connected_27_light.png.flat",
-        "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-27.1.1.aar/4c48a6876bf68a8853aa05c3cadc26ea/res/drawable-xxhdpi-v4/ic_mr_button_connected_27_light.png"
-    },
-    {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/anim_slide_out_left.xml.flat",
         "source": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/src/main/res/anim/slide_out_left.xml"
+    },
+    {
+        "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_ic_mr_button_connected_27_light.png.flat",
+        "source": "/Users/rachit/.gradle/caches/transforms-1/files-1.1/mediarouter-v7-27.1.1.aar/4c48a6876bf68a8853aa05c3cadc26ea/res/drawable-xxhdpi-v4/ic_mr_button_connected_27_light.png"
     },
     {
         "merged": "/Users/rachit/Downloads/Rachit/World Tour/StreetView_v5/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_places_ic_clear.png.flat",

@@ -10,6 +10,10 @@ import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
 
+import com.activeandroid.ActiveAndroid;
+import com.activeandroid.Cache;
+import com.activeandroid.Model;
+import com.activeandroid.TableInfo;
 import com.osahub.rachit.streetview.database.old.DataContract.CategoriesEntry;
 import com.osahub.rachit.streetview.database.old.DataContract.CategoryLocationsEntry;
 import com.osahub.rachit.streetview.database.old.DataContract.LocationsEntry;
@@ -134,7 +138,7 @@ public class Helper {
         categoryValues.put(CategoriesEntry.COLUMN_ID, category.getCategoryId());
         categoryValues.put(CategoriesEntry.COLUMN_NAME, category.getName());
         categoryValues.put(CategoriesEntry.COLUMN_TYPE, category.getType());
-        categoryValues.put(CategoriesEntry.COLUMN_ORDER, category.getOrder());
+        categoryValues.put(CategoriesEntry.COLUMN_ORDER, category.getPosition());
         categoryValues.put(CategoriesEntry.COLUMN_CREATED_ON, Helper.convertDateToString(category.getCreatedOn()));
         categoryValues.put(CategoriesEntry.COLUMN_UPDATED_ON, Helper.convertDateToString(category.getUpdatedOn()));
         return categoryValues;
@@ -163,7 +167,7 @@ public class Helper {
         categoryValues.put(CategoryLocationsEntry.COLUMN_ID, categoryLocations.getCategoryLocationId());
         categoryValues.put(CategoryLocationsEntry.COLUMN_CATEGORY_ID, categoryLocations.getCategoryId());
         categoryValues.put(CategoryLocationsEntry.COLUMN_LOCATION_ID, categoryLocations.getLocationId());
-        categoryValues.put(CategoryLocationsEntry.COLUMN_ORDER, categoryLocations.getOrder());
+        categoryValues.put(CategoryLocationsEntry.COLUMN_ORDER, categoryLocations.getPosition());
         categoryValues.put(CategoryLocationsEntry.COLUMN_CREATED_ON, Helper.convertDateToString(categoryLocations.getCreatedOn()));
         categoryValues.put(CategoryLocationsEntry.COLUMN_UPDATED_ON, Helper.convertDateToString(categoryLocations.getUpdatedOn()));
         return categoryValues;
@@ -181,5 +185,12 @@ public class Helper {
                 dpMeasure,
                 context.getResources().getDisplayMetrics()
         );
+    }
+
+    public static void clearTable(Class<? extends Model> type) {
+        TableInfo tableInfo = Cache.getTableInfo(type);
+        ActiveAndroid.execSQL(String.format("DELETE FROM %s;", tableInfo.getTableName()));
+        ActiveAndroid.execSQL(
+                String.format("DELETE FROM sqlite_sequence WHERE name='%s';", tableInfo.getTableName()));
     }
 }

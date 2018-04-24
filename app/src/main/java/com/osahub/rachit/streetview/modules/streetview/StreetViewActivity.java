@@ -8,7 +8,6 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -21,9 +20,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.StreetViewPanoramaCamera;
 import com.osahub.rachit.streetview.R;
 import com.osahub.rachit.streetview.model.Location;
+import com.osahub.rachit.streetview.modules.base.BaseActivity;
 import com.osahub.rachit.streetview.modules.detail.DetailActivity;
 
-public class StreetViewActivity extends AppCompatActivity implements
+public class StreetViewActivity extends BaseActivity implements
         OnStreetViewPanoramaReadyCallback {
 
     private static final String LOG_TAG = "World Tour 3D: " + StreetViewActivity.class.getSimpleName();
@@ -42,9 +42,14 @@ public class StreetViewActivity extends AppCompatActivity implements
             showDialogForNetwork();
         }
 
-        mLocation = (Location) getIntent().getSerializableExtra("location");
+        int locationId = getIntent().getIntExtra("location", 0);
+        if (locationId != 0) {
+            mLocation = mDatabaseHelper.mLocationDbHelper.getLocationById(locationId);
+        } else {
+            finish();
+        }
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         assert toolbar != null;
         toolbar.setTitle(mLocation.getLocationName());
         toolbar.setNavigationIcon(R.drawable.street_view_icon);
