@@ -36,13 +36,19 @@ public class GalleryActivity extends BaseActivity {
     private List<String> mImageLinks;
     FloatingActionButton mFab;
     int mCurrentImage = 1;
+    private Location mLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
 
-        Location mLocation = (Location) getIntent().getSerializableExtra("location");
+        int locationId = getIntent().getIntExtra("location", -1);
+        if (locationId != -1) {
+            mLocation = mDatabaseHelper.mLocationDbHelper.getLocationById(locationId);
+        } else {
+            finish();
+        }
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(mLocation.getLocationName() + " Gallery");

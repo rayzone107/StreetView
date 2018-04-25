@@ -2,7 +2,6 @@ package com.osahub.rachit.streetview.modules.detail;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.Display;
@@ -34,7 +33,12 @@ public class DetailActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        mLocation = (Location) getIntent().getSerializableExtra("location");
+        int locationId = getIntent().getIntExtra("location", -1);
+        if (locationId != -1) {
+            mLocation = mDatabaseHelper.mLocationDbHelper.getLocationById(locationId);
+        } else {
+            finish();
+        }
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         assert toolbar != null;

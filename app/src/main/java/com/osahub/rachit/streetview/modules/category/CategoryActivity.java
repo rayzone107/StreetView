@@ -30,7 +30,12 @@ public class CategoryActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
-        mCategory = (Category) getIntent().getSerializableExtra(Helper.CATEGORY_EXTRA);
+        int categoryId = getIntent().getIntExtra(Helper.CATEGORY_EXTRA, -1);
+        if (categoryId != -1) {
+            mCategory = mDatabaseHelper.mCategoryDbHelper.getCategoryById(categoryId);
+        } else {
+            finish();
+        }
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(mCategory.getName());
