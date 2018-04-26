@@ -148,8 +148,8 @@ public class SingleCategoryActivity extends AppCompatActivity {
         country1TextView.setText(countries[0]);
         country2TextView.setAlpha(0f);
 
-        country1TextView.setTypeface(Typeface.createFromAsset(getAssets(), "open-sans-extrabold.ttf"));
-        country2TextView.setTypeface(Typeface.createFromAsset(getAssets(), "open-sans-extrabold.ttf"));
+//        country1TextView.setTypeface(Typeface.createFromAsset(getAssets(), "open-sans-extrabold.ttf"));
+//        country2TextView.setTypeface(Typeface.createFromAsset(getAssets(), "open-sans-extrabold.ttf"));
     }
 
     private void initGreenDot() {

@@ -6,35 +6,40 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.osahub.rachit.streetview.R;
 import com.osahub.rachit.streetview.model.Category;
 import com.osahub.rachit.streetview.modules.base.BaseActivity;
-import com.osahub.rachit.streetview.modules.category.CategoryFragment;
 import com.osahub.rachit.streetview.modules.developerprofile.DeveloperProfileActivity;
+import com.osahub.rachit.streetview.modules.home.categoryfragment.CategoryFragment;
+import com.osahub.rachit.streetview.modules.home.search.SearchFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LocationsActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements LocationsContract.View, NavigationView.OnNavigationItemSelectedListener {
 
     private static final String LOG_TAG = "World Tour 3D: " + LocationsActivity.class.getSimpleName();
+    private static final String SEARCH_FRAGMENT_TAG = "SEARCH_FRAGMENT_TAG";
 
     private DrawerLayout mDrawer;
-    FragmentTransaction ft;
-    ProgressBar fragmentsProgressBar;
-
+    private FragmentTransaction ft;
+    private ProgressBar fragmentsProgressBar;
+    private MaterialSearchView mSearchView;
     List<Category> mCategories = new ArrayList<>();
 
     @Override
@@ -44,6 +49,7 @@ public class LocationsActivity extends BaseActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mSearchView = findViewById(R.id.search_view);
         mDrawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -60,31 +66,70 @@ public class LocationsActivity extends BaseActivity
 
         Log.i(LOG_TAG, "Categories Fetched");
         setCategoriesList();
+
+        setSearchListeners();
     }
 
     public void setCategoriesList() {
         fragmentsProgressBar.setVisibility(View.GONE);
 
+        ft = getSupportFragmentManager().beginTransaction();
         for (Category category : mCategories) {
             if (mDatabaseHelper.mLocationDbHelper.getLocationCountByCategoryId(category.getCategoryId()) != 0) {
-                ft = getSupportFragmentManager().beginTransaction();
-                CategoryFragment categoryFragment = new CategoryFragment();
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("category", category.getCategoryId());
-                categoryFragment.setArguments(bundle);
                 CategoryFragment categoryFragmentOld = (CategoryFragment) getSupportFragmentManager().findFragmentByTag(category.getName());
                 if (categoryFragmentOld == null) {
+                    CategoryFragment categoryFragment = new CategoryFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("category", category.getCategoryId());
+                    categoryFragment.setArguments(bundle);
                     ft.add(R.id.fragment_holder, categoryFragment, category.getName());
+                }
+            }
+        }
+        ft.commit();
+    }
+
+    private void setSearchListeners() {
+        mSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        mSearchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+            @Override
+            public void onSearchViewShown() {
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_top);
+                SearchFragment searchFragment = new SearchFragment();
+                ft.replace(R.id.search_fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
+                ft.commit();
+            }
+
+            @Override
+            public void onSearchViewClosed() {
+                ft = getSupportFragmentManager().beginTransaction();
+                Fragment fragment = getSupportFragmentManager().findFragmentByTag(SEARCH_FRAGMENT_TAG);
+                if (fragment != null) {
+                    ft.remove(fragment);
                 }
                 ft.commit();
             }
-        }
+        });
     }
 
     @Override
     public void onBackPressed() {
         if (mDrawer.isDrawerOpen(GravityCompat.START)) {
             mDrawer.closeDrawer(GravityCompat.START);
+        } else if (mSearchView.isSearchOpen()) {
+            mSearchView.closeSearch();
         } else {
             super.onBackPressed();
         }
@@ -151,5 +196,15 @@ public class LocationsActivity extends BaseActivity
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(LocationsActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_location_list, menu);
+
+        MenuItem item = menu.findItem(R.id.action_search);
+        mSearchView.setMenuItem(item);
+
+        return true;
     }
 }

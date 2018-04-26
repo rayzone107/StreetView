@@ -73,6 +73,10 @@ public class FetchDataIntentService extends BaseIntentService {
         }
     }
 
+    public void showError() {
+
+    }
+
     private void handleActionFetchDataFromServer() {
         AppController.getInstance().addToRequestQueue(VolleyRequests.createFetchCategoriesJsonObjectRequest(this));
         AppController.getInstance().addToRequestQueue(VolleyRequests.createFetchLocationsJsonObjectRequest(this));

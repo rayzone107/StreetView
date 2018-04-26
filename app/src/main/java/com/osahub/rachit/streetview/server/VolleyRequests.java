@@ -50,7 +50,7 @@ public class VolleyRequests {
                         try {
                             context.saveCategoriesList(response);
                         } catch (JSONException | ParseException e) {
-                            e.printStackTrace();
+                            context.showError();
                         }
                         Log.d(LOG_TAG, response.toString());
                     }
@@ -61,6 +61,7 @@ public class VolleyRequests {
                 // Error handling
                 Log.e(LOG_TAG, "Something went wrong!");
                 error.printStackTrace();
+                context.showError();
             }
         });
     }
