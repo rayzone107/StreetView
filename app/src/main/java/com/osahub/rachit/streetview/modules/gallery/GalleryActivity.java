@@ -95,7 +95,6 @@ public class GalleryActivity extends BaseActivity {
             final PhotoViewAttacher attacher = new PhotoViewAttacher(photoView);
             Picasso.get()
                     .load(mImageLinks.get(position))
-                    .placeholder(ContextCompat.getDrawable(mContext, R.drawable.progress_animation_white))
                     .into(photoView, new Callback() {
                         @Override
                         public void onSuccess() {

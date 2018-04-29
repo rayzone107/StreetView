@@ -9,9 +9,7 @@
     <!--Developer Details-->
 
     <!--Activities-->
-    <string name="title_activity_detail">Details</string>
     <string name="title_activity_gallery">Gallery</string>
-    <string name="title_activity_category">Categories</string>
     <string name="title_activity_developer_profile">Rachit Goyal</string>
     <!--Activities-->
 
@@ -33,16 +31,11 @@
     <string name="category">Category</string>
     <string name="count">Count</string>
     <string name="visit_website_button">Visit Website</string>
-    <string name="progress_animation">Progress Animation</string>
-    <string name="goto_gallery">Goto Gallery</string>
-    <string name="title_activity_single_category">SingleCategoryActivity</string>
     <!--Misc-->
 
     <string name="category_name">Category Name</string>
     <string name="search_for_locations">Search for Locations</string>
     <string name="more">MORE</string>
-    <string name="name">Name</string>
-    <string name="description">Description</string>
     <string name="read_more">read more</string>
     <string name="read_less">read less</string>
     <string name="similar_places_you_can_explore">Similar places you can explore</string>

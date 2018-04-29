@@ -41,10 +41,4 @@
         <item name="colorControlNormal">@color/black</item>
     </style>
 
-    <style name="TransparentToolbarStyle" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:windowActionBarOverlay">true</item>
-        <!-- Support library compatibility -->
-        <item name="windowActionBarOverlay">true</item>
-    </style>
-
 </resources>

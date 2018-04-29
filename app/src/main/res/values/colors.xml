@@ -3,8 +3,6 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="blue">#348af7</color>
-    <color name="temperature_background">@color/blue</color>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
     <color name="transparent">#0000</color>
