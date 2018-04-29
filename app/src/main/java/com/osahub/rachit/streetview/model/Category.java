@@ -56,9 +56,9 @@ public class Category extends Model {
                 jsonObject.getInt("id"),
                 jsonObject.getString("name"),
                 jsonObject.getString("type"),
-                jsonObject.getInt("order"),
-                Helper.convertStringToDate(jsonObject.getString("created")),
-                Helper.convertStringToDate(jsonObject.getString("updated")));
+                jsonObject.getInt("position"),
+                Helper.convertStringToDate(jsonObject.getString("created_on")),
+                Helper.convertStringToDate(jsonObject.getString("updated_on")));
     }
 
     public void updateObject(Category category) {

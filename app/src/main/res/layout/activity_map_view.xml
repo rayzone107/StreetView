@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.osahub.rachit.streetview.modules.mapview.MapViewActivity">
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/map_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:transitionName="mapView" />
+
+    <ImageView
+        android:id="@+id/exit_fullscreen_iv"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignRight="@id/map_view"
+        android:layout_alignTop="@id/map_view"
+        android:padding="10dp"
+        android:tint="@color/white"
+        app:srcCompat="@drawable/ic_fullscreen_exit" />
+
+</RelativeLayout>

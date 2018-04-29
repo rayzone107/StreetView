@@ -4,6 +4,7 @@ import com.activeandroid.query.Select;
 import com.osahub.rachit.streetview.misc.Helper;
 import com.osahub.rachit.streetview.model.Category;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,36 +37,20 @@ public class CategoryDatabaseHelper implements DatabaseContract.CategoryContract
 
     @Override
     public List<Category> getCategoriesByIdsList(List<Integer> categoryIds) {
-        if (categoryIds.isEmpty()) {
-            return null;
-        } else {
-            String whereClause = " " + Category.COLUMN_CATEGORY_ID + " IN (";
-            Integer[] whereArgs = new Integer[categoryIds.size()];
-            for (int i = 0; i < categoryIds.size(); i++) {
-                Integer id = categoryIds.get(i);
-                whereClause = whereClause.concat("?,");
-                whereArgs[i] = id;
-            }
-            whereClause = whereClause.substring(0, whereClause.length() - 1).concat(") ");
-            return new Select().from(Category.class).where(whereClause, whereArgs).execute();
+        List<Category> categories = new ArrayList<>();
+        for (Integer id : categoryIds) {
+            categories.add(getCategoryById(id));
         }
+        return categories;
     }
 
     @Override
     public List<Category> getCategoriesByNamesList(List<String> names) {
-        if (names.isEmpty()) {
-            return null;
-        } else {
-            String whereClause = " " + Category.COLUMN_NAME + " IN (";
-            String[] whereArgs = new String[names.size()];
-            for (int i = 0; i < names.size(); i++) {
-                String name = names.get(i);
-                whereClause = whereClause.concat("?,");
-                whereArgs[i] = name;
-            }
-            whereClause = whereClause.substring(0, whereClause.length() - 1).concat(") ");
-            return new Select().from(Category.class).where(whereClause, whereArgs).execute();
+        List<Category> categories = new ArrayList<>();
+        for (String name : names) {
+            categories.add(getCategoryByName(name));
         }
+        return categories;
     }
 
     @Override

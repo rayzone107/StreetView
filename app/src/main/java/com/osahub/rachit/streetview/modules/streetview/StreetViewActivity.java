@@ -22,6 +22,7 @@ import com.osahub.rachit.streetview.R;
 import com.osahub.rachit.streetview.model.Location;
 import com.osahub.rachit.streetview.modules.base.BaseActivity;
 import com.osahub.rachit.streetview.modules.detail.DetailActivity;
+import com.osahub.rachit.streetview.utils.Constants;
 
 public class StreetViewActivity extends BaseActivity implements
         OnStreetViewPanoramaReadyCallback {
@@ -33,6 +34,12 @@ public class StreetViewActivity extends BaseActivity implements
     StreetViewPanoramaFragment mStreetViewPanoramaFragment;
     StreetViewPanoramaCamera mStreetViewPanoramaCamera;
 
+    public static Intent getStartIntent(Context context, int locationId) {
+        Intent intent = new Intent(context, StreetViewActivity.class);
+        intent.putExtra(Constants.EXTRAS.LOCATION_ID, locationId);
+        return intent;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +49,7 @@ public class StreetViewActivity extends BaseActivity implements
             showDialogForNetwork();
         }
 
-        int locationId = getIntent().getIntExtra("location", 0);
+        int locationId = getIntent().getIntExtra(Constants.EXTRAS.LOCATION_ID, 0);
         if (locationId != 0) {
             mLocation = mDatabaseHelper.mLocationDbHelper.getLocationById(locationId);
         } else {
@@ -52,7 +59,6 @@ public class StreetViewActivity extends BaseActivity implements
         Toolbar toolbar = findViewById(R.id.toolbar);
         assert toolbar != null;
         toolbar.setTitle(mLocation.getLocationName());
-        toolbar.setNavigationIcon(R.drawable.street_view_icon);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -123,9 +129,7 @@ public class StreetViewActivity extends BaseActivity implements
         int id = item.getItemId();
 
         if (id == R.id.action_info) {
-            Intent intent = new Intent(StreetViewActivity.this, DetailActivity.class);
-            intent.putExtra("location", mLocation.getLocationId());
-            startActivity(intent);
+            startActivity(DetailActivity.getStartIntent(this, mLocation.getLocationId()));
             return true;
         }
 

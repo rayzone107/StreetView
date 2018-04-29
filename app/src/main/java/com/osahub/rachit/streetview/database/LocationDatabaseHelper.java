@@ -38,36 +38,20 @@ public class LocationDatabaseHelper implements DatabaseContract.LocationContract
 
     @Override
     public List<Location> getLocationsByIdsList(List<Integer> locationIds) {
-        if (locationIds.isEmpty()) {
-            return null;
-        } else {
-            String whereClause = " " + Location.COLUMN_LOCATION_ID + " IN (";
-            Integer[] whereArgs = new Integer[locationIds.size()];
-            for (int i = 0; i < locationIds.size(); i++) {
-                Integer id = locationIds.get(i);
-                whereClause = whereClause.concat("?,");
-                whereArgs[i] = id;
-            }
-            whereClause = whereClause.substring(0, whereClause.length() - 1).concat(") ");
-            return new Select().from(Location.class).where(whereClause, whereArgs).execute();
+        List<Location> locations = new ArrayList<>();
+        for (Integer id : locationIds) {
+            locations.add(getLocationById(id));
         }
+        return locations;
     }
 
     @Override
     public List<Location> getLocationsByNamesList(List<String> names) {
-        if (names.isEmpty()) {
-            return null;
-        } else {
-            String whereClause = " " + Location.COLUMN_LOCATION_NAME + " IN (";
-            String[] whereArgs = new String[names.size()];
-            for (int i = 0; i < names.size(); i++) {
-                String name = names.get(i);
-                whereClause = whereClause.concat("?,");
-                whereArgs[i] = name;
-            }
-            whereClause = whereClause.substring(0, whereClause.length() - 1).concat(") ");
-            return new Select().from(Location.class).where(whereClause, whereArgs).execute();
+        List<Location> locations = new ArrayList<>();
+        for (String name : names) {
+            locations.add(getLocationByName(name));
         }
+        return locations;
     }
 
     @Override
@@ -92,6 +76,7 @@ public class LocationDatabaseHelper implements DatabaseContract.LocationContract
     public List<Location> getLimitedLocationsByCategoryId(int categoryId) {
         List<CategoryLocations> categoryLocationsList = new Select().from(CategoryLocations.class).
                 where(CategoryLocations.COLUMN_CATEGORY_ID + " = ? ", categoryId).
+                orderBy(CategoryLocations.COLUMN_POSITION).
                 limit(String.valueOf(Helper.MAX_PER_LIST_ON_HOME_SCREEN)).execute();
 
         List<Integer> locationIds = new ArrayList<>();

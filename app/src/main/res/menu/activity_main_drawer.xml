@@ -4,28 +4,28 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_profile"
-            android:icon="@android:drawable/ic_menu_myplaces"
-            android:title="@string/developer_profile"/>
+            android:icon="@drawable/ic_person"
+            android:title="@string/developer_profile" />
         <item
             android:id="@+id/nav_other_apps"
-            android:icon="@android:drawable/ic_menu_compass"
-            android:title="@string/other_applications"/>
+            android:icon="@drawable/ic_other_apps"
+            android:title="@string/other_applications" />
     </group>
 
     <item android:title="@string/communicate">
         <menu>
             <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/share_application"/>
+                android:icon="@drawable/ic_share"
+                android:title="@string/share_application" />
             <item
                 android:id="@+id/nav_rate"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/rate_application"/>
+                android:icon="@drawable/ic_rate"
+                android:title="@string/rate_application" />
             <item
                 android:id="@+id/nav_email"
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/email_author"/>
+                android:icon="@drawable/ic_email"
+                android:title="@string/email_author" />
         </menu>
     </item>
 

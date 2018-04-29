@@ -1,86 +1,196 @@
 package com.osahub.rachit.streetview.modules.category;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
-import android.app.ActivityOptions;
+import android.animation.Animator;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.StyleRes;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewTreeObserver;
-import android.widget.ImageSwitcher;
 import android.widget.ImageView;
-import android.widget.TextSwitcher;
 import android.widget.TextView;
-import android.widget.ViewSwitcher;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.osahub.rachit.streetview.R;
-import com.osahub.rachit.streetview.misc.utils.DecodeBitmapTask;
-import com.osahub.rachit.streetview.modules.category.cards.SliderAdapter;
-import com.osahub.rachit.streetview.modules.detail.DetailActivity;
+import com.osahub.rachit.streetview.model.Category;
+import com.osahub.rachit.streetview.model.Location;
+import com.osahub.rachit.streetview.modules.base.BaseActivity;
+import com.osahub.rachit.streetview.modules.category.adapter.SliderAdapter;
+import com.osahub.rachit.streetview.modules.mapview.MapViewActivity;
+import com.osahub.rachit.streetview.modules.streetview.StreetViewActivity;
+import com.osahub.rachit.streetview.utils.Constants;
 import com.ramotion.cardslider.CardSliderLayoutManager;
 import com.ramotion.cardslider.CardSnapHelper;
 
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
-public class SingleCategoryActivity extends AppCompatActivity {
+public class SingleCategoryActivity extends BaseActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
-    private final int[][] dotCoords = new int[5][2];
-    private final int[] pics = {R.drawable.p1, R.drawable.p2, R.drawable.p3, R.drawable.p4, R.drawable.p5};
-    private final int[] maps = {R.drawable.map_paris, R.drawable.map_seoul, R.drawable.map_london, R.drawable.map_beijing, R.drawable.map_greece};
-    private final int[] descriptions = {R.string.text1, R.string.text2, R.string.text3, R.string.text4, R.string.text5};
-    private final String[] countries = {"PARIS", "SEOUL", "LONDON", "BEIJING", "THIRA"};
-    private final String[] places = {"The Louvre", "Gwanghwamun", "Tower Bridge", "Temple of Heaven", "Aegeana Sea"};
-    private final String[] temperatures = {"21°C", "19°C", "17°C", "23°C", "20°C"};
-    private final String[] times = {"Aug 1 - Dec 15    7:00-18:00", "Sep 5 - Nov 10    8:00-16:00", "Mar 8 - May 21    7:00-18:00"};
+    private static final String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
+    private static final String MAP_VIEW_FRAGMENT_TAG = "MapViewFragmentTag";
 
-    private final SliderAdapter sliderAdapter = new SliderAdapter(pics, 20, new OnCardClickListener());
+    private SliderAdapter sliderAdapter;
 
-    private CardSliderLayoutManager layoutManger;
-    private RecyclerView recyclerView;
-    private ImageSwitcher mapSwitcher;
-    private TextSwitcher temperatureSwitcher;
-    private TextSwitcher placeSwitcher;
-    private TextSwitcher clockSwitcher;
-    private TextSwitcher descriptionsSwitcher;
-    private View greenDot;
+    private CardSliderLayoutManager mLayoutManger;
+    private RecyclerView mLocationListRV;
+    private Category mCategory;
+    private List<Location> mLocationList;
+    private int mCurrentPosition;
 
-    private TextView country1TextView;
-    private TextView country2TextView;
-    private int countryOffset1;
-    private int countryOffset2;
-    private long countryAnimDuration;
-    private int currentPosition;
+    private TextView mCategoryNameTV;
+    private TextView mLocationNameTV;
+    private TextView mLocationDescTV;
+    private MapView mMapView;
+    private ImageView mFullScreenIV;
 
-    private DecodeBitmapTask decodeMapBitmapTask;
-    private DecodeBitmapTask.Listener mapLoadListener;
+    private GoogleMap mGoogleMap;
+    private List<Marker> mMarkerList = new ArrayList<>();
+
+    public static void startActivity(Context context, int categoryId) {
+        Intent intent = new Intent(context, SingleCategoryActivity.class);
+        intent.putExtra(Constants.EXTRAS.CATEGORY_ID, categoryId);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_single_category);
+        int categoryId = getIntent().getIntExtra(Constants.EXTRAS.CATEGORY_ID, -1);
+        if (categoryId != -1) {
+            mCategory = mDatabaseHelper.mCategoryDbHelper.getCategoryById(categoryId);
+            mLocationList = mDatabaseHelper.mLocationDbHelper.getLocationsByCategoryId(categoryId);
+        } else {
+            finish();
+        }
 
+        setContentView(R.layout.activity_single_category);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Bundle mapViewBundle = null;
+        if (savedInstanceState != null) {
+            mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
+        }
+
+        mCategoryNameTV = findViewById(R.id.category_name_tv);
+        mLocationNameTV = findViewById(R.id.location_name_tv);
+        mLocationDescTV = findViewById(R.id.location_short_desc_tv);
+        mFullScreenIV = findViewById(R.id.fullscreen_iv);
+        mMapView = findViewById(R.id.map_view);
+        ViewCompat.setTransitionName(mMapView, Constants.TRANSITION_KEYS.MAP_VIEW);
+        mMapView.onCreate(mapViewBundle);
+        mMapView.getMapAsync(this);
+
+        mFullScreenIV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = MapViewActivity.getStartIntent(SingleCategoryActivity.this, mCategory.getCategoryId(), mCurrentPosition);
+                ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation(SingleCategoryActivity.this, mMapView, Constants.TRANSITION_KEYS.MAP_VIEW);
+                startActivity(intent, options.toBundle());
+            }
+        });
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        Bundle mapViewBundle = outState.getBundle(MAP_VIEW_BUNDLE_KEY);
+        if (mapViewBundle == null) {
+            mapViewBundle = new Bundle();
+            outState.putBundle(MAP_VIEW_BUNDLE_KEY, mapViewBundle);
+        }
+        mMapView.onSaveInstanceState(mapViewBundle);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mMapView.onResume();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mMapView.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mMapView.onStop();
+    }
+
+    @Override
+    protected void onPause() {
+        mMapView.onPause();
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        mMapView.onDestroy();
+        super.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mMapView.onLowMemory();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mGoogleMap = googleMap;
+        mGoogleMap.setBuildingsEnabled(true);
+        mGoogleMap.setOnMarkerClickListener(this);
+        mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        addAllMarkers();
+        setInitialData();
         initRecyclerView();
-        initCountryText();
-        initSwitchers();
-        initGreenDot();
+    }
+
+    private void addAllMarkers() {
+        for (Location location : mLocationList) {
+            LatLng locationLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(locationLatLng);
+            markerOptions.title(location.getLocationName());
+            Marker marker = mGoogleMap.addMarker(markerOptions);
+            marker.setTag(location.getLocationId());
+            mMarkerList.add(marker);
+        }
+    }
+
+    private void setInitialData() {
+        Location location = mLocationList.get(0);
+        mCategoryNameTV.setText(mCategory.getName());
+        mLocationNameTV.setText(location.getLocationName());
+        mLocationDescTV.setText(location.getDescriptionSmall());
+        setMapLocation(location);
     }
 
     private void initRecyclerView() {
-        recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setAdapter(sliderAdapter);
-        recyclerView.setHasFixedSize(true);
+        mLocationListRV = findViewById(R.id.location_list_rv);
+        sliderAdapter = new SliderAdapter(mLocationList, new OnCardClickListener());
+        mLocationListRV.setAdapter(sliderAdapter);
+        mLocationListRV.setHasFixedSize(true);
 
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        mLocationListRV.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
@@ -89,132 +199,14 @@ public class SingleCategoryActivity extends AppCompatActivity {
             }
         });
 
-        layoutManger = (CardSliderLayoutManager) recyclerView.getLayoutManager();
+        mLayoutManger = (CardSliderLayoutManager) mLocationListRV.getLayoutManager();
 
-        new CardSnapHelper().attachToRecyclerView(recyclerView);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (isFinishing() && decodeMapBitmapTask != null) {
-            decodeMapBitmapTask.cancel(true);
-        }
-    }
-
-    private void initSwitchers() {
-        temperatureSwitcher = findViewById(R.id.ts_temperature);
-        temperatureSwitcher.setFactory(new TextViewFactory(R.style.TemperatureTextView, true));
-        temperatureSwitcher.setCurrentText(temperatures[0]);
-
-        placeSwitcher = findViewById(R.id.ts_place);
-        placeSwitcher.setFactory(new TextViewFactory(R.style.PlaceTextView, false));
-        placeSwitcher.setCurrentText(places[0]);
-
-        clockSwitcher = findViewById(R.id.ts_clock);
-        clockSwitcher.setFactory(new TextViewFactory(R.style.ClockTextView, false));
-        clockSwitcher.setCurrentText(times[0]);
-
-        descriptionsSwitcher = findViewById(R.id.ts_description);
-        descriptionsSwitcher.setInAnimation(this, android.R.anim.fade_in);
-        descriptionsSwitcher.setOutAnimation(this, android.R.anim.fade_out);
-        descriptionsSwitcher.setFactory(new TextViewFactory(R.style.DescriptionTextView, false));
-        descriptionsSwitcher.setCurrentText(getString(descriptions[0]));
-
-        mapSwitcher = findViewById(R.id.ts_map);
-        mapSwitcher.setInAnimation(this, R.anim.fade_in);
-        mapSwitcher.setOutAnimation(this, R.anim.fade_out);
-        mapSwitcher.setFactory(new ImageViewFactory());
-        mapSwitcher.setImageResource(maps[0]);
-
-        mapLoadListener = new DecodeBitmapTask.Listener() {
-            @Override
-            public void onPostExecuted(Bitmap bitmap) {
-                ((ImageView) mapSwitcher.getNextView()).setImageBitmap(bitmap);
-                mapSwitcher.showNext();
-            }
-        };
-    }
-
-    private void initCountryText() {
-        countryAnimDuration = getResources().getInteger(R.integer.labels_animation_duration);
-        countryOffset1 = getResources().getDimensionPixelSize(R.dimen.left_offset);
-        countryOffset2 = getResources().getDimensionPixelSize(R.dimen.card_width);
-        country1TextView = findViewById(R.id.tv_country_1);
-        country2TextView = findViewById(R.id.tv_country_2);
-
-        country1TextView.setX(countryOffset1);
-        country2TextView.setX(countryOffset2);
-        country1TextView.setText(countries[0]);
-        country2TextView.setAlpha(0f);
-
-//        country1TextView.setTypeface(Typeface.createFromAsset(getAssets(), "open-sans-extrabold.ttf"));
-//        country2TextView.setTypeface(Typeface.createFromAsset(getAssets(), "open-sans-extrabold.ttf"));
-    }
-
-    private void initGreenDot() {
-        mapSwitcher.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                mapSwitcher.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-
-                final int viewLeft = mapSwitcher.getLeft();
-                final int viewTop = mapSwitcher.getTop() + mapSwitcher.getHeight() / 3;
-
-                final int border = 100;
-                final int xRange = Math.max(1, mapSwitcher.getWidth() - border * 2);
-                final int yRange = Math.max(1, (mapSwitcher.getHeight() / 3) * 2 - border * 2);
-
-                final Random rnd = new Random();
-
-                for (int i = 0, cnt = dotCoords.length; i < cnt; i++) {
-                    dotCoords[i][0] = viewLeft + border + rnd.nextInt(xRange);
-                    dotCoords[i][1] = viewTop + border + rnd.nextInt(yRange);
-                }
-
-                greenDot = findViewById(R.id.green_dot);
-                greenDot.setX(dotCoords[0][0]);
-                greenDot.setY(dotCoords[0][1]);
-            }
-        });
-    }
-
-    private void setCountryText(String text, boolean left2right) {
-        final TextView invisibleText;
-        final TextView visibleText;
-        if (country1TextView.getAlpha() > country2TextView.getAlpha()) {
-            visibleText = country1TextView;
-            invisibleText = country2TextView;
-        } else {
-            visibleText = country2TextView;
-            invisibleText = country1TextView;
-        }
-
-        final int vOffset;
-        if (left2right) {
-            invisibleText.setX(0);
-            vOffset = countryOffset2;
-        } else {
-            invisibleText.setX(countryOffset2);
-            vOffset = 0;
-        }
-
-        invisibleText.setText(text);
-
-        final ObjectAnimator iAlpha = ObjectAnimator.ofFloat(invisibleText, "alpha", 1f);
-        final ObjectAnimator vAlpha = ObjectAnimator.ofFloat(visibleText, "alpha", 0f);
-        final ObjectAnimator iX = ObjectAnimator.ofFloat(invisibleText, "x", countryOffset1);
-        final ObjectAnimator vX = ObjectAnimator.ofFloat(visibleText, "x", vOffset);
-
-        final AnimatorSet animSet = new AnimatorSet();
-        animSet.playTogether(iAlpha, vAlpha, iX, vX);
-        animSet.setDuration(countryAnimDuration);
-        animSet.start();
+        new CardSnapHelper().attachToRecyclerView(mLocationListRV);
     }
 
     private void onActiveCardChange() {
-        final int pos = layoutManger.getActiveCardPosition();
-        if (pos == RecyclerView.NO_POSITION || pos == currentPosition) {
+        final int pos = mLayoutManger.getActiveCardPosition();
+        if (pos == RecyclerView.NO_POSITION || pos == mCurrentPosition) {
             return;
         }
 
@@ -222,105 +214,52 @@ public class SingleCategoryActivity extends AppCompatActivity {
     }
 
     private void onActiveCardChange(int pos) {
-        int animH[] = new int[]{R.anim.slide_in_right, R.anim.slide_out_left};
-        int animV[] = new int[]{R.anim.slide_in_top, R.anim.slide_out_bottom};
 
-        final boolean left2right = pos < currentPosition;
-        if (left2right) {
-            animH[0] = R.anim.slide_in_left;
-            animH[1] = R.anim.slide_out_right;
+        final Location location = mLocationList.get(pos);
 
-            animV[0] = R.anim.slide_in_bottom;
-            animV[1] = R.anim.slide_out_top;
-        }
-
-        setCountryText(countries[pos % countries.length], left2right);
-
-        temperatureSwitcher.setInAnimation(SingleCategoryActivity.this, animH[0]);
-        temperatureSwitcher.setOutAnimation(SingleCategoryActivity.this, animH[1]);
-        temperatureSwitcher.setText(temperatures[pos % temperatures.length]);
-
-        placeSwitcher.setInAnimation(SingleCategoryActivity.this, animV[0]);
-        placeSwitcher.setOutAnimation(SingleCategoryActivity.this, animV[1]);
-        placeSwitcher.setText(places[pos % places.length]);
-
-        clockSwitcher.setInAnimation(SingleCategoryActivity.this, animV[0]);
-        clockSwitcher.setOutAnimation(SingleCategoryActivity.this, animV[1]);
-        clockSwitcher.setText(times[pos % times.length]);
-
-        descriptionsSwitcher.setText(getString(descriptions[pos % descriptions.length]));
-
-        showMap(maps[pos % maps.length]);
-
-        ViewCompat.animate(greenDot)
-                .translationX(dotCoords[pos % dotCoords.length][0])
-                .translationY(dotCoords[pos % dotCoords.length][1])
-                .start();
-
-        currentPosition = pos;
-    }
-
-    private void showMap(@DrawableRes int resId) {
-        if (decodeMapBitmapTask != null) {
-            decodeMapBitmapTask.cancel(true);
-        }
-
-        final int w = mapSwitcher.getWidth();
-        final int h = mapSwitcher.getHeight();
-
-        decodeMapBitmapTask = new DecodeBitmapTask(getResources(), resId, w, h, mapLoadListener);
-        decodeMapBitmapTask.execute();
-    }
-
-    private class TextViewFactory implements ViewSwitcher.ViewFactory {
-
-        @StyleRes
-        final int styleId;
-        final boolean center;
-
-        TextViewFactory(@StyleRes int styleId, boolean center) {
-            this.styleId = styleId;
-            this.center = center;
-        }
-
-        @SuppressWarnings("deprecation")
-        @Override
-        public View makeView() {
-            final TextView textView = new TextView(SingleCategoryActivity.this);
-
-            if (center) {
-                textView.setGravity(Gravity.CENTER);
+        YoYo.with(Techniques.SlideOutLeft).duration(300).onStart(new YoYo.AnimatorCallback() {
+            @Override
+            public void call(Animator animator) {
+                YoYo.with(Techniques.FadeOut).duration(300).playOn(mLocationNameTV);
             }
-
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-                textView.setTextAppearance(SingleCategoryActivity.this, styleId);
-            } else {
-                textView.setTextAppearance(styleId);
+        }).onEnd(new YoYo.AnimatorCallback() {
+            @Override
+            public void call(Animator animator) {
+                YoYo.with(Techniques.SlideInRight).duration(300).onStart(new YoYo.AnimatorCallback() {
+                    @Override
+                    public void call(Animator animator) {
+                        YoYo.with(Techniques.FadeIn).duration(300).playOn(mLocationNameTV);
+                        mLocationNameTV.setText(location.getLocationName());
+                    }
+                }).playOn(mLocationNameTV);
             }
+        }).playOn(mLocationNameTV);
 
-            return textView;
-        }
-
-    }
-
-    private class ImageViewFactory implements ViewSwitcher.ViewFactory {
-        @Override
-        public View makeView() {
-            final ImageView imageView = new ImageView(SingleCategoryActivity.this);
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-            final ImageSwitcher.LayoutParams lp =
-                    new ImageSwitcher.LayoutParams(ImageSwitcher.LayoutParams.MATCH_PARENT, ImageSwitcher.LayoutParams.MATCH_PARENT);
-            imageView.setLayoutParams(lp);
-
-            return imageView;
-        }
+        YoYo.with(Techniques.SlideOutLeft).duration(300).onStart(new YoYo.AnimatorCallback() {
+            @Override
+            public void call(Animator animator) {
+                YoYo.with(Techniques.FadeOut).duration(300).playOn(mLocationDescTV);
+            }
+        }).onEnd(new YoYo.AnimatorCallback() {
+            @Override
+            public void call(Animator animator) {
+                YoYo.with(Techniques.SlideInRight).duration(300).onStart(new YoYo.AnimatorCallback() {
+                    @Override
+                    public void call(Animator animator) {
+                        YoYo.with(Techniques.FadeIn).duration(300).playOn(mLocationDescTV);
+                        mLocationDescTV.setText(location.getDescriptionSmall());
+                    }
+                }).playOn(mLocationDescTV);
+            }
+        }).playOn(mLocationDescTV);
+        setMapLocation(location);
+        mCurrentPosition = pos;
     }
 
     private class OnCardClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            final CardSliderLayoutManager lm = (CardSliderLayoutManager) recyclerView.getLayoutManager();
+            final CardSliderLayoutManager lm = (CardSliderLayoutManager) mLocationListRV.getLayoutManager();
 
             if (lm.isSmoothScrolling()) {
                 return;
@@ -331,25 +270,50 @@ public class SingleCategoryActivity extends AppCompatActivity {
                 return;
             }
 
-            final int clickedPosition = recyclerView.getChildAdapterPosition(view);
+            final int clickedPosition = mLocationListRV.getChildAdapterPosition(view);
             if (clickedPosition == activeCardPosition) {
-                final Intent intent = new Intent(SingleCategoryActivity.this, DetailActivity.class);
-                intent.putExtra(DetailActivity.BUNDLE_IMAGE_ID, pics[activeCardPosition % pics.length]);
-
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-                    startActivity(intent);
-                } else {
-                    final CardView cardView = (CardView) view;
-                    final View sharedView = cardView.getChildAt(cardView.getChildCount() - 1);
-                    final ActivityOptions options = ActivityOptions
-                            .makeSceneTransitionAnimation(SingleCategoryActivity.this, sharedView, "shared");
-                    startActivity(intent, options.toBundle());
-                }
+                Intent intent = new Intent(SingleCategoryActivity.this, StreetViewActivity.class);
+                intent.putExtra(Constants.EXTRAS.LOCATION_ID, mLocationList.get(clickedPosition).getLocationId());
+                startActivity(intent);
             } else if (clickedPosition > activeCardPosition) {
-                recyclerView.smoothScrollToPosition(clickedPosition);
+                mLocationListRV.smoothScrollToPosition(clickedPosition);
                 onActiveCardChange(clickedPosition);
             }
         }
     }
 
+    private void setMapLocation(Location location) {
+        LatLng locationLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+        mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locationLatLng, 16f));
+
+        for (Marker marker : mMarkerList) {
+            if (location.getLocationId() == (int) marker.getTag()) {
+                marker.showInfoWindow();
+                break;
+            }
+        }
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        int locationId = (int) marker.getTag();
+        for (int i = 0; i < mLocationList.size(); i++) {
+            if (mLocationList.get(i).getLocationId() == locationId) {
+                mLocationListRV.smoothScrollToPosition(i);
+                onActiveCardChange(i);
+                break;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(MAP_VIEW_FRAGMENT_TAG);
+        if (fragment != null && fragment.isVisible()) {
+            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }

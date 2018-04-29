@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.osahub.rachit.streetview.R;
@@ -23,16 +24,10 @@ import java.util.List;
  */
 public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapter.ViewHolder> {
 
-    public interface OnItemClickListener {
-        void onItemClick(Location location);
-    }
-
-    private Context mContext;
     private List<Location> mLocations;
     private final OnItemClickListener onItemClickListener;
 
-    public LocationListAdapter(Context context, List<Location> locationList, OnItemClickListener itemListener) {
-        mContext = context;
+    public LocationListAdapter(List<Location> locationList, OnItemClickListener itemListener) {
         mLocations = locationList;
         onItemClickListener = itemListener;
     }
@@ -41,7 +36,7 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
         public TextView name;
         TextView desc;
         public ImageView image;
-        ImageView progressBar;
+        ProgressBar progressBar;
 
         ViewHolder(View view) {
             super(view);
@@ -114,5 +109,9 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
         } else {
             return 1;
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Location location);
     }
 }

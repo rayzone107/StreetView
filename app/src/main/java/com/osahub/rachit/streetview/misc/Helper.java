@@ -1,6 +1,5 @@
 package com.osahub.rachit.streetview.misc;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
@@ -14,12 +13,6 @@ import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Cache;
 import com.activeandroid.Model;
 import com.activeandroid.TableInfo;
-import com.osahub.rachit.streetview.database.old.DataContract.CategoriesEntry;
-import com.osahub.rachit.streetview.database.old.DataContract.CategoryLocationsEntry;
-import com.osahub.rachit.streetview.database.old.DataContract.LocationsEntry;
-import com.osahub.rachit.streetview.model.Category;
-import com.osahub.rachit.streetview.model.CategoryLocations;
-import com.osahub.rachit.streetview.model.Location;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -45,11 +38,7 @@ public class Helper {
 
     public static final String DATE_FORMAT_DEFAULT = "yyyy-MM-dd hh:mm:ss";
 
-    public static final String QUERY_SORT_ORDER_ASC = "order_num ASC";
-    public static final String QUERY_SORT_ORDER_DESC = "order_num DESC";
-
     public static final String CATEGORY_TYPE_SPECIAL = "special";
-
     public static final String LOCATION_FRAGMENT_BLANK_TAG = "BLANK";
 
     public static Date convertStringToDate(String date) throws ParseException {
@@ -84,41 +73,6 @@ public class Helper {
         }
     }
 
-    public static class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
-
-        private int spanCount;
-        private int spacing;
-        private boolean includeEdge;
-
-        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
-            this.spanCount = spanCount;
-            this.spacing = spacing;
-            this.includeEdge = includeEdge;
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            int position = parent.getChildAdapterPosition(view); // item position
-            int column = position % spanCount; // item column
-
-            if (includeEdge) {
-                outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
-                outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
-
-                if (position < spanCount) { // top edge
-                    outRect.top = spacing;
-                }
-                outRect.bottom = spacing; // item bottom
-            } else {
-                outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
-                outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
-                if (position >= spanCount) {
-                    outRect.top = spacing; // item top
-                }
-            }
-        }
-    }
-
     public static Uri getLocalBitmapUri(Context context, Bitmap bmp) {
         Uri bmpUri = null;
         try {
@@ -131,46 +85,6 @@ public class Helper {
             e.printStackTrace();
         }
         return bmpUri;
-    }
-
-    public static ContentValues generateContentValuesFromCategoryObject(Category category) {
-        ContentValues categoryValues = new ContentValues();
-        categoryValues.put(CategoriesEntry.COLUMN_ID, category.getCategoryId());
-        categoryValues.put(CategoriesEntry.COLUMN_NAME, category.getName());
-        categoryValues.put(CategoriesEntry.COLUMN_TYPE, category.getType());
-        categoryValues.put(CategoriesEntry.COLUMN_ORDER, category.getPosition());
-        categoryValues.put(CategoriesEntry.COLUMN_CREATED_ON, Helper.convertDateToString(category.getCreatedOn()));
-        categoryValues.put(CategoriesEntry.COLUMN_UPDATED_ON, Helper.convertDateToString(category.getUpdatedOn()));
-        return categoryValues;
-    }
-
-    public static ContentValues generateContentValuesFromLocationObject(Location location) {
-        ContentValues locationValues = new ContentValues();
-        locationValues.put(LocationsEntry.COLUMN_ID, location.getLocationId());
-        locationValues.put(LocationsEntry.COLUMN_LOCATION_NAME, location.getLocationName());
-        locationValues.put(LocationsEntry.COLUMN_DESCRIPTION, location.getDescription());
-        locationValues.put(LocationsEntry.COLUMN_DESCRIPTION_SMALL, location.getDescriptionSmall());
-        locationValues.put(LocationsEntry.COLUMN_CITY, location.getCity());
-        locationValues.put(LocationsEntry.COLUMN_STATE, location.getState());
-        locationValues.put(LocationsEntry.COLUMN_COUNTRY, location.getCountry());
-        locationValues.put(LocationsEntry.COLUMN_LATITUDE, location.getLatitude());
-        locationValues.put(LocationsEntry.COLUMN_LONGITUDE, location.getLongitude());
-        locationValues.put(LocationsEntry.COLUMN_IMAGE_PATH, location.getImageLinks());
-        locationValues.put(LocationsEntry.COLUMN_THUMBNAIL_PATH, location.getThumbnailPath());
-        locationValues.put(LocationsEntry.COLUMN_CREATED_ON, Helper.convertDateToString(location.getCreatedOn()));
-        locationValues.put(LocationsEntry.COLUMN_UPDATED_ON, Helper.convertDateToString(location.getUpdatedOn()));
-        return locationValues;
-    }
-
-    public static ContentValues generateContentValuesFromCategoryLocationsObject(CategoryLocations categoryLocations) {
-        ContentValues categoryValues = new ContentValues();
-        categoryValues.put(CategoryLocationsEntry.COLUMN_ID, categoryLocations.getCategoryLocationId());
-        categoryValues.put(CategoryLocationsEntry.COLUMN_CATEGORY_ID, categoryLocations.getCategoryId());
-        categoryValues.put(CategoryLocationsEntry.COLUMN_LOCATION_ID, categoryLocations.getLocationId());
-        categoryValues.put(CategoryLocationsEntry.COLUMN_ORDER, categoryLocations.getPosition());
-        categoryValues.put(CategoryLocationsEntry.COLUMN_CREATED_ON, Helper.convertDateToString(categoryLocations.getCreatedOn()));
-        categoryValues.put(CategoryLocationsEntry.COLUMN_UPDATED_ON, Helper.convertDateToString(categoryLocations.getUpdatedOn()));
-        return categoryValues;
     }
 
     public static List<String> generateImageLinksArrayFromLinksString(String imageLinks) {

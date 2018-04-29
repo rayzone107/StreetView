@@ -55,7 +55,7 @@ public class CategoryLocations extends Model {
                 jsonObject.getInt("id"),
                 jsonObject.getInt("category_id"),
                 jsonObject.getInt("location_id"),
-                jsonObject.getInt("order"),
+                jsonObject.getInt("position"),
                 Helper.convertStringToDate(jsonObject.getString("created_on")),
                 Helper.convertStringToDate(jsonObject.getString("updated_on")));
     }

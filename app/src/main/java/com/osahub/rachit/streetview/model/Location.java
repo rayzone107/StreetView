@@ -25,9 +25,10 @@ public class Location extends Model {
     public static final String COLUMN_CITY = "city";
     public static final String COLUMN_STATE = "state";
     public static final String COLUMN_COUNTRY = "country";
+    public static final String COLUMN_BUILT_IN = "builtIn";
+    public static final String COLUMN_BUILT_BY = "builtBy";
     public static final String COLUMN_LATITUDE = "latitude";
     public static final String COLUMN_LONGITUDE = "longitude";
-    public static final String COLUMN_IMAGE_LINKS = "imageLinks";
     public static final String COLUMN_THUMBNAIL_PATH = "thumbnailPath";
     public static final String COLUMN_CREATED_ON = "createdOn";
     public static final String COLUMN_UPDATED_ON = "updatedOn";
@@ -47,12 +48,14 @@ public class Location extends Model {
     private String state;
     @Column(name = COLUMN_COUNTRY)
     private String country;
+    @Column(name = COLUMN_BUILT_IN)
+    private String builtIn;
+    @Column(name = COLUMN_BUILT_BY)
+    private String builtBy;
     @Column(name = COLUMN_LATITUDE)
     private double latitude;
     @Column(name = COLUMN_LONGITUDE)
     private double longitude;
-    @Column(name = COLUMN_IMAGE_LINKS)
-    private String imageLinks;
     @Column(name = COLUMN_THUMBNAIL_PATH)
     private String thumbnailPath;
     @Column(name = COLUMN_CREATED_ON)
@@ -67,18 +70,19 @@ public class Location extends Model {
         this.locationName = name;
     }
 
-    public Location(int id, String locationName, String description, String descriptionSmall, String city, String state, String country, double latitude,
-                    double longitude, String imageLinks, String thumbnailPath, Date createdOn, Date updatedOn) {
-        this.locationId = id;
+    public Location(int locationId, String locationName, String description, String descriptionSmall, String city, String state, String country,
+                    String builtIn, String builtBy, double latitude, double longitude, String thumbnailPath, Date createdOn, Date updatedOn) {
+        this.locationId = locationId;
         this.locationName = locationName;
         this.description = description;
         this.descriptionSmall = descriptionSmall;
         this.city = city;
         this.state = state;
         this.country = country;
+        this.builtIn = builtIn;
+        this.builtBy = builtBy;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.imageLinks = imageLinks;
         this.thumbnailPath = thumbnailPath;
         this.createdOn = createdOn;
         this.updatedOn = updatedOn;
@@ -87,18 +91,19 @@ public class Location extends Model {
     public static Location fromJson(JSONObject jsonObject) throws JSONException, ParseException {
         return new Location(
                 jsonObject.getInt("id"),
-                jsonObject.getString("locname"),
-                jsonObject.getString("desc"),
-                jsonObject.getString("descsmall"),
+                jsonObject.getString("name"),
+                jsonObject.getString("description"),
+                jsonObject.getString("description_small"),
                 jsonObject.getString("city"),
                 jsonObject.getString("state"),
                 jsonObject.getString("country"),
-                jsonObject.getDouble("lat"),
-                jsonObject.getDouble("lng"),
-                jsonObject.getString("image"),
-                jsonObject.getString("thumb"),
-                Helper.convertStringToDate(jsonObject.getString("created")),
-                Helper.convertStringToDate(jsonObject.getString("updated")));
+                jsonObject.getString("built_in"),
+                jsonObject.getString("built_by"),
+                jsonObject.getDouble("latitude"),
+                jsonObject.getDouble("longitude"),
+                jsonObject.getString("thumbnail_path"),
+                Helper.convertStringToDate(jsonObject.getString("created_on")),
+                Helper.convertStringToDate(jsonObject.getString("updated_on")));
     }
 
     public void updateObject(Location location) {
@@ -109,9 +114,11 @@ public class Location extends Model {
         this.city = location.getCity();
         this.state = location.getState();
         this.country = location.getCountry();
+        this.builtIn = location.getBuiltIn();
+        this.builtBy = location.getBuiltBy();
+        this.country = location.getCountry();
         this.latitude = location.getLatitude();
         this.longitude = location.getLongitude();
-        this.imageLinks = location.getImageLinks();
         this.thumbnailPath = location.getThumbnailPath();
         this.createdOn = location.getCreatedOn();
         this.updatedOn = location.getUpdatedOn();
@@ -173,6 +180,22 @@ public class Location extends Model {
         this.country = country;
     }
 
+    public String getBuiltIn() {
+        return builtIn;
+    }
+
+    public void setBuiltIn(String builtIn) {
+        this.builtIn = builtIn;
+    }
+
+    public String getBuiltBy() {
+        return builtBy;
+    }
+
+    public void setBuiltBy(String builtBy) {
+        this.builtBy = builtBy;
+    }
+
     public double getLatitude() {
         return latitude;
     }
@@ -187,14 +210,6 @@ public class Location extends Model {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
-    }
-
-    public String getImageLinks() {
-        return imageLinks;
-    }
-
-    public void setImageLinks(String imageLinks) {
-        this.imageLinks = imageLinks;
     }
 
     public String getThumbnailPath() {

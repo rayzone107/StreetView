@@ -3,16 +3,15 @@ package com.osahub.rachit.streetview.modules.home.search;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.osahub.rachit.streetview.R;
+import com.osahub.rachit.streetview.modules.base.BaseFragment;
 
-public class SearchFragment extends Fragment {
-
-    private OnFragmentInteractionListener mListener;
+public class SearchFragment extends BaseFragment {
 
     public SearchFragment() {
     }
@@ -25,14 +24,9 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+        return view;
     }
 
     public static SearchFragment newInstance() {
@@ -40,14 +34,7 @@ public class SearchFragment extends Fragment {
         return fragment;
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    public void changeSearchText(String newText) {
+        Toast.makeText(mContext, "Change Search - " + newText, Toast.LENGTH_SHORT).show();
     }
 }

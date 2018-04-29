@@ -1,7 +1,5 @@
 package com.osahub.rachit.streetview.database;
 
-import com.osahub.rachit.streetview.database.old.DataContract;
-
 /**
  * Created by Rachit Goyal on 20/04/18
  */

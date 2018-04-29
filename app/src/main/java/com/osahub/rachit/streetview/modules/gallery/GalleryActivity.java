@@ -1,5 +1,6 @@
 package com.osahub.rachit.streetview.modules.gallery;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -22,6 +23,7 @@ import com.osahub.rachit.streetview.misc.HackyViewPager;
 import com.osahub.rachit.streetview.misc.Helper;
 import com.osahub.rachit.streetview.model.Location;
 import com.osahub.rachit.streetview.modules.base.BaseActivity;
+import com.osahub.rachit.streetview.utils.Constants;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -38,12 +40,19 @@ public class GalleryActivity extends BaseActivity {
     int mCurrentImage = 1;
     private Location mLocation;
 
+    public static Intent getStartIntent(Context context, int locationId, int position) {
+        Intent intent = new Intent(context, GalleryActivity.class);
+        intent.putExtra(Constants.EXTRAS.LOCATION_ID, locationId);
+        intent.putExtra(Constants.EXTRAS.LOCATION_POSITION, position);
+        return intent;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
 
-        int locationId = getIntent().getIntExtra("location", -1);
+        int locationId = getIntent().getIntExtra(Constants.EXTRAS.LOCATION_ID, -1);
         if (locationId != -1) {
             mLocation = mDatabaseHelper.mLocationDbHelper.getLocationById(locationId);
         } else {
@@ -57,8 +66,6 @@ public class GalleryActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mFab = findViewById(R.id.fab);
-
-        mImageLinks = Helper.generateImageLinksArrayFromLinksString(mLocation.getImageLinks());
 
         mFab.setOnClickListener(new View.OnClickListener() {
             @Override

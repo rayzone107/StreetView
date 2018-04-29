@@ -6,13 +6,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,23 +22,22 @@ import com.osahub.rachit.streetview.R;
 import com.osahub.rachit.streetview.model.Category;
 import com.osahub.rachit.streetview.modules.base.BaseActivity;
 import com.osahub.rachit.streetview.modules.developerprofile.DeveloperProfileActivity;
-import com.osahub.rachit.streetview.modules.home.categoryfragment.CategoryFragment;
+import com.osahub.rachit.streetview.modules.home.categoryfragment.CategoryItemFragment;
 import com.osahub.rachit.streetview.modules.home.search.SearchFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocationsActivity extends BaseActivity
-        implements LocationsContract.View, NavigationView.OnNavigationItemSelectedListener {
-
-    private static final String LOG_TAG = "World Tour 3D: " + LocationsActivity.class.getSimpleName();
+public class LocationsActivity extends BaseActivity implements LocationsContract.View,
+        NavigationView.OnNavigationItemSelectedListener {
     private static final String SEARCH_FRAGMENT_TAG = "SEARCH_FRAGMENT_TAG";
 
     private DrawerLayout mDrawer;
     private FragmentTransaction ft;
     private ProgressBar fragmentsProgressBar;
     private MaterialSearchView mSearchView;
-    List<Category> mCategories = new ArrayList<>();
+    private List<Category> mCategories = new ArrayList<>();
+    private SearchFragment mSearchFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +61,7 @@ public class LocationsActivity extends BaseActivity
 
         mCategories = mDatabaseHelper.mCategoryDbHelper.getAllCategories();
 
-        Log.i(LOG_TAG, "Categories Fetched");
         setCategoriesList();
-
         setSearchListeners();
     }
 
@@ -76,13 +71,10 @@ public class LocationsActivity extends BaseActivity
         ft = getSupportFragmentManager().beginTransaction();
         for (Category category : mCategories) {
             if (mDatabaseHelper.mLocationDbHelper.getLocationCountByCategoryId(category.getCategoryId()) != 0) {
-                CategoryFragment categoryFragmentOld = (CategoryFragment) getSupportFragmentManager().findFragmentByTag(category.getName());
-                if (categoryFragmentOld == null) {
-                    CategoryFragment categoryFragment = new CategoryFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("category", category.getCategoryId());
-                    categoryFragment.setArguments(bundle);
-                    ft.add(R.id.fragment_holder, categoryFragment, category.getName());
+                CategoryItemFragment categoryItemFragmentOld = (CategoryItemFragment) getSupportFragmentManager().findFragmentByTag(category.getName());
+                if (categoryItemFragmentOld == null) {
+                    CategoryItemFragment categoryItemFragment = CategoryItemFragment.newInstance(category.getCategoryId());
+                    ft.add(R.id.fragment_holder, categoryItemFragment, category.getName());
                 }
             }
         }
@@ -98,6 +90,9 @@ public class LocationsActivity extends BaseActivity
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                if (mSearchFragment != null) {
+                    mSearchFragment.changeSearchText(newText);
+                }
                 return false;
             }
         });
@@ -107,17 +102,16 @@ public class LocationsActivity extends BaseActivity
             public void onSearchViewShown() {
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_top);
-                SearchFragment searchFragment = new SearchFragment();
-                ft.replace(R.id.search_fragment_container, searchFragment, SEARCH_FRAGMENT_TAG);
+                mSearchFragment = SearchFragment.newInstance();
+                ft.replace(R.id.search_fragment_container, mSearchFragment, SEARCH_FRAGMENT_TAG);
                 ft.commit();
             }
 
             @Override
             public void onSearchViewClosed() {
                 ft = getSupportFragmentManager().beginTransaction();
-                Fragment fragment = getSupportFragmentManager().findFragmentByTag(SEARCH_FRAGMENT_TAG);
-                if (fragment != null) {
-                    ft.remove(fragment);
+                if (mSearchFragment != null && mSearchFragment.isAdded()) {
+                    ft.remove(mSearchFragment);
                 }
                 ft.commit();
             }
@@ -140,13 +134,12 @@ public class LocationsActivity extends BaseActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.nav_profile) {
-            Intent intent = new Intent(LocationsActivity.this, DeveloperProfileActivity.class);
-            startActivity(intent);
+            DeveloperProfileActivity.startActivity(this);
         } else if (id == R.id.nav_other_apps) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=Rachit+Goyal"));
             startActivity(browserIntent);
         } else if (id == R.id.nav_share) {
-            otherApps();
+            shareApps();
         } else if (id == R.id.nav_rate) {
             rateApp();
         } else if (id == R.id.nav_email) {
@@ -157,7 +150,7 @@ public class LocationsActivity extends BaseActivity
         return true;
     }
 
-    protected void otherApps() {
+    protected void shareApps() {
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.osahub.rachit.streetview");
@@ -179,7 +172,6 @@ public class LocationsActivity extends BaseActivity
     }
 
     protected void sendEmail() {
-        Log.i(LOG_TAG, "Sending Email.");
         String[] TO = {"rachit@osahub.com"};
         String[] CC = {""};
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
@@ -192,7 +184,6 @@ public class LocationsActivity extends BaseActivity
 
         try {
             startActivity(Intent.createChooser(emailIntent, "Send mail"));
-            Log.i(LOG_TAG, "Email Sent.");
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(LocationsActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
         }
