@@ -2,11 +2,12 @@ package com.osahub.rachit.streetview.modules.detail;
 
 import com.osahub.rachit.streetview.database.DatabaseHelper;
 import com.osahub.rachit.streetview.model.Location;
-import com.osahub.rachit.streetview.model.LocationImages;
-import com.osahub.rachit.streetview.model.LocationSimilarPlaces;
+import com.osahub.rachit.streetview.model.LocationImage;
+import com.osahub.rachit.streetview.model.LocationSimilarPlace;
 import com.osahub.rachit.streetview.server.NetworkRequest;
 import com.osahub.rachit.streetview.server.NetworkResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.osahub.rachit.streetview.modules.base.BaseActivity.ViewState;
@@ -33,29 +34,38 @@ public class DetailPresenter implements DetailContract.Presenter {
         Location location;
         if (locationId != -1) {
             location = mDatabaseHelper.mLocationDbHelper.getLocationById(locationId);
-            mView.setLocation(location);
-        } else {
-            mNetworkRequest.getLocationById(locationId, new NetworkResponse<Location>() {
-                @Override
-                public void onData(Location location) {
-                    mView.setLocation(location);
-                }
+            if (location == null) {
+                mNetworkRequest.getLocationById(locationId, new NetworkResponse<Location>() {
+                    @Override
+                    public void onData(Location location) {
+                        mView.setLocation(location);
+                        fetchDetails(location.getLocationId());
+                    }
 
-                @Override
-                public void onError() {
-                    mView.changeViewState(ViewState.ERROR);
-                }
-            });
+                    @Override
+                    public void onError() {
+                        mView.changeViewState(ViewState.ERROR);
+                    }
+                });
+            } else {
+                mView.setLocation(location);
+                fetchDetails(locationId);
+            }
+        } else {
+            mView.finishActivity();
         }
-        fetchDetails(locationId);
     }
 
     private void fetchDetails(int locationId) {
-        mNetworkRequest.getLocationImages(locationId, new NetworkResponse<List<LocationImages>>() {
+        mNetworkRequest.getLocationImages(locationId, new NetworkResponse<List<LocationImage>>() {
             @Override
-            public void onData(List<LocationImages> images) {
+            public void onData(List<LocationImage> images) {
                 mView.changeViewState(ViewState.DATA);
-                mView.showImages(images);
+                if (images.isEmpty()) {
+                    mView.showThumbnailInImages();
+                } else {
+                    mView.showImages(images);
+                }
             }
 
             @Override
@@ -64,10 +74,14 @@ public class DetailPresenter implements DetailContract.Presenter {
             }
         });
 
-        mNetworkRequest.getLocationSimilarPlaces(locationId, new NetworkResponse<List<LocationSimilarPlaces>>() {
+        mNetworkRequest.getLocationSimilarPlaces(locationId, new NetworkResponse<List<LocationSimilarPlace>>() {
             @Override
-            public void onData(List<LocationSimilarPlaces> similarPlaces) {
-                mView.showSimilarPlaces(similarPlaces);
+            public void onData(List<LocationSimilarPlace> similarPlaces) {
+                ArrayList<Integer> similarPlacesIds = new ArrayList<>();
+                for (LocationSimilarPlace locationSimilarPlace : similarPlaces) {
+                    similarPlacesIds.add(locationSimilarPlace.getSimilarLocationId());
+                }
+                mView.showSimilarPlaces(similarPlacesIds);
             }
 
             @Override

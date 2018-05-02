@@ -7,11 +7,14 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
 import com.google.android.gms.maps.StreetViewPanorama;
@@ -27,7 +30,7 @@ import com.osahub.rachit.streetview.utils.Constants;
 public class StreetViewActivity extends BaseActivity implements
         OnStreetViewPanoramaReadyCallback {
 
-    private static final String LOG_TAG = "World Tour 3D: " + StreetViewActivity.class.getSimpleName();
+    private AppBarLayout mAppBarLayout;
 
     private Location mLocation;
 
@@ -44,6 +47,16 @@ public class StreetViewActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_street_view);
+        Window window = StreetViewActivity.this.getWindow();
+        window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        mAppBarLayout = findViewById(R.id.app_bar);
+        mAppBarLayout.bringToFront();
 
         if (!isNetworkAvailable()) {
             showDialogForNetwork();
@@ -57,7 +70,6 @@ public class StreetViewActivity extends BaseActivity implements
         }
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        assert toolbar != null;
         toolbar.setTitle(mLocation.getLocationName());
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -129,10 +141,21 @@ public class StreetViewActivity extends BaseActivity implements
         int id = item.getItemId();
 
         if (id == R.id.action_info) {
-            startActivity(DetailActivity.getStartIntent(this, mLocation.getLocationId()));
+            startActivityForResult(DetailActivity.getStartIntent(StreetViewActivity.this, mLocation.getLocationId()),
+                    Constants.REQUEST_CODE.STREET_VIEW_DETAIL);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Constants.REQUEST_CODE.STREET_VIEW_DETAIL) {
+            if (resultCode == RESULT_OK) {
+                int locationId = data.getIntExtra(Constants.EXTRAS.LOCATION_ID, -1);
+            }
+        }
     }
 }

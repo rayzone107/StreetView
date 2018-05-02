@@ -10,17 +10,19 @@ import com.osahub.rachit.streetview.R;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 class SliderCard extends RecyclerView.ViewHolder {
 
-    private int viewWidth = 0;
-
-    private final ImageView mImageView;
-    private final ProgressBar mProgressBar;
+    @BindView(R.id.image)
+    ImageView mImageView;
+    @BindView(R.id.progress_bar)
+    ProgressBar mProgressBar;
 
     SliderCard(View itemView) {
         super(itemView);
-        mImageView = itemView.findViewById(R.id.image);
-        mProgressBar = itemView.findViewById(R.id.progress_bar);
+        ButterKnife.bind(this, itemView);
     }
 
     void setContent(final String imageUrl) {

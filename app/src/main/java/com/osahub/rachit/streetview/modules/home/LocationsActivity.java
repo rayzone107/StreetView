@@ -2,67 +2,122 @@ package com.osahub.rachit.streetview.modules.home;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.osahub.rachit.streetview.R;
+import com.osahub.rachit.streetview.misc.searchview.MySearchView;
 import com.osahub.rachit.streetview.model.Category;
 import com.osahub.rachit.streetview.modules.base.BaseActivity;
+import com.osahub.rachit.streetview.modules.category.SingleCategoryActivity;
 import com.osahub.rachit.streetview.modules.developerprofile.DeveloperProfileActivity;
-import com.osahub.rachit.streetview.modules.home.categoryfragment.CategoryItemFragment;
+import com.osahub.rachit.streetview.modules.home.categoryfragment.CategoryFragment;
 import com.osahub.rachit.streetview.modules.home.search.SearchFragment;
+import com.osahub.rachit.streetview.server.NetworkRequest;
+import com.osahub.rachit.streetview.service.FetchDataIntentService;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class LocationsActivity extends BaseActivity implements LocationsContract.View,
-        NavigationView.OnNavigationItemSelectedListener {
+        OnNavigationItemSelectedListener {
     private static final String SEARCH_FRAGMENT_TAG = "SEARCH_FRAGMENT_TAG";
 
-    private DrawerLayout mDrawer;
-    private FragmentTransaction ft;
-    private ProgressBar fragmentsProgressBar;
-    private MaterialSearchView mSearchView;
+    @BindView(R.id.loading_parent_rl)
+    RelativeLayout mLoadingRL;
+
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+
+    @BindView(R.id.drawer_layout)
+    DrawerLayout mDrawer;
+
+    @BindView(R.id.nav_view)
+    NavigationView mNavigationView;
+
+    @BindView(R.id.nested_scroll_view)
+    NestedScrollView mNestedScrollView;
+
+    @BindView(R.id.fragments_progress_bar)
+    ProgressBar fragmentsProgressBar;
+
+    @BindView(R.id.search_view)
+    MySearchView mMySearchView;
+
+    private LocationsContract.Presenter mPresenter;
     private List<Category> mCategories = new ArrayList<>();
     private SearchFragment mSearchFragment;
+    private FragmentTransaction ft;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_location_list);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_locations);
+        ButterKnife.bind(this);
+        setSupportActionBar(mToolbar);
 
-        mSearchView = findViewById(R.id.search_view);
-        mDrawer = findViewById(R.id.drawer_layout);
+        FetchDataIntentService.startService(mContext);
+
+        mMySearchView.setHint("Search Locations");
+        mMySearchView.setHintTextColor(Color.BLACK);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, mDrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, mDrawer, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawer.addDrawerListener(toggle);
         toggle.syncState();
-
-        NavigationView mNavigationView = findViewById(R.id.nav_view);
-        assert mNavigationView != null;
         mNavigationView.setNavigationItemSelectedListener(this);
 
-        fragmentsProgressBar = findViewById(R.id.fragments_progress_bar);
+        mPresenter = new LocationsPresenter(this, mDatabaseHelper, new NetworkRequest());
+    }
 
-        mCategories = mDatabaseHelper.mCategoryDbHelper.getAllCategories();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter.onResume();
+    }
 
+    public void changeViewState(ViewState viewState) {
+        switch (viewState) {
+            case LOADING:
+                mLoadingRL.setVisibility(View.VISIBLE);
+                break;
+            case DATA:
+                mLoadingRL.setVisibility(View.GONE);
+                break;
+            case ERROR:
+                mLoadingRL.setVisibility(View.GONE);
+                break;
+        }
+    }
+
+    @Override
+    public void showData(List<Category> categories) {
+        mCategories = categories;
         setCategoriesList();
         setSearchListeners();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     public void setCategoriesList() {
@@ -71,10 +126,10 @@ public class LocationsActivity extends BaseActivity implements LocationsContract
         ft = getSupportFragmentManager().beginTransaction();
         for (Category category : mCategories) {
             if (mDatabaseHelper.mLocationDbHelper.getLocationCountByCategoryId(category.getCategoryId()) != 0) {
-                CategoryItemFragment categoryItemFragmentOld = (CategoryItemFragment) getSupportFragmentManager().findFragmentByTag(category.getName());
-                if (categoryItemFragmentOld == null) {
-                    CategoryItemFragment categoryItemFragment = CategoryItemFragment.newInstance(category.getCategoryId());
-                    ft.add(R.id.fragment_holder, categoryItemFragment, category.getName());
+                CategoryFragment categoryFragmentOld = (CategoryFragment) getSupportFragmentManager().findFragmentByTag(category.getName());
+                if (categoryFragmentOld == null) {
+                    CategoryFragment categoryFragment = CategoryFragment.newInstance(category.getCategoryId());
+                    ft.add(R.id.fragment_holder, categoryFragment, category.getName());
                 }
             }
         }
@@ -82,10 +137,10 @@ public class LocationsActivity extends BaseActivity implements LocationsContract
     }
 
     private void setSearchListeners() {
-        mSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+        mMySearchView.setOnQueryTextListener(new MySearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                return false;
+                return true;
             }
 
             @Override
@@ -97,9 +152,10 @@ public class LocationsActivity extends BaseActivity implements LocationsContract
             }
         });
 
-        mSearchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+        mMySearchView.setOnSearchViewListener(new MySearchView.SearchViewListener() {
             @Override
             public void onSearchViewShown() {
+                mNestedScrollView.setVisibility(View.GONE);
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.setCustomAnimations(R.anim.slide_in_top, R.anim.slide_out_top);
                 mSearchFragment = SearchFragment.newInstance();
@@ -109,6 +165,7 @@ public class LocationsActivity extends BaseActivity implements LocationsContract
 
             @Override
             public void onSearchViewClosed() {
+                mNestedScrollView.setVisibility(View.VISIBLE);
                 ft = getSupportFragmentManager().beginTransaction();
                 if (mSearchFragment != null && mSearchFragment.isAdded()) {
                     ft.remove(mSearchFragment);
@@ -119,45 +176,50 @@ public class LocationsActivity extends BaseActivity implements LocationsContract
     }
 
     @Override
-    public void onBackPressed() {
-        if (mDrawer.isDrawerOpen(GravityCompat.START)) {
-            mDrawer.closeDrawer(GravityCompat.START);
-        } else if (mSearchView.isSearchOpen()) {
-            mSearchView.closeSearch();
-        } else {
-            super.onBackPressed();
-        }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_location_list, menu);
+
+        MenuItem item = menu.findItem(R.id.action_search);
+        mMySearchView.setMenuItem(item);
+
+        return true;
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.nav_profile) {
-            DeveloperProfileActivity.startActivity(this);
-        } else if (id == R.id.nav_other_apps) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=Rachit+Goyal"));
-            startActivity(browserIntent);
-        } else if (id == R.id.nav_share) {
-            shareApps();
-        } else if (id == R.id.nav_rate) {
-            rateApp();
-        } else if (id == R.id.nav_email) {
-            sendEmail();
+        switch (item.getItemId()) {
+            case R.id.nav_favourites:
+                SingleCategoryActivity.startActivity(LocationsActivity.this);
+                break;
+            case R.id.nav_profile:
+                DeveloperProfileActivity.startActivity(LocationsActivity.this);
+                break;
+            case R.id.nav_other_apps:
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=Rachit+Goyal")));
+                break;
+            case R.id.nav_share:
+                shareApps();
+                break;
+            case R.id.nav_rate:
+                rateApp();
+                break;
+            case R.id.nav_email:
+                sendEmail();
+                break;
         }
-
         mDrawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    protected void shareApps() {
+    private void shareApps() {
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.osahub.rachit.streetview");
         startActivity(Intent.createChooser(sharingIntent, "Share Using"));
     }
 
-    protected void rateApp() {
+    private void rateApp() {
         Uri uri = Uri.parse("market://details?id=" + mContext.getPackageName());
         Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
         goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
@@ -171,7 +233,7 @@ public class LocationsActivity extends BaseActivity implements LocationsContract
         }
     }
 
-    protected void sendEmail() {
+    private void sendEmail() {
         String[] TO = {"rachit@osahub.com"};
         String[] CC = {""};
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
@@ -190,12 +252,13 @@ public class LocationsActivity extends BaseActivity implements LocationsContract
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_location_list, menu);
-
-        MenuItem item = menu.findItem(R.id.action_search);
-        mSearchView.setMenuItem(item);
-
-        return true;
+    public void onBackPressed() {
+        if (mDrawer.isDrawerOpen(GravityCompat.START)) {
+            mDrawer.closeDrawer(GravityCompat.START);
+        } else if (mMySearchView.isSearchOpen()) {
+            mMySearchView.closeSearch();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

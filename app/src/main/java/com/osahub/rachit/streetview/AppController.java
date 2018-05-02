@@ -5,12 +5,13 @@ import android.text.TextUtils;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.orm.SugarApp;
 
 /**
  * Application class for Volley Request Queue initialization
  * Created by Rachit on 28-May-16.
  */
-public class AppController extends com.activeandroid.app.Application {
+public class AppController extends SugarApp {
 
     public static final String TAG = AppController.class.getSimpleName();
 

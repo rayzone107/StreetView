@@ -2,14 +2,29 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_person"
-            android:title="@string/developer_profile" />
-        <item
-            android:id="@+id/nav_other_apps"
-            android:icon="@drawable/ic_other_apps"
-            android:title="@string/other_applications" />
+        <item android:title="@string/app_settings">
+            <menu>
+                <item
+                    android:id="@+id/nav_favourites"
+                    android:icon="@drawable/ic_star"
+                    android:title="@string/favourites" />
+            </menu>
+        </item>
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item android:title="@string/about_developer">
+            <menu>
+                <item
+                    android:id="@+id/nav_profile"
+                    android:icon="@drawable/ic_person"
+                    android:title="@string/developer_profile" />
+                <item
+                    android:id="@+id/nav_other_apps"
+                    android:icon="@drawable/ic_other_apps"
+                    android:title="@string/other_applications" />
+            </menu>
+        </item>
     </group>
 
     <item android:title="@string/communicate">
@@ -28,5 +43,4 @@
                 android:title="@string/email_author" />
         </menu>
     </item>
-
 </menu>

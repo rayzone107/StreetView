@@ -29,10 +29,10 @@
                 android:paddingBottom="5dp"
                 android:paddingRight="20dp"
                 android:paddingTop="5dp"
-                android:text="@string/category_name"
-                android:textColor="@color/menu_gray"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="@string/category_name" />
 
         </android.support.v7.widget.Toolbar>
 
@@ -40,9 +40,6 @@
 
     <include layout="@layout/content_single_category" />
 
-    <FrameLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <include layout="@layout/error_layout" />
 
 </android.support.design.widget.CoordinatorLayout>

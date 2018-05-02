@@ -17,12 +17,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.osahub.rachit.streetview.R;
-import com.osahub.rachit.streetview.model.Category;
 import com.osahub.rachit.streetview.model.Location;
 import com.osahub.rachit.streetview.modules.base.BaseActivity;
 import com.osahub.rachit.streetview.modules.streetview.StreetViewActivity;
 import com.osahub.rachit.streetview.utils.Constants;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MapViewActivity extends BaseActivity implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
@@ -32,17 +32,26 @@ public class MapViewActivity extends BaseActivity implements OnMapReadyCallback,
     private MapView mMapView;
     private ImageView mExitFullscreenIV;
 
-    private Category mCategory;
     private List<Location> mLocationList;
     private int mCurrentPosition;
 
     private GoogleMap mGoogleMap;
 
-    public static Intent getStartIntent(Context context, int categoryId, int selectedLocationPositon) {
+    public static Intent getStartIntent(Context context, ArrayList<Integer> locationIdList, int selectedLocationPositon) {
         Intent intent = new Intent(context, MapViewActivity.class);
-        intent.putExtra(Constants.EXTRAS.CATEGORY_ID, categoryId);
+        intent.putExtra(Constants.EXTRAS.LOCATION_ID_LIST, locationIdList);
         intent.putExtra(Constants.EXTRAS.LOCATION_POSITION, selectedLocationPositon);
         return intent;
+    }
+
+    private void getFromIntent() {
+        ArrayList<Integer> locationIdList = getIntent().getIntegerArrayListExtra(Constants.EXTRAS.LOCATION_ID_LIST);
+        if (locationIdList != null && !locationIdList.isEmpty()) {
+            mLocationList = mDatabaseHelper.mLocationDbHelper.getLocationsByIdsList(locationIdList);
+            mCurrentPosition = getIntent().getIntExtra(Constants.EXTRAS.LOCATION_POSITION, 0);
+        } else {
+            finish();
+        }
     }
 
     @Override
@@ -50,15 +59,7 @@ public class MapViewActivity extends BaseActivity implements OnMapReadyCallback,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_view);
 
-        int categoryId = getIntent().getIntExtra(Constants.EXTRAS.CATEGORY_ID, -1);
-        if (categoryId != -1) {
-            mCategory = mDatabaseHelper.mCategoryDbHelper.getCategoryById(categoryId);
-            mLocationList = mDatabaseHelper.mLocationDbHelper.getLocationsByCategoryId(categoryId);
-            mCurrentPosition = getIntent().getIntExtra(Constants.EXTRAS.LOCATION_POSITION, 0);
-        } else {
-            finish();
-        }
-
+        getFromIntent();
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
@@ -157,7 +158,7 @@ public class MapViewActivity extends BaseActivity implements OnMapReadyCallback,
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-        startActivity(StreetViewActivity.getStartIntent(this, (int) marker.getTag()));
+        startActivity(StreetViewActivity.getStartIntent(MapViewActivity.this, (int) marker.getTag()));
     }
 
     @Override

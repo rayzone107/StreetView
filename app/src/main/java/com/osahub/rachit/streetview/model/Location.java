@@ -1,9 +1,10 @@
 package com.osahub.rachit.streetview.model;
 
-import com.activeandroid.Model;
-import com.activeandroid.annotation.Column;
-import com.activeandroid.annotation.Table;
-import com.osahub.rachit.streetview.misc.Helper;
+import com.google.gson.annotations.SerializedName;
+import com.orm.SugarRecord;
+import com.orm.dsl.Column;
+import com.orm.dsl.Table;
+import com.osahub.rachit.streetview.utils.Helper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,7 +17,7 @@ import java.util.Date;
  * Created by Rachit on 22-Apr-16.
  */
 @Table(name = "Locations")
-public class Location extends Model {
+public class Location {
 
     public static final String COLUMN_LOCATION_ID = "locationId";
     public static final String COLUMN_LOCATION_NAME = "locationName";
@@ -32,36 +33,54 @@ public class Location extends Model {
     public static final String COLUMN_THUMBNAIL_PATH = "thumbnailPath";
     public static final String COLUMN_CREATED_ON = "createdOn";
     public static final String COLUMN_UPDATED_ON = "updatedOn";
+    public static final String COLUMN_IS_FAVOURITE = "isFavourite";
 
+    private transient Long id;
 
+    @SerializedName("id")
     @Column(name = COLUMN_LOCATION_ID, unique = true)
     private int locationId;
+    @SerializedName("name")
     @Column(name = COLUMN_LOCATION_NAME)
     private String locationName;
+    @SerializedName("description")
     @Column(name = COLUMN_DESCRIPTION)
     private String description;
+    @SerializedName("description_small")
     @Column(name = COLUMN_DESCRIPTION_SMALL)
     private String descriptionSmall;
+    @SerializedName("city")
     @Column(name = COLUMN_CITY)
     private String city;
+    @SerializedName("state")
     @Column(name = COLUMN_STATE)
     private String state;
+    @SerializedName("country")
     @Column(name = COLUMN_COUNTRY)
     private String country;
+    @SerializedName("built_in")
     @Column(name = COLUMN_BUILT_IN)
     private String builtIn;
+    @SerializedName("built_by")
     @Column(name = COLUMN_BUILT_BY)
     private String builtBy;
+    @SerializedName("latitude")
     @Column(name = COLUMN_LATITUDE)
     private double latitude;
+    @SerializedName("longitude")
     @Column(name = COLUMN_LONGITUDE)
     private double longitude;
+    @SerializedName("thumbnail_path")
     @Column(name = COLUMN_THUMBNAIL_PATH)
     private String thumbnailPath;
+    @SerializedName("created_on")
     @Column(name = COLUMN_CREATED_ON)
     private Date createdOn;
+    @SerializedName("updated_on")
     @Column(name = COLUMN_UPDATED_ON)
     private Date updatedOn;
+    @Column(name = COLUMN_IS_FAVOURITE)
+    private boolean isFavourite;
 
     public Location() {
     }
@@ -116,7 +135,6 @@ public class Location extends Model {
         this.country = location.getCountry();
         this.builtIn = location.getBuiltIn();
         this.builtBy = location.getBuiltBy();
-        this.country = location.getCountry();
         this.latitude = location.getLatitude();
         this.longitude = location.getLongitude();
         this.thumbnailPath = location.getThumbnailPath();
@@ -234,5 +252,13 @@ public class Location extends Model {
 
     public void setUpdatedOn(Date updatedOn) {
         this.updatedOn = updatedOn;
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
     }
 }

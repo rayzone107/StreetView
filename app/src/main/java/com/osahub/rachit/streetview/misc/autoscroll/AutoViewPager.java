@@ -3,7 +3,6 @@ package com.osahub.rachit.streetview.misc.autoscroll;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -192,7 +191,7 @@ public class AutoViewPager extends ViewPager {
      */
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        int action = MotionEventCompat.getActionMasked(ev);
+        int action = ev.getAction();
 
         if (stopScrollWhenTouch) {
             if ((action == MotionEvent.ACTION_DOWN) && isAutoScroll) {

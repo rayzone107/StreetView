@@ -18,4 +18,11 @@
         <attr format="boolean" name="avp_autoScroll"/>
         <attr format="integer" name="avp_duration"/>
     </declare-styleable>
+
+    <declare-styleable name="MySearchView">
+        <attr name="searchBackground" format="integer" />
+        <attr name="searchVoiceIcon" format="integer" />
+        <attr name="searchCloseIcon" format="integer" />
+        <attr name="searchBackIcon" format="integer" />
+    </declare-styleable>
 </resources>

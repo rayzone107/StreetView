@@ -47,4 +47,25 @@ class NetworkURL {
                 appendQueryParameter(Constants.QUERY_PARAMETERS.LOCATION_ID, String.valueOf(locationId)).build();
         return builtUri.toString();
     }
+
+    static String createFetchCategoryByIdURL(int locationId) {
+        final String API_BASE_URL = BASE_URL + "get_category_by_id.php";
+        Uri builtUri = Uri.parse(API_BASE_URL).buildUpon().
+                appendQueryParameter(Constants.QUERY_PARAMETERS.LOCATION_ID, String.valueOf(locationId)).build();
+        return builtUri.toString();
+    }
+
+    static String createFetchLocationsByCategoryIdURL(int categoryID) {
+        final String API_BASE_URL = BASE_URL + "get_locations_by_category_id.php";
+        Uri builtUri = Uri.parse(API_BASE_URL).buildUpon().
+                appendQueryParameter(Constants.QUERY_PARAMETERS.CATEGORY_ID, String.valueOf(categoryID)).build();
+        return builtUri.toString();
+    }
+
+    static String createAddRequestedLocationURL(String name) {
+        final String API_BASE_URL = BASE_URL + "add_requested_location.php";
+        Uri builtUri = Uri.parse(API_BASE_URL).buildUpon().
+                appendQueryParameter(Constants.QUERY_PARAMETERS.NAME, name).build();
+        return builtUri.toString();
+    }
 }

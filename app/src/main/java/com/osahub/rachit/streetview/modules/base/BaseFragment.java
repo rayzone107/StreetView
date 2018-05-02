@@ -24,7 +24,7 @@ public abstract class BaseFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getActivity() != null) {
-            mContext = getActivity().getApplicationContext();
+            mContext = getActivity();
         }
         mDatabaseHelper = new DatabaseHelper();
     }

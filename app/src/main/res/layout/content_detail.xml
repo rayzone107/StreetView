@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="40dp"
+    android:paddingBottom="20dp"
     tools:context="com.osahub.rachit.streetview.modules.detail.DetailActivity"
     tools:showIn="@layout/activity_detail">
 
@@ -21,93 +21,148 @@
         android:textStyle="bold"
         tools:text="Location Name" />
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/thumbnail_civ"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/name_tv"
+        android:layout_marginRight="20dp"
+        android:elevation="3dp"
+        android:scaleType="centerCrop"
+        app:civ_border_color="@color/black"
+        app:civ_border_width="2dp" />
+
     <TextView
         android:id="@+id/city_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_below="@id/name_tv"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@id/thumbnail_civ"
         android:textColor="@color/black"
         android:textSize="20sp"
         tools:text="City, State, Country" />
 
-    <LinearLayout
-        android:id="@+id/built_details_ll"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/built_in_tv"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_below="@id/city_tv"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="20dp"
+        android:layout_toLeftOf="@id/thumbnail_civ"
+        tools:text="Built In - 1658" />
 
-        <TextView
-            android:id="@+id/built_in_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            tools:text="Built In - 1658" />
-
-        <TextView
-            android:id="@+id/built_by_tv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            tools:text="Built By - Shah Jahan" />
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/built_by_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/built_in_tv"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_toLeftOf="@id/thumbnail_civ"
+        tools:text="Built By - Shah Jahan" />
 
     <com.osahub.rachit.streetview.misc.readmore.ReadMoreTextView
         android:id="@+id/description_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/built_details_ll"
+        android:layout_below="@id/built_by_tv"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/black"
-        app:showTrimExpandedText="false"
-        app:trimLines="2"
-        app:trimMode="trimModeLine"
+        app:trimCollapsedText="@string/read_more"
+        app:trimExpandedText="@string/read_less"
+        app:trimLength="100"
+        app:trimMode="trimModeLength"
         tools:text="Description" />
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/map_view"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_below="@id/description_tv"
-        android:layout_marginTop="20dp" />
-
     <View
-        android:id="@+id/divider"
+        android:id="@+id/divider1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/map_view"
+        android:layout_below="@id/description_tv"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="30dp"
         android:background="@color/menu_gray" />
 
     <TextView
-        android:id="@+id/similar_title_tv"
+        android:id="@+id/location_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/divider"
+        android:layout_below="@id/divider1"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:text="@string/similar_places_you_can_explore"
+        android:text="@string/locate_on_the_map"
         android:textColor="@color/black"
-        android:textSize="26sp" />
+        android:textSize="22sp"
+        android:textStyle="bold" />
 
-    <FrameLayout
-        android:id="@+id/similar_container"
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/map_view"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@id/location_title_tv"
+        android:layout_marginTop="20dp"
+        android:transitionName="mapView" />
+
+    <View
+        android:id="@+id/map_overlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/map_view"
+        android:layout_alignLeft="@id/map_view"
+        android:layout_alignRight="@id/map_view"
+        android:layout_alignTop="@id/map_view"
+        android:clickable="true"
+        android:focusable="true" />
+
+    <LinearLayout
+        android:id="@+id/similar_places_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/similar_title_tv"
-        android:layout_marginTop="20dp" />
+        android:layout_below="@id/map_view"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/menu_gray" />
+
+        <TextView
+            android:id="@+id/similar_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/similar_places_you_can_explore"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <FrameLayout
+            android:id="@+id/similar_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" />
+
+    </LinearLayout>
 
 </RelativeLayout>

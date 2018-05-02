@@ -1,8 +1,9 @@
 package com.osahub.rachit.streetview.database;
 
-import com.activeandroid.query.Select;
-import com.osahub.rachit.streetview.misc.Helper;
-import com.osahub.rachit.streetview.model.CategoryLocations;
+import com.orm.SugarRecord;
+import com.orm.query.Condition;
+import com.orm.query.Select;
+import com.osahub.rachit.streetview.model.CategoryLocation;
 
 import java.util.List;
 
@@ -12,44 +13,63 @@ import java.util.List;
 
 public class CategoryLocationDatabaseHelper implements DatabaseContract.CategoryLocationContract {
     @Override
-    public void addCategoryLocations(CategoryLocations categoryLocations) {
-        categoryLocations.save();
+    public void saveCategoryLocation(CategoryLocation categoryLocation) {
+        SugarRecord.save(categoryLocation);
     }
 
     @Override
-    public void addMultipleCategoryLocations(List<CategoryLocations> categoryLocationsList) {
-        for (CategoryLocations categoryLocations : categoryLocationsList) {
-            categoryLocations.save();
+    public void addMultipleCategoryLocations(List<CategoryLocation> categoryLocationList) {
+        SugarRecord.saveInTx(categoryLocationList);
+    }
+
+    @Override
+    public void updateOrInsertMultipleCategoryLocations(List<CategoryLocation> categoryLocationList) {
+        for (CategoryLocation categoryLocation : categoryLocationList) {
+            CategoryLocation storedCategoryLocation = Select.from(CategoryLocation.class).where(
+                    Condition.prop(CategoryLocation.COLUMN_CATEGORY_LOCATION_ID).eq(
+                            categoryLocation.getCategoryLocationId())).first();
+            if (storedCategoryLocation != null) {
+                storedCategoryLocation.updateObject(categoryLocation);
+                saveCategoryLocation(storedCategoryLocation);
+            } else {
+                saveCategoryLocation(categoryLocation);
+            }
         }
     }
 
     @Override
-    public List<CategoryLocations> getCategoryLocationByCategoryId(int categoryId) {
-        return new Select().from(CategoryLocations.class).where(CategoryLocations.COLUMN_CATEGORY_ID + " = ? ", categoryId).execute();
+    public int getCategoryLocationCount() {
+        return Select.from(CategoryLocation.class).list().size();
     }
 
     @Override
-    public List<CategoryLocations> getAllCategoryLocations() {
-        return new Select().from(CategoryLocations.class).execute();
+    public List<CategoryLocation> getCategoryLocationByCategoryId(int categoryId) {
+        return Select.from(CategoryLocation.class)
+                .where(Condition.prop(CategoryLocation.COLUMN_CATEGORY_ID).eq(categoryId)).list();
     }
 
     @Override
-    public void updateCategoryLocationById(int categoryLocationId, CategoryLocations categoryLocations) {
-        CategoryLocations originalCategoryLocations = new Select().from(CategoryLocations.class).
-                where(CategoryLocations.COLUMN_CATEGORY_LOCATION_ID + " = ? ", categoryLocationId).executeSingle();
-        originalCategoryLocations.updateObject(categoryLocations);
-        originalCategoryLocations.save();
+    public List<CategoryLocation> getAllCategoryLocations() {
+        return Select.from(CategoryLocation.class).list();
+    }
+
+    @Override
+    public void updateCategoryLocationById(int categoryLocationId, CategoryLocation categoryLocation) {
+        CategoryLocation originalCategoryLocation = Select.from(CategoryLocation.class).
+                where(Condition.prop(CategoryLocation.COLUMN_CATEGORY_LOCATION_ID).eq(categoryLocationId)).first();
+        originalCategoryLocation.updateObject(categoryLocation);
+        saveCategoryLocation(originalCategoryLocation);
     }
 
     @Override
     public void deleteCategoryLocationById(int categoryLocationId) {
-        CategoryLocations categoryLocations = new Select().from(CategoryLocations.class).
-                where(CategoryLocations.COLUMN_CATEGORY_LOCATION_ID + " = ? ", categoryLocationId).executeSingle();
-        categoryLocations.delete();
+        CategoryLocation categoryLocation = Select.from(CategoryLocation.class).
+                where(Condition.prop(CategoryLocation.COLUMN_CATEGORY_LOCATION_ID).eq(categoryLocationId)).first();
+        SugarRecord.delete(categoryLocation);
     }
 
     @Override
     public void deleteAllCategoryLocations() {
-        Helper.clearTable(CategoryLocations.class);
+        SugarRecord.deleteAll(CategoryLocation.class);
     }
 }

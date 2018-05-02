@@ -1,10 +1,10 @@
 package com.osahub.rachit.streetview.modules.detail;
 
 import com.osahub.rachit.streetview.model.Location;
-import com.osahub.rachit.streetview.model.LocationImages;
-import com.osahub.rachit.streetview.model.LocationSimilarPlaces;
+import com.osahub.rachit.streetview.model.LocationImage;
 import com.osahub.rachit.streetview.modules.base.BaseActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,11 +18,15 @@ public interface DetailContract {
 
         void setLocation(Location location);
 
-        void showImages(List<LocationImages> locationImages);
+        void showImages(List<LocationImage> locationImages);
 
-        void showSimilarPlaces(List<LocationSimilarPlaces> similarPlaces);
+        void showSimilarPlaces(ArrayList<Integer> similarPlaces);
 
         void hideSimilarPlaces();
+
+        void finishActivity();
+
+        void showThumbnailInImages();
     }
 
     interface Presenter {

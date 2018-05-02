@@ -1,6 +1,5 @@
 package com.osahub.rachit.streetview.modules.home.adapter;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,15 +10,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.osahub.rachit.streetview.R;
-import com.osahub.rachit.streetview.misc.Helper;
 import com.osahub.rachit.streetview.model.Location;
+import com.osahub.rachit.streetview.utils.Helper;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 /**
- * Adapter for Location List on LocationsActivity
+ * Adapter for Location List on LocationsActivity2
  * Created by Rachit on 22-Apr-16.
  */
 public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapter.ViewHolder> {
@@ -33,30 +32,33 @@ public class LocationListAdapter extends RecyclerView.Adapter<LocationListAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView name;
-        TextView desc;
-        public ImageView image;
+        TextView nameTV;
+        TextView descTV;
+        ImageView imageIV;
+        ImageView favouriteIV;
         ProgressBar progressBar;
 
         ViewHolder(View view) {
             super(view);
-            name = view.findViewById(R.id.location_name);
-            desc = view.findViewById(R.id.location_description);
-            image = view.findViewById(R.id.location_image);
+            nameTV = view.findViewById(R.id.location_name);
+            descTV = view.findViewById(R.id.location_description);
+            imageIV = view.findViewById(R.id.location_image);
+            favouriteIV = view.findViewById(R.id.favourite_iv);
             progressBar = view.findViewById(R.id.progress_bar);
         }
 
         void bind(final Location location, final OnItemClickListener onItemClickListener) {
             if (!location.getLocationName().equals(Helper.LOCATION_FRAGMENT_BLANK_TAG)) {
-                name.setText(location.getLocationName());
-                name.setSelected(true);
-                desc.setText(location.getDescriptionSmall());
-                desc.setSelected(true);
+                nameTV.setText(location.getLocationName());
+                nameTV.setSelected(true);
+                descTV.setText(location.getDescriptionSmall());
+                descTV.setSelected(true);
+                favouriteIV.setVisibility(location.isFavourite() ? View.VISIBLE : View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
                 Picasso.get()
                         .load(location.getThumbnailPath())
                         .fit()
-                        .into(image, new Callback() {
+                        .into(imageIV, new Callback() {
                             @Override
                             public void onSuccess() {
                                 progressBar.setVisibility(View.GONE);

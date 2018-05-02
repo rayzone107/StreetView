@@ -3,114 +3,28 @@ package com.osahub.rachit.streetview.service;
 import android.content.Context;
 import android.content.Intent;
 
-import com.osahub.rachit.streetview.AppController;
-import com.osahub.rachit.streetview.model.Category;
-import com.osahub.rachit.streetview.model.CategoryLocations;
-import com.osahub.rachit.streetview.model.Location;
 import com.osahub.rachit.streetview.modules.base.BaseIntentService;
-import com.osahub.rachit.streetview.modules.home.LocationsActivity;
-import com.osahub.rachit.streetview.modules.splash.SplashActivity;
-import com.osahub.rachit.streetview.server.VolleyRequests;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
+import com.osahub.rachit.streetview.server.NetworkRequest;
 
 public class FetchDataIntentService extends BaseIntentService {
-    private static final String ACTION_FETCH_DATA = "ACTION_FETCH_DATA";
-
-    private List<Category> categoryList = new ArrayList<>();
-    private List<Location> locationList = new ArrayList<>();
-    private List<CategoryLocations> categoryLocationsList = new ArrayList<>();
-
-    boolean isCategoriesSaved = false, isLocationsSaved = false, isCategoryLocationsSaved = false;
 
     public FetchDataIntentService() {
         super("FetchDataIntentService");
     }
 
-    public static void startActionFetchDataFromServer(Context context) {
-        Intent intent = new Intent(context, FetchDataIntentService.class);
-        intent.setAction(ACTION_FETCH_DATA);
-        context.startService(intent);
-    }
-
-    public void saveCategoriesList(JSONObject response) throws JSONException, ParseException {
-        JSONArray categoriesJSON = response.getJSONArray("categories");
-        for (int i = 0; i < categoriesJSON.length(); i++) {
-            categoryList.add(Category.fromJson(categoriesJSON.getJSONObject(i)));
-        }
-        saveToDatabase("Categories");
-    }
-
-    public void saveLocationsList(JSONObject response) throws JSONException, ParseException {
-        JSONArray locationsJSON = response.getJSONArray("locations");
-        for (int i = 0; i < locationsJSON.length(); i++) {
-            locationList.add(Location.fromJson(locationsJSON.getJSONObject(i)));
-        }
-        saveToDatabase("Locations");
-    }
-
-    public void saveCategoryLocationsList(JSONObject response) throws JSONException, ParseException {
-        JSONArray categoryLocationsJSON = response.getJSONArray("category_locations");
-        for (int i = 0; i < categoryLocationsJSON.length(); i++) {
-            categoryLocationsList.add(CategoryLocations.fromJson(categoryLocationsJSON.getJSONObject(i)));
-        }
-        saveToDatabase("CategoryLocations");
+    public static void startService(Context context) {
+        context.startService(new Intent(context, FetchDataIntentService.class));
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        if (intent != null) {
-            final String action = intent.getAction();
-            if (ACTION_FETCH_DATA.equals(action)) {
-                handleActionFetchDataFromServer();
-            }
-        }
-    }
-
-    public void showError() {
-
+        handleActionFetchDataFromServer();
     }
 
     private void handleActionFetchDataFromServer() {
-        AppController.getInstance().addToRequestQueue(VolleyRequests.createFetchCategoriesJsonObjectRequest(this));
-        AppController.getInstance().addToRequestQueue(VolleyRequests.createFetchLocationsJsonObjectRequest(this));
-        AppController.getInstance().addToRequestQueue(VolleyRequests.createFetchCategoryLocationsJsonObjectRequest(this));
-    }
-
-    private void saveToDatabase(String type) {
-        switch (type) {
-            case "Categories":
-                mDatabaseHelper.mCategoryDbHelper.deleteAllCategories();
-                mDatabaseHelper.mCategoryDbHelper.addMultipleCategories(categoryList);
-                isCategoriesSaved = true;
-                actionIfAllSaved();
-                break;
-            case "Locations":
-                mDatabaseHelper.mLocationDbHelper.deleteAllLocations();
-                mDatabaseHelper.mLocationDbHelper.addMultipleLocations(locationList);
-                isLocationsSaved = true;
-                actionIfAllSaved();
-                break;
-            case "CategoryLocations":
-                mDatabaseHelper.mCategoryLocationDatabaseHelper.deleteAllCategoryLocations();
-                mDatabaseHelper.mCategoryLocationDatabaseHelper.addMultipleCategoryLocations(categoryLocationsList);
-                isCategoryLocationsSaved = true;
-                actionIfAllSaved();
-                break;
-        }
-    }
-
-    private void actionIfAllSaved() {
-        if (!SplashActivity.databaseHasData && isCategoriesSaved && isLocationsSaved && isCategoryLocationsSaved) {
-            Intent intent = new Intent(FetchDataIntentService.this, LocationsActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-        }
+        NetworkRequest networkRequest = new NetworkRequest();
+        networkRequest.getAllCategories();
+        networkRequest.getAllLocations();
+        networkRequest.getAllCategoryLocations();
     }
 }

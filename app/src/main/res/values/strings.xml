@@ -3,19 +3,21 @@
 
     <!--Developer Details-->
     <string name="userName">Rachit Goyal</string>
-    <string name="userEmail">rachit@osahub.com</string>
-    <string name="company_name">Osahub Technologies</string>
-    <string name="about_developer">Ray, the eloquent engineer, is a Chief Executive Officer at OSAHUB Technologies. He is an excellent orator, and will always have a witty response to any situation. Besides being great with words, he has a keen interest in all aspects of technology. Having worked on a plethora of languages and technologies, he is a jack of all trades. He has developed products ranging from web portals and large scale backend processes to android apps and games for some of the finest MNC\'s around the world. \n\nAs a hobby, he practices \'Ethical\' Hacking (although we seriously doubt anything he does is ethical at all). He loves to read and explore new arenas within the technology world, and is always cognizant of all that\'s new and in.</string>
+    <string name="userEmail">rachitgoy@gmail.com</string>
+    <string name="designation">Senior Mobile Developer</string>
+    <string name="e_mail">E-mail</string>
+    <string name="phone">Phone</string>
+    <string name="user_number">+91&#8211;97179&#8211;82464</string>
+    <string name="website">Website</string>
+    <string name="user_website">http://rachitgoyal.com</string>
+    <string name="world_tour_3d">World Tour 3D</string>
+    <string name="developed_apps">Developed Apps</string>
+    <string name="gaze_away">Gaze Away</string>
+    <string name="upgrad_education_pvt_ltd">UpGrad Education Pvt. Ltd.</string>
     <!--Developer Details-->
 
-    <!--Activities-->
-    <string name="title_activity_gallery">Gallery</string>
-    <string name="title_activity_developer_profile">Rachit Goyal</string>
-    <!--Activities-->
-
     <!--Navigation Drawer Options-->
-    <string name="about_the">About the</string>
-    <string name="developer">Developer</string>
+    <string name="about_the_developer">About the Developer</string>
     <string name="developer_profile">Developer Profile</string>
     <string name="other_applications">Other Applications</string>
     <string name="communicate">Communicate</string>
@@ -30,14 +32,29 @@
     <string name="action_Info">Info</string>
     <string name="category">Category</string>
     <string name="count">Count</string>
-    <string name="visit_website_button">Visit Website</string>
     <!--Misc-->
 
     <string name="category_name">Category Name</string>
     <string name="search_for_locations">Search for Locations</string>
     <string name="more">MORE</string>
-    <string name="read_more">read more</string>
-    <string name="read_less">read less</string>
+    <string name="read_more"> Read more</string>
+    <string name="read_less"> Read less</string>
     <string name="similar_places_you_can_explore">Similar places you can explore</string>
-
+    <string name="search_by_name_or_country">Search by name or country</string>
+    <string name="couldnt_find_location_error_message">Unfortunately, we couldn\'t find such a place in our databases. If you wish to see this place here, please let us know below, and we\'ll do our best to put it on here asap.</string>
+    <string name="search_hint">Search</string>
+    <string name="locate_on_the_map">Locate on the map</string>
+    <string name="added_to_favourites">Added to Favourites</string>
+    <string name="removed_from_favourites">Removed from Favourites</string>
+    <string name="favourites">Favourites</string>
+    <string name="app_settings">App Settings</string>
+    <string name="about_developer">About Developer</string>
+    <string name="request_location">Request Location</string>
+    <string name="request_location_success">Location request has been registered</string>
+    <string name="request_location_failed">Location request failed. Please try again.</string>
+    <string name="categories">Categories</string>
+    <string name="locations">Locations</string>
+    <string name="retry">Retry</string>
+    <string name="could_not_connect">Could not connect to the server. Please retry</string>
+    <string name="no_favourites_added">You have not added any favourites yet</string>
 </resources>

@@ -60,7 +60,7 @@ public class ReadMoreTextView extends android.support.v7.widget.AppCompatTextVie
         this.trimExpandedText = getResources().getString(resourceIdTrimExpandedText);
         this.trimLines = typedArray.getInt(R.styleable.ReadMoreTextView_trimLines, DEFAULT_TRIM_LINES);
         this.colorClickableText = typedArray.getColor(R.styleable.ReadMoreTextView_colorClickableText,
-                ContextCompat.getColor(context, R.color.colorPrimary));
+                ContextCompat.getColor(context, R.color.colorAccent));
         this.showTrimExpandedText =
                 typedArray.getBoolean(R.styleable.ReadMoreTextView_showTrimExpandedText, DEFAULT_SHOW_TRIM_EXPANDED_TEXT);
         this.trimMode = typedArray.getInt(R.styleable.ReadMoreTextView_trimMode, TRIM_MODE_LINES);
@@ -70,7 +70,7 @@ public class ReadMoreTextView extends android.support.v7.widget.AppCompatTextVie
         setText();
     }
 
-    private void setText() {
+    public void setText() {
         super.setText(getDisplayableText(), bufferType);
         setMovementMethod(LinkMovementMethod.getInstance());
         setHighlightColor(Color.TRANSPARENT);
@@ -88,6 +88,7 @@ public class ReadMoreTextView extends android.support.v7.widget.AppCompatTextVie
     }
 
     private CharSequence getTrimmedText(CharSequence text) {
+        refreshLineEndIndex();
         if (trimMode == TRIM_MODE_LENGTH) {
             if (text != null && text.length() > trimLength) {
                 if (readMore) {
@@ -132,7 +133,7 @@ public class ReadMoreTextView extends android.support.v7.widget.AppCompatTextVie
 
     private CharSequence updateExpandedText() {
         if (showTrimExpandedText) {
-            SpannableStringBuilder s = new SpannableStringBuilder(text, 0, text.length()).append(trimExpandedText);
+            SpannableStringBuilder s = new SpannableStringBuilder(text, 0, text.length()).append(" ").append(trimExpandedText);
             return addClickableSpan(s, trimExpandedText);
         }
         return text;

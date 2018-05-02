@@ -4,12 +4,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.osahub.rachit.streetview.service.FetchDataIntentService;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.text.ParseException;
 
 /**
  * Class that contains methods to create Volley Requests
@@ -17,60 +13,92 @@ import java.text.ParseException;
  */
 public class VolleyRequests {
 
-    public static JsonObjectRequest createFetchCategoriesJsonObjectRequest(final FetchDataIntentService context) {
+    public static JsonObjectRequest createFetchCategoriesJsonObjectRequest(final VolleyResponse volleyResponse) {
         return new JsonObjectRequest(Request.Method.GET, NetworkURL.createFetchCategoriesURL(), null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        try {
-                            context.saveCategoriesList(response);
-                        } catch (JSONException | ParseException e) {
-                            context.showError();
-                        }
+                        volleyResponse.onData(response);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                context.showError();
+                volleyResponse.onError(error);
             }
         });
     }
 
-    public static JsonObjectRequest createFetchLocationsJsonObjectRequest(final FetchDataIntentService context) {
+    public static JsonObjectRequest createFetchLocationsJsonObjectRequest(final VolleyResponse volleyResponse) {
         return new JsonObjectRequest(Request.Method.GET, NetworkURL.createFetchLocationsURL(), null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        try {
-                            context.saveLocationsList(response);
-                        } catch (JSONException | ParseException e) {
-                            e.printStackTrace();
-                        }
+                        volleyResponse.onData(response);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
+                volleyResponse.onError(error);
             }
         });
     }
 
-    public static JsonObjectRequest createFetchCategoryLocationsJsonObjectRequest(final FetchDataIntentService context) {
+    public static JsonObjectRequest createFetchCategoryLocationsJsonObjectRequest(final VolleyResponse volleyResponse) {
         return new JsonObjectRequest(Request.Method.GET, NetworkURL.createFetchCategoryLocationsURL(), null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        try {
-                            context.saveCategoryLocationsList(response);
-                        } catch (JSONException | ParseException e) {
-                            e.printStackTrace();
-                        }
+                        volleyResponse.onData(response);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
+                volleyResponse.onError(error);
+            }
+        });
+    }
+
+    static JsonObjectRequest createFetchCategoryByIdJsonObjectRequest(final VolleyResponse volleyResponse, int categoryId) {
+        return new JsonObjectRequest(Request.Method.GET, NetworkURL.createFetchCategoryByIdURL(categoryId), null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        volleyResponse.onData(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                volleyResponse.onError(error);
+            }
+        });
+    }
+
+    static JsonObjectRequest createFetchLocationByIdJsonObjectRequest(final VolleyResponse volleyResponse, int locationId) {
+        return new JsonObjectRequest(Request.Method.GET, NetworkURL.createFetchLocationByIdURL(locationId), null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        volleyResponse.onData(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                volleyResponse.onError(error);
+            }
+        });
+    }
+
+    static JsonObjectRequest createFetchLocationsByCategoryIdJsonObjectRequest(final VolleyResponse volleyResponse, int categoryId) {
+        return new JsonObjectRequest(Request.Method.GET, NetworkURL.createFetchLocationsByCategoryIdURL(categoryId), null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        volleyResponse.onData(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                volleyResponse.onError(error);
             }
         });
     }
@@ -105,8 +133,8 @@ public class VolleyRequests {
         });
     }
 
-    static JsonObjectRequest createFetchLocationByIdJsonObjectRequest(final VolleyResponse volleyResponse, int locationId) {
-        return new JsonObjectRequest(Request.Method.GET, NetworkURL.createFetchLocationByIdURL(locationId), null,
+    static JsonObjectRequest createAddRequestedLocationJsonObjectRequest(final VolleyResponse volleyResponse, String name) {
+        return new JsonObjectRequest(Request.Method.GET, NetworkURL.createAddRequestedLocationURL(name), null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
