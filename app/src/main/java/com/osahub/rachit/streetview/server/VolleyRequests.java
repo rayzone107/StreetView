@@ -147,4 +147,19 @@ public class VolleyRequests {
             }
         });
     }
+
+    static JsonObjectRequest createGetRequestedLocationLatLngJsonObjectRequest(final VolleyResponse volleyResponse, String name) {
+        return new JsonObjectRequest(Request.Method.GET, NetworkURL.createAddRequestedLocationURL(name), null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        volleyResponse.onData(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                volleyResponse.onError(error);
+            }
+        });
+    }
 }

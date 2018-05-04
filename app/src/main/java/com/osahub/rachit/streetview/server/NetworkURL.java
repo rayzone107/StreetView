@@ -68,4 +68,12 @@ class NetworkURL {
                 appendQueryParameter(Constants.QUERY_PARAMETERS.NAME, name).build();
         return builtUri.toString();
     }
+
+    static String createGetRequestedLocationLatLngURL(String name) {
+        String baseURL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
+        String api = "&key=AIzaSyDknW1CpDxTEn5VwEAt1fbic2OjYRKMzlw";
+
+        Uri builtUri = Uri.parse(baseURL).buildUpon().appendQueryParameter("address", name).appendPath(api).build();
+        return builtUri.toString();
+    }
 }

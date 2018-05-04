@@ -305,4 +305,27 @@ public class NetworkRequest {
                     }
                 }, name));
     }
+
+    public void getRequestedLocationLatLng(String name, final NetworkResponse<Void> networkResponse) {
+        AppController.getInstance().addToRequestQueue(VolleyRequests.
+                createGetRequestedLocationLatLngJsonObjectRequest(new VolleyResponse() {
+                    @Override
+                    public void onData(JSONObject response) {
+                        try {
+                            JSONArray results = response.getJSONArray("results");
+                            if(results.length() > 0) {
+
+                            }
+                            networkResponse.onData(null);
+                        } catch (JSONException e) {
+                            networkResponse.onError();
+                        }
+                    }
+
+                    @Override
+                    public void onError(VolleyError e) {
+                        networkResponse.onError();
+                    }
+                }, name));
+    }
 }
