@@ -34,7 +34,11 @@ public class LocationsPresenter implements LocationsContract.Presenter {
             mNetworkRequest.getAllCategories(new NetworkResponse<List<Category>>() {
                 @Override
                 public void onData(List<Category> categoriesList) {
-                    fetchLocations(categoriesList);
+                    if (categoriesList.isEmpty()) {
+                        mView.changeViewState(ViewState.ERROR);
+                    } else {
+                        fetchLocations(categoriesList);
+                    }
                 }
 
                 @Override
@@ -52,8 +56,12 @@ public class LocationsPresenter implements LocationsContract.Presenter {
             mNetworkRequest.getAllLocations(new NetworkResponse<List<Location>>() {
                 @Override
                 public void onData(List<Location> locations) {
-                    mView.changeViewState(ViewState.DATA);
-                    mView.showData(categories);
+                    if (locations.isEmpty()) {
+                        mView.changeViewState(ViewState.ERROR);
+                    } else {
+                        mView.changeViewState(ViewState.DATA);
+                        mView.showData(categories);
+                    }
                 }
 
                 @Override
